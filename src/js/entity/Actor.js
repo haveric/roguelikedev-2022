@@ -1,9 +1,7 @@
 import _Entity from "./_Entity";
 import sceneState from "../SceneState";
 import Hex from "../map/Hex";
-
-const hex_a = 2 * Math.PI / 6;
-const hex_r = 50;
+import HexUtil from "../util/HexUtil";
 
 export default class Actor extends _Entity {
     constructor() {
@@ -14,15 +12,10 @@ export default class Actor extends _Entity {
 
     draw() {
         // TODO: Replace arbitrary 1.15
-        const drawX = hex_r + (hex_r * (1 + Math.cos(hex_a))) * this.hex.getY();
-        const drawY = 1.15 * hex_r + (2 * hex_r * Math.sin(hex_a)) * this.hex.getDisplayX();
+        const drawX = HexUtil.HEX_RADIUS + (HexUtil.HEX_RADIUS * (1 + Math.cos(HexUtil.HEX_A))) * this.hex.getY();
+        const drawY = 1.15 * HexUtil.HEX_RADIUS + (2 * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A)) * this.hex.getDisplayX();
 
-
-        sceneState.ctx.beginPath();
-        for (let i = 0; i < 6; i++) {
-            sceneState.ctx.lineTo(drawX + hex_r * Math.cos(hex_a * i), drawY + hex_r * Math.sin(hex_a * i));
-        }
-        sceneState.ctx.closePath();
+        HexUtil.drawHex(sceneState.ctx, drawX, drawY);
         sceneState.ctx.fillStyle="blue";
         sceneState.ctx.fill();
 

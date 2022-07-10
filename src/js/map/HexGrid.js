@@ -1,7 +1,5 @@
 import Hex from "./Hex";
-
-const hex_a = 2 * Math.PI / 6;
-const hex_r = 50;
+import HexUtil from "../util/HexUtil";
 
 export default class HexGrid {
     constructor(rows, cols) {
@@ -30,10 +28,10 @@ export default class HexGrid {
 
     draw() {
         for (let i = 0; i < this.rows; i++) {
-            let y = 2 * hex_r + (2 * hex_r * Math.sin(hex_a)) * i;
+            let y = 2 * HexUtil.HEX_RADIUS + (2 * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A)) * i;
             for (let j = 0; j < this.cols; j++) {
-                const x = hex_r + (hex_r * (1 + Math.cos(hex_a))) * j;
-                y -= (-1) ** j * hex_r * Math.sin(hex_a);
+                const x = HexUtil.HEX_RADIUS + (HexUtil.HEX_RADIUS * (1 + Math.cos(HexUtil.HEX_A))) * j;
+                y -= (-1) ** j * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A);
                 this.hexes[i][j].draw(x, y);
             }
         }

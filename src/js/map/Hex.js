@@ -1,7 +1,5 @@
 import sceneState from "../SceneState";
-
-const hex_a = 2 * Math.PI / 6;
-const hex_r = 50;
+import HexUtil from "../util/HexUtil";
 
 export default class Hex {
     constructor(q, r) {
@@ -56,11 +54,7 @@ export default class Hex {
     }
 
     draw(x, y) {
-        sceneState.ctx.beginPath();
-        for (let i = 0; i < 6; i++) {
-            sceneState.ctx.lineTo(x + hex_r * Math.cos(hex_a * i), y + hex_r * Math.sin(hex_a * i));
-        }
-        sceneState.ctx.closePath();
+        HexUtil.drawHex(sceneState.ctx, x, y);
         sceneState.ctx.stroke();
 
         sceneState.ctx.textAlign = "center";
