@@ -2,13 +2,13 @@ import "./styles/style.css";
 
 import engine from "./js/Engine";
 import sceneState from "./js/SceneState";
-import HexGrid from "./js/map/HexGrid";
 import Actor from "./js/entity/Actor";
 import DefaultPlayerEventHandler from "./js/event/DefaultPlayerEventHandler";
+import CellularAutomataMap from "./js/map/CellularAutomataMap";
 
 (function () {
     function init() {
-        engine.gameMap = new HexGrid(10, 20);
+        engine.gameMap = new CellularAutomataMap(35, 80);
 
         engine.player = new Actor();
         engine.gameMap.actors.push(engine.player);

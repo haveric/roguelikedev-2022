@@ -1,7 +1,7 @@
 export default class HexUtil {
     static PI = Math.PI;
     static HEX_A = this.PI / 3;
-    static HEX_RADIUS = 50;
+    static HEX_RADIUS = 20;
 
     constructor() {}
 

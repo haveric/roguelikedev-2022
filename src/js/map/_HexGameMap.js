@@ -1,12 +1,10 @@
 import Hex from "./Hex";
 import HexUtil from "../util/HexUtil";
 
-export default class HexGrid {
+export default class _HexGameMap {
     constructor(rows, cols) {
         this.rows = rows;
         this.cols = cols;
-
-        this.actors = [];
 
         this.init();
     }
@@ -20,11 +18,15 @@ export default class HexGrid {
                 this.hexes[i][j] = new Hex(i - Math.floor(j / 2), j);
             }
         }
+
+        this.actors = [];
     }
 
     isInBounds(x, y) {
         return 0 <= x && x < this.rows && 0 <= y && y < this.cols;
     }
+
+    create() {}
 
     draw() {
         for (let i = 0; i < this.rows; i++) {
