@@ -1,23 +1,30 @@
 import _Entity from "./_Entity";
 import sceneState from "../SceneState";
-import Hex from "../map/Hex";
 import HexUtil from "../util/HexUtil";
 
 export default class Actor extends _Entity {
-    constructor() {
-        super();
+    constructor(args = {}) {
+        args.type = "actor";
+        super(args);
+    }
 
-        this.hex = new Hex(0, 10);
+    clone() {
+        return new Actor(this.save());
     }
 
     draw() {
         // TODO: Replace arbitrary 1.15
-        const drawX = HexUtil.HEX_RADIUS + (HexUtil.HEX_RADIUS * (1 + Math.cos(HexUtil.HEX_A))) * this.hex.getY();
-        const drawY = 1.15 * HexUtil.HEX_RADIUS + (2 * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A)) * this.hex.getDisplayX();
+        const hex = this.getComponent("hex");
+        const drawX = HexUtil.HEX_RADIUS + (HexUtil.HEX_RADIUS * (1 + Math.cos(HexUtil.HEX_A))) * hex.getDisplayY();
+        const drawY = 1.15 * HexUtil.HEX_RADIUS + (2 * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A)) * hex.getDisplayX();
 
+        super.draw(drawX, drawY);
         HexUtil.drawHex(sceneState.ctx, drawX, drawY);
-        sceneState.ctx.fillStyle="blue";
-        sceneState.ctx.fill();
+        if (this.color) {
+            sceneState.ctx.fillStyle = this.color;
+            sceneState.ctx.fill();
+        }
+        sceneState.ctx.stroke();
 
         sceneState.ctx.fillStyle="white";
         sceneState.ctx.textAlign = "center";

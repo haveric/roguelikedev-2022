@@ -1,0 +1,11 @@
+[
+    {
+        "id": "player",
+        "extends": "base_actor",
+        "name": "Player",
+        "color": "#00f",
+        "components": {
+
+        }
+    }
+]

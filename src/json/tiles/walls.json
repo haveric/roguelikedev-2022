@@ -1,0 +1,15 @@
+[
+    {
+        "id": "base_wall",
+        "extends": "base_tile",
+        "components": {
+            "blocksMovement": true,
+            "blocksFov": true
+        }
+    },
+    {
+        "id": "cave_wall",
+        "extends": "base_wall",
+        "color": "#666"
+    }
+]

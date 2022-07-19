@@ -1,0 +1,9 @@
+[
+    {
+        "id": "base_tile",
+        "type": "tile",
+        "components": {
+
+        }
+    }
+]

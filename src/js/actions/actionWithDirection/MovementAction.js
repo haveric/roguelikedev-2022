@@ -1,5 +1,4 @@
 import _ActionWithDirection from "./_ActionWithDirection";
-import Hex from "../../map/Hex";
 import engine from "../../Engine";
 import UnableToPerformAction from "../UnableToPerformAction";
 
@@ -9,14 +8,15 @@ export default class MovementAction extends _ActionWithDirection {
     }
 
     perform() {
-        if (this.entity.hex) {
-            const destHex = Hex.add(this.entity.hex, new Hex(this.dq, this.dr));
-            if (!engine.gameMap.isInBounds(destHex.getX(), destHex.getY())) {
+        const hex = this.entity.getComponent("hex");
+        if (hex) {
+            const destXY = hex.hexToArray(hex.q + this.dq, hex.r + this.dr);
+
+            if (!engine.gameMap.isInBounds(destXY.x, destXY.y)) {
                 return new UnableToPerformAction(this.entity, "Location is outside of the map!");
             }
 
-            this.entity.hex.q += this.dq;
-            this.entity.hex.r += this.dr;
+            hex.moveTo(destXY.x, destXY.y);
         }
 
         return this;

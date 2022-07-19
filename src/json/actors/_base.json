@@ -1,0 +1,12 @@
+[
+    {
+        "id": "base_actor",
+        "type": "actor",
+        "components": {
+            "hex": {
+                "row": 0,
+                "col": 0
+            }
+        }
+    }
+]

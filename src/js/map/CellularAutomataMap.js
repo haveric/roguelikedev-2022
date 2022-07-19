@@ -1,11 +1,15 @@
 import _HexGameMap from "./_HexGameMap";
 import engine from "../Engine";
+import entityLoader from "../entity/EntityLoader";
 
 export default class CellularAutomataMap extends _HexGameMap {
     constructor(rows, cols) {
         super(rows, cols);
 
         this.percentAreWalls = .35; // 1 = 100%
+
+        this.wallEntity = entityLoader.createFromTemplate("cave_wall", {components: {hex: {row: 0, col: 0}}});
+        this.floorEntity = entityLoader.createFromTemplate("cave_floor", {components: {hex: {row: 0, col: 0}}});
 
         this.create();
     }
@@ -20,17 +24,23 @@ export default class CellularAutomataMap extends _HexGameMap {
         const colsMiddle = Math.floor(Math.random() * this.cols);
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
-                if (this.hexes[i][j].isEdge(this.hexes)) {
-                    this.hexes[i][j].isWall = 1;
-                } else if (i === rowsMiddle) {
-                    this.hexes[i][j].isWall = 0;
-                } else if (j === colsMiddle) { // Clear a row for better connections
-                    this.hexes[i][j].isWall = 0;
-                } else if (Math.random() < this.percentAreWalls) {
-                    this.hexes[i][j].isWall = 1;
+                let entity;
+                if (i === 0 || j === 0 || i === this.rows - 1 || j === this.cols - 1) {
+                    entity = this.wallEntity.clone();
+                } else if (i === rowsMiddle || j === colsMiddle) {
+                    entity = this.floorEntity.clone();
                 } else {
-                    this.hexes[i][j].isWall = 0;
+                    const isWall = Math.random() < this.percentAreWalls;
+
+                    if (isWall) {
+                        entity = this.wallEntity.clone();
+                    } else {
+                        entity = this.floorEntity.clone();
+                    }
                 }
+
+                entity.getComponent("hex").moveTo(i, j);
+                this.tiles[i][j] = entity;
             }
         }
     }
@@ -39,9 +49,10 @@ export default class CellularAutomataMap extends _HexGameMap {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 if (Math.random() < .02) {
-                    this.hexes[i][j].isWall = 1;
+                    const entity = this.wallEntity.clone();
+                    entity.getComponent("hex").moveTo(i, j);
+                    this.tiles[i][j] = entity;
                 }
-
             }
         }
     }
@@ -50,7 +61,18 @@ export default class CellularAutomataMap extends _HexGameMap {
         this.addRandomNoise();
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
-                this.hexes[i][j].isWall = this.placeWallLogic(this.hexes[i][j]);
+                this.placeWallLogic(this.tiles[i][j]);
+                const isWall = this.placeWallLogic(this.tiles[i][j]);
+
+                let entity;
+                if (isWall) {
+                    entity = this.wallEntity.clone();
+                } else {
+                    entity = this.floorEntity.clone();
+                }
+
+                entity.getComponent("hex").moveTo(i, j);
+                this.tiles[i][j] = entity;
             }
         }
 
@@ -71,24 +93,25 @@ export default class CellularAutomataMap extends _HexGameMap {
         }
     }
 
-    placeWallLogic(hex) {
-        const numWalls = hex.getNumAdjacentWalls(this.hexes);
+    placeWallLogic(tile) {
+        const hex = tile.getComponent("hex");
+        const numWalls = hex.getNumAdjacentWalls(this.tiles);
 
         // Edges should always be walls
-        if (hex.isEdge(this.hexes)) {
-            return 1;
+        if (hex.isEdge(this)) {
+            return true;
         }
 
-        if (hex.isWall) {
+        if (tile.isWall()) {
             if (numWalls >= 2) {
-                return 1;
+                return true;
             }
         } else {
             if (numWalls >= 4) {
-                return 1;
+                return true;
             }
         }
 
-        return 0;
+        return false;
     }
 }
