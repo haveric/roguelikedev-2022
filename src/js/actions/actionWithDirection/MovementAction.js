@@ -16,6 +16,13 @@ export default class MovementAction extends _ActionWithDirection {
                 return new UnableToPerformAction(this.entity, "Location is outside of the map!");
             }
 
+            const destTile = engine.gameMap.tiles[destXY.x][destXY.y];
+
+            const blocksMovementComponent = destTile.getComponent("blocksMovement");
+            if (blocksMovementComponent && blocksMovementComponent.blocksMovement) {
+                return new UnableToPerformAction(this.entity, "There's a " + destTile.name + " in the way!");
+            }
+
             hex.moveTo(destXY.x, destXY.y);
         }
 
