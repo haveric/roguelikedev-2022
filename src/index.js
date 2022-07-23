@@ -28,6 +28,8 @@ import entityLoader from "./js/entity/EntityLoader";
         engine.eventHandler = new DefaultPlayerEventHandler();
 
         engine.needsRenderUpdate = true;
+        engine.player.fov.compute(engine.player, 5);
+        engine.player.fov.updateMap();
 
         window.requestAnimationFrame(update);
     }

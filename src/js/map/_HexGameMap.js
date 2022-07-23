@@ -34,4 +34,17 @@ export default class _HexGameMap {
             actor.draw();
         }
     }
+
+    getTileFromArrayCoords(x, y) {
+        if (this.tiles[x]) {
+            return this.tiles[x][y];
+        }
+
+        return null;
+    }
+
+    getTileFromHexCoords(q, r) {
+        const xy = HexUtil.hexToArray(q, r);
+        return this.tiles[xy.x][xy.y];
+    }
 }

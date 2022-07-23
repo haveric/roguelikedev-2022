@@ -28,6 +28,8 @@ class Engine {
                 return false;
             } else {
                 engine.needsRenderUpdate = true;
+                engine.player.fov.compute(engine.player, 5);
+                engine.player.fov.updateMap();
 
                 this.handleEnemyTurns();
 

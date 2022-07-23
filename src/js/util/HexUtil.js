@@ -12,4 +12,11 @@ export default class HexUtil {
         }
         ctx.closePath();
     }
+
+    static hexToArray(q, r) {
+        return {
+            x: Math.floor(q + (r / 2.0)),
+            y: r
+        };
+    }
 }

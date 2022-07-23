@@ -1,4 +1,5 @@
 import _Component from "./_Component";
+import HexUtil from "../util/HexUtil";
 
 export default class Hex extends _Component {
     constructor(args = {}) {
@@ -64,17 +65,8 @@ export default class Hex extends _Component {
         return this.r;
     }
 
-    hexToArray(q, r) {
-        const x = Math.floor(q + (r / 2.0));
-
-        return {
-            x: x,
-            y: r
-        };
-    }
-
     getTileFromArray(map, q, r) {
-        const xy = this.hexToArray(q, r);
+        const xy = HexUtil.hexToArray(q, r);
         if (map[xy.x] && map[xy.x][xy.y]) {
             return map[xy.x][xy.y];
         }
@@ -99,5 +91,20 @@ export default class Hex extends _Component {
         }
 
         return 0;
+    }
+
+    isInRange(otherHex, radius) {
+        const distQ = Math.abs(this.q - otherHex.q);
+        if (distQ < radius) {
+            const distR = Math.abs(this.r - otherHex.r);
+            if (distR < radius) {
+                const distS = Math.abs(this.s - otherHex.s);
+                if (distS < radius) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

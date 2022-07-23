@@ -1,5 +1,6 @@
 import BlocksFov from "./BlocksFov";
 import BlocksMovement from "./BlocksMovement";
+import Fov from "./Fov";
 import Hex from "./Hex";
 
 class ComponentLoader {
@@ -12,6 +13,7 @@ class ComponentLoader {
     init() {
         this.load(new BlocksFov());
         this.load(new BlocksMovement());
+        this.load(new Fov());
         this.load(new Hex());
     }
 
