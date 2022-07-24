@@ -47,4 +47,22 @@ export default class _HexGameMap {
         const xy = HexUtil.hexToArray(q, r);
         return this.tiles[xy.x][xy.y];
     }
+
+    getTileNeighbor(q, r, direction) {
+        switch(direction) {
+            case 1: // N
+                return this.getTileFromHexCoords(q - 1, r);
+            case 2: // NE
+                return this.getTileFromHexCoords(q - 1, r + 1);
+            case 3: // SE
+                return this.getTileFromHexCoords(q, r + 1);
+            case 4: // S
+                return this.getTileFromHexCoords(q + 1, r);
+            case 5: // SW
+                return this.getTileFromHexCoords(q + 1, r - 1);
+            case 6: // NW
+            default:
+                return this.getTileFromHexCoords(q, r - 1);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 import engine from "../../Engine";
 import Fov from "../../components/Fov";
+import HexUtil from "../../util/HexUtil";
 
 export default class _BaseFov {
     constructor() {
@@ -25,7 +26,12 @@ export default class _BaseFov {
         this.bottom = Math.min(engine.gameMap.cols, y + radius);
     }
 
-    exploreTile(row, col) {
+    exploreTileByHex(q, r) {
+        const xy = HexUtil.hexToArray(q, r);
+        this.visibleTiles.push(engine.gameMap.tiles[xy.x][xy.y]);
+    }
+
+    exploreTileByArray(row, col) {
         this.visibleTiles.push(engine.gameMap.tiles[row][col]);
     }
 

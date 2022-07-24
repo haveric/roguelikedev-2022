@@ -1,14 +1,14 @@
 import _Entity from "./_Entity";
 import sceneState from "../SceneState";
 import HexUtil from "../util/HexUtil";
-import SimpleHexFov from "../map/fov/SimpleHexFov";
+import CustomFov from "../map/fov/CustomFov";
 
 export default class Actor extends _Entity {
     constructor(args = {}) {
         args.type = "actor";
         super(args);
 
-        this.fov = new SimpleHexFov();
+        this.fov = new CustomFov();
     }
 
     clone() {

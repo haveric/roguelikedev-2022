@@ -15,7 +15,7 @@ export default class SimpleHexFov extends _BaseFov {
                 if (toTile) {
                     const toHex = toTile.getComponent("hex");
                     if (this.hex.isInRange(toHex, radius)) {
-                        this.exploreTile(i, j);
+                        this.exploreTileByArray(i, j);
                     }
                 }
             }

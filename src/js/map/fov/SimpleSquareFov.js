@@ -10,7 +10,7 @@ export default class SimpleSquareFov extends _BaseFov {
 
         for (let i = this.left; i < this.right; i++) {
             for (let j = this.top; j < this.bottom; j++) {
-                this.exploreTile(i, j);
+                this.exploreTileByArray(i, j);
             }
         }
     }
