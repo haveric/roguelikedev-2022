@@ -1,5 +1,6 @@
 import HexUtil from "../util/HexUtil";
 import ArrayUtil from "../util/ArrayUtil";
+import engine from "../Engine";
 
 export default class _HexGameMap {
     constructor(rows, cols) {
@@ -26,12 +27,22 @@ export default class _HexGameMap {
             for (let j = 0; j < this.cols; j++) {
                 const x = HexUtil.HEX_RADIUS + (HexUtil.HEX_RADIUS * (1 + Math.cos(HexUtil.HEX_A))) * j;
                 y -= (-1) ** j * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A);
-                this.tiles[i][j].draw(x, y);
+
+                const tile = this.tiles[i][j];
+                const tileFov = tile.getComponent("fov");
+                if (tileFov && tileFov.explored) {
+                    tile.draw(x, y);
+                }
             }
         }
 
         for (const actor of this.actors) {
-            actor.draw();
+            const actorHex = actor.getComponent("hex");
+            const tile = engine.gameMap.getTileFromArrayCoords(actorHex.row, actorHex.col);
+            const tileFov = tile.getComponent("fov");
+            if (tileFov && tileFov.visible) {
+                actor.draw();
+            }
         }
     }
 
@@ -64,5 +75,21 @@ export default class _HexGameMap {
             default:
                 return this.getTileFromHexCoords(q, r - 1);
         }
+    }
+
+    getBlockingActorAtArrayLocation(x, y) {
+        let blockingActor = null;
+        for (const actor of this.actors) {
+            const hex = actor.getComponent("hex");
+            if (hex && x === hex.row && y === hex.col) {
+                const component = actor.getComponent("blocksMovement");
+                if (component && component.blocksMovement) {
+                    blockingActor = actor;
+                    break;
+                }
+            }
+        }
+
+        return blockingActor;
     }
 }

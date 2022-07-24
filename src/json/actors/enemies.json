@@ -1,0 +1,20 @@
+[
+    {
+        "id": "orc",
+        "extends": "base_actor",
+        "name": "Orc",
+        "color": "#3f7f3f",
+        "components": {
+
+        }
+    },
+    {
+        "id": "troll",
+        "extends": "base_actor",
+        "name": "Troll",
+        "color": "#007f00",
+        "components": {
+
+        }
+    }
+]

@@ -22,6 +22,11 @@ export default class MovementAction extends _ActionWithDirection {
                 return new UnableToPerformAction(this.entity, "There's a " + destTile.name + " in the way!");
             }
 
+            const blockingActor = engine.gameMap.getBlockingActorAtArrayLocation(destXY.x, destXY.y);
+            if (blockingActor) {
+                return new UnableToPerformAction(this.entity, "There's something in the way!");
+            }
+
             hex.moveTo(destXY.x, destXY.y);
         }
 

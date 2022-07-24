@@ -3,6 +3,7 @@
         "id": "base_actor",
         "type": "actor",
         "components": {
+            "blocksMovement": true,
             "hex": {
                 "row": 0,
                 "col": 0

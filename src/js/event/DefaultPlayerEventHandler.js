@@ -1,6 +1,6 @@
 import _EventHandler from "./_EventHandler";
 import controls from "../controls/Controls";
-import MovementAction from "../actions/actionWithDirection/MovementAction";
+import BumpAction from "../actions/actionWithDirection/BumpAction";
 import engine from "../Engine";
 
 export default class DefaultPlayerEventHandler extends _EventHandler {
@@ -17,17 +17,17 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
 
         if (this.isPlayerTurn) {
             if (controls.testPressed("up")) {
-                action = new MovementAction(engine.player, -1, 0);
+                action = new BumpAction(engine.player, -1, 0);
             } else if (controls.testPressed("down")) {
-                action = new MovementAction(engine.player, 1, 0);
+                action = new BumpAction(engine.player, 1, 0);
             } else if (controls.testPressed("nw")) {
-                action = new MovementAction(engine.player, 0, -1);
+                action = new BumpAction(engine.player, 0, -1);
             } else if (controls.testPressed("ne")) {
-                action = new MovementAction(engine.player, -1, 1);
+                action = new BumpAction(engine.player, -1, 1);
             } else if (controls.testPressed("sw")) {
-                action = new MovementAction(engine.player, 1, -1);
+                action = new BumpAction(engine.player, 1, -1);
             } else if (controls.testPressed("se")) {
-                action = new MovementAction(engine.player, 0, 1);
+                action = new BumpAction(engine.player, 0, 1);
             }
         }
 

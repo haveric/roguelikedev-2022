@@ -24,6 +24,7 @@ import entityLoader from "./js/entity/EntityLoader";
             }
         }
         engine.gameMap.actors.push(engine.player);
+        engine.gameMap.placeEntities("cave", 1, .03, 5);
 
         engine.eventHandler = new DefaultPlayerEventHandler();
 

@@ -1,6 +1,7 @@
 import _HexGameMap from "./_HexGameMap";
 import engine from "../Engine";
 import entityLoader from "../entity/EntityLoader";
+import chanceLoader from "./ChanceLoader";
 
 export default class CellularAutomataMap extends _HexGameMap {
     constructor(rows, cols) {
@@ -113,5 +114,26 @@ export default class CellularAutomataMap extends _HexGameMap {
         }
 
         return false;
+    }
+
+    placeEntities(generation, level, percentage, distFromPlayer) {
+        const playerHex = engine.player.getComponent("hex");
+
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                const tile = this.tiles[i][j];
+                if (!tile.isWall()) {
+                    const hex = tile.getComponent("hex");
+                    if (!playerHex.isInRange(hex, distFromPlayer)) {
+                        if (Math.random() < percentage) {
+                            const actorId = chanceLoader.getActorForLevel(generation, level);
+                            const actor = entityLoader.createFromTemplate(actorId, {components: {hex: {row: hex.row, col: hex.col}}});
+
+                            this.actors.push(actor);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
