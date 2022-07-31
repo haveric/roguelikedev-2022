@@ -6,10 +6,20 @@ export default class Tile extends _Entity {
     constructor(args = {}) {
         args.type = "tile";
         super(args);
+
+        this.borderColor = args.borderColor || "#000";
     }
 
     clone() {
         return new Tile(this.save());
+    }
+
+    save() {
+        const saveJson = super.save();
+
+        saveJson.borderColor = this.borderColor;
+
+        return saveJson;
     }
 
     isWall() {
@@ -17,8 +27,6 @@ export default class Tile extends _Entity {
     }
 
     draw(x, y) {
-
-
         // sceneState.ctx.textAlign = "center";
         // sceneState.ctx.textBaseline = "middle";
         //
@@ -33,6 +41,8 @@ export default class Tile extends _Entity {
                     sceneState.ctx.fillStyle = this.color;
                     sceneState.ctx.fill();
                 }
+
+                sceneState.ctx.strokeStyle = this.borderColor;
                 sceneState.ctx.stroke();
 
                 if (!fov.visible) {

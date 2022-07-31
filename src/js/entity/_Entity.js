@@ -8,6 +8,7 @@ export default class _Entity {
         this.name = args.name || "";
         this.description = args.description || "";
         this.sprite = args.sprite || "";
+        this.letter = args.letter || "?";
         this.color = args.color || "#fff";
 
         this.componentArray = [];
@@ -92,6 +93,7 @@ export default class _Entity {
             name: this.name,
             description: this.description,
             sprite: this.sprite,
+            letter: this.letter,
             color: this.color
         };
 

@@ -4,6 +4,7 @@
         "extends": "base_enemy",
         "name": "Orc",
         "color": "#3f7f3f",
+        "letter": "o",
         "components": {
             "fighter": {
                 "hp": 10,
@@ -19,6 +20,7 @@
         "extends": "base_enemy",
         "name": "Troll",
         "color": "#007f00",
+        "letter": "T",
         "components": {
             "fighter": {
                 "hp": 16,

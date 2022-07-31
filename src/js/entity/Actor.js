@@ -27,17 +27,17 @@ export default class Actor extends _Entity {
         const drawY = 1.15 * HexUtil.HEX_RADIUS + (2 * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A)) * hex.getDisplayX();
 
         super.draw(drawX, drawY);
-        HexUtil.drawHex(sceneState.ctx, drawX, drawY);
-        if (this.color) {
-            sceneState.ctx.fillStyle = this.color;
-            sceneState.ctx.fill();
-        }
-        sceneState.ctx.stroke();
+        //HexUtil.drawHex(sceneState.ctx, drawX, drawY);
+        // if (this.color) {
+        //     sceneState.ctx.fillStyle = this.color;
+        //     sceneState.ctx.fill();
+        // }
 
-        sceneState.ctx.fillStyle="white";
+
+        sceneState.ctx.fillStyle = this.color || "white";
         sceneState.ctx.textAlign = "center";
         sceneState.ctx.textBaseline = "middle";
-        sceneState.ctx.font = "26px serif";
-        sceneState.ctx.fillText("@", drawX, drawY);
+        sceneState.ctx.font = "bold 26px serif";
+        sceneState.ctx.fillText(this.letter, drawX, drawY);
     }
 }

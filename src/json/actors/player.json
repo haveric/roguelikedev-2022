@@ -4,6 +4,7 @@
         "extends": "base_actor",
         "name": "Player",
         "color": "#00f",
+        "letter": "@",
         "components": {
             "faction": {
                 "factions": "player",
