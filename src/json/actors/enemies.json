@@ -1,20 +1,32 @@
 [
     {
         "id": "orc",
-        "extends": "base_actor",
+        "extends": "base_enemy",
         "name": "Orc",
         "color": "#3f7f3f",
         "components": {
-
+            "fighter": {
+                "hp": 10,
+                "maxHp": 10,
+                "defense": 0,
+                "power": 3
+            },
+            "aiMeleeChase": {}
         }
     },
     {
         "id": "troll",
-        "extends": "base_actor",
+        "extends": "base_enemy",
         "name": "Troll",
         "color": "#007f00",
         "components": {
-
+            "fighter": {
+                "hp": 16,
+                "maxHp": 16,
+                "defense": 1,
+                "power": 4
+            },
+            "aiMeleeChase": {}
         }
     }
 ]

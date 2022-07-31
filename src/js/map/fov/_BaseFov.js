@@ -6,11 +6,13 @@ export default class _BaseFov {
     constructor() {
         this.previousVisibleTiles = [];
         this.visibleTiles = [];
+        this.visibleActors = [];
     }
 
     compute(entity, radius) {
         this.previousVisibleTiles = this.visibleTiles;
         this.visibleTiles = [];
+        this.visibleActors = [];
 
         this.hex = entity.getComponent("hex");
         this.q = this.hex.q;
@@ -26,13 +28,28 @@ export default class _BaseFov {
         this.bottom = Math.min(engine.gameMap.cols, y + radius);
     }
 
+    addVisibleActor(actor) {
+        if (this.visibleActors.indexOf(actor) === -1) {
+            this.visibleActors.push(actor);
+        }
+    }
+
     exploreTileByHex(q, r) {
         const xy = HexUtil.hexToArray(q, r);
-        this.visibleTiles.push(engine.gameMap.tiles[xy.x][xy.y]);
+        this.exploreTileByArray(xy.x, xy.y);
     }
 
     exploreTileByArray(row, col) {
         this.visibleTiles.push(engine.gameMap.tiles[row][col]);
+
+        for (const actor of engine.gameMap.actors) {
+            const actorHex = actor.getComponent("hex");
+            if (actorHex) {
+                if (row === actorHex.row && col === actorHex.col) {
+                    this.addVisibleActor(actor);
+                }
+            }
+        }
     }
 
     updateMap() {

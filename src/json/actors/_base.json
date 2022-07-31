@@ -9,5 +9,15 @@
                 "col": 0
             }
         }
+    },
+    {
+        "id": "base_enemy",
+        "extends": "base_actor",
+        "components": {
+            "faction": {
+                "factions": "monsters",
+                "enemies": "player"
+            }
+        }
     }
 ]

@@ -39,7 +39,18 @@ class Engine {
     }
 
     handleEnemyTurns() {
+        this.eventHandler.isPlayerTurn = false;
 
+        for (const actor of this.gameMap.actors) {
+            if (actor !== this.player) {
+                const ai = actor.getComponent("ai");
+                if (ai) {
+                    ai.perform();
+                }
+            }
+        }
+
+        this.eventHandler.isPlayerTurn = true;
     }
 }
 

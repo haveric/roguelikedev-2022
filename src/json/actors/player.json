@@ -5,7 +5,16 @@
         "name": "Player",
         "color": "#00f",
         "components": {
-
+            "faction": {
+                "factions": "player",
+                "enemies": "monsters"
+            },
+            "fighter": {
+                "hp": 30,
+                "maxHp": 30,
+                "defense": 2,
+                "power": 5
+            }
         }
     }
 ]

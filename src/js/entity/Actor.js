@@ -15,6 +15,11 @@ export default class Actor extends _Entity {
         return new Actor(this.save());
     }
 
+    isAlive() {
+        const fighter = this.getComponent("fighter");
+        return fighter && fighter.hp > 0;
+    }
+
     draw() {
         // TODO: Replace arbitrary 1.15
         const hex = this.getComponent("hex");

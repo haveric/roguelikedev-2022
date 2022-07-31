@@ -44,11 +44,17 @@ export default class _Component {
         }
     }
 
-    // saveArg(arg, defaultValue) {
-    //
-    // }
-
     loadArg(name, defaultValue) {
         return this.args.components[this.type][name] || defaultValue;
+    }
+
+    loadArgArray(name) {
+        const array = [];
+        const items = this.args.components[this.type][name].split(",");
+        for (const item of items) {
+            array.push(item.trim());
+        }
+
+        return array;
     }
 }

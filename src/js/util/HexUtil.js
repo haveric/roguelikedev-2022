@@ -19,4 +19,11 @@ export default class HexUtil {
             y: r
         };
     }
+
+    static arrayToHex(row, col) {
+        return {
+            q: row - Math.floor(col / 2),
+            r: col
+        };
+    }
 }

@@ -107,4 +107,12 @@ export default class Hex extends _Component {
 
         return false;
     }
+
+    distanceTo(otherHex) {
+        const distQ = Math.abs(this.q - otherHex.q);
+        const distR = Math.abs(this.r - otherHex.r);
+        const distS = Math.abs(this.s - otherHex.s);
+
+        return Math.max(distQ, Math.max(distR, distS));
+    }
 }

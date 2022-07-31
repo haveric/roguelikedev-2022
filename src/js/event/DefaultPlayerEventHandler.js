@@ -2,6 +2,7 @@ import _EventHandler from "./_EventHandler";
 import controls from "../controls/Controls";
 import BumpAction from "../actions/actionWithDirection/BumpAction";
 import engine from "../Engine";
+import WaitAction from "../actions/WaitAction";
 
 export default class DefaultPlayerEventHandler extends _EventHandler {
     constructor() {
@@ -28,6 +29,8 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                 action = new BumpAction(engine.player, 1, -1);
             } else if (controls.testPressed("se")) {
                 action = new BumpAction(engine.player, 0, 1);
+            } else if (controls.testPressed("wait")) {
+                action = new WaitAction(engine.player);
             }
         }
 
