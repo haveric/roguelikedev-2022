@@ -2,6 +2,7 @@ import _ActionWithDirection from "./_ActionWithDirection";
 import engine from "../../Engine";
 import HexUtil from "../../util/HexUtil";
 import UnableToPerformAction from "../UnableToPerformAction";
+import messageManager from "../../message/MessageManager";
 
 export default class MeleeAction extends _ActionWithDirection {
     constructor(entity, dq, dr) {
@@ -25,10 +26,13 @@ export default class MeleeAction extends _ActionWithDirection {
                 }
 
                 let blockingName;
+                let attackColor;
                 if (blockingActor === engine.player) {
                     blockingName = "You";
+                    attackColor = "#C00";
                 } else {
                     blockingName = blockingActor.name;
+                    attackColor = "#999";
                 }
 
                 const entityFighter = this.entity.getComponent("fighter");
@@ -44,7 +48,7 @@ export default class MeleeAction extends _ActionWithDirection {
                     description += ", but does no damage.";
                 }
 
-                console.log(description);
+                messageManager.text(description, attackColor).build();
             } else {
                 return new UnableToPerformAction(this.entity, "There's nothing to attack there!");
             }

@@ -1,5 +1,6 @@
 import NoAction from "./actions/NoAction";
 import UnableToPerformAction from "./actions/UnableToPerformAction";
+import messageManager from "./message/MessageManager";
 
 class Engine {
     constructor() {
@@ -22,8 +23,7 @@ class Engine {
 
             if (performedAction instanceof UnableToPerformAction) {
                 if (performedAction.reason) {
-                    console.log(performedAction.reason);
-                    //messageConsole.text(performedAction.reason).build();
+                    messageManager.text(performedAction.reason).build();
                 }
                 return false;
             } else {

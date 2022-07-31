@@ -1,5 +1,6 @@
 import _Component from "./_Component";
 import AIDead from "./ai/AIDead";
+import messageManager from "../message/MessageManager";
 
 export default class Fighter extends _Component {
     constructor(args) {
@@ -53,9 +54,9 @@ export default class Fighter extends _Component {
     die() {
         const entity = this.parentEntity;
         if (this.isPlayer()) {
-            console.log("You died!");
+            messageManager.text("You died!", "#f00").build();
         } else {
-            console.log(entity.name + " dies!");
+            messageManager.text(entity.name + " dies!", "#ffa030").build();
         }
 
         entity.callEvent("onEntityDeath");
