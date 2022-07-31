@@ -40,4 +40,18 @@ export default class Actor extends _Entity {
         sceneState.ctx.font = "bold 26px serif";
         sceneState.ctx.fillText(this.letter, drawX, drawY);
     }
+
+
+    setName(newName) {
+        this.name = newName;
+        this.clearSaveCache();
+    }
+
+    onEntityDeath() {
+        // TODO: Handle these better
+        this.letter = "%";
+        this.color = "red";
+
+        this.setName("Remains of " + this.name);
+    }
 }

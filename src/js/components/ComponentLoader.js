@@ -3,7 +3,7 @@ import AIMeleeChase from "./ai/AIMeleeChase";
 import BlocksFov from "./BlocksFov";
 import BlocksMovement from "./BlocksMovement";
 import Faction from "./Faction";
-import Fighter from "./FIghter";
+import Fighter from "./Fighter";
 import Fov from "./Fov";
 import Hex from "./Hex";
 

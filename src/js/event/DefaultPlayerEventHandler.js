@@ -16,7 +16,7 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
     handleInput() {
         let action = null;
 
-        if (this.isPlayerTurn) {
+        if (this.isPlayerTurn && engine.player.isAlive()) {
             if (controls.testPressed("up")) {
                 action = new BumpAction(engine.player, -1, 0);
             } else if (controls.testPressed("down")) {

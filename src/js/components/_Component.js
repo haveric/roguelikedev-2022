@@ -1,3 +1,5 @@
+import engine from "../Engine";
+
 export default class _Component {
     constructor(args = {}, baseType, type) {
         this.args = args;
@@ -19,6 +21,10 @@ export default class _Component {
 
     hasComponent() {
         return this.args.components && this.args.components[this.type] !== undefined;
+    }
+
+    isPlayer() {
+        return this.parentEntity === engine.player;
     }
 
     saveBoolean(arg, defaultValue) {

@@ -10,6 +10,7 @@
     {
         "id": "cave_wall",
         "extends": "base_wall",
+        "name": "wall",
         "color": "#666",
         "borderColor": "#222"
     }

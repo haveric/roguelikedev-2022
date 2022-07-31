@@ -15,4 +15,10 @@ export default class BlocksMovement extends _Component {
     save() {
         return this.saveBoolean(this.blocksMovement, false);
     }
+
+    onEntityDeath() {
+        this.blocksMovement = false;
+
+        this.clearSaveCache();
+    }
 }

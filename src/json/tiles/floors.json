@@ -9,6 +9,7 @@
     {
         "id": "cave_floor",
         "extends": "base_floor",
+        "name": "floor",
         "color": "#ddd",
         "borderColor": "#999"
     }
