@@ -47,8 +47,8 @@ export default class CellularAutomataMap extends _HexGameMap {
     }
 
     addRandomNoise() {
-        for (let i = 0; i < this.rows; i++) {
-            for (let j = 0; j < this.cols; j++) {
+        for (let i = 1; i < this.rows - 1; i++) {
+            for (let j = 1; j < this.cols - 1; j++) {
                 if (Math.random() < .02) {
                     const entity = this.wallEntity.clone();
                     entity.getComponent("hex").moveTo(i, j);
@@ -62,7 +62,6 @@ export default class CellularAutomataMap extends _HexGameMap {
         this.addRandomNoise();
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
-                this.placeWallLogic(this.tiles[i][j]);
                 const isWall = this.placeWallLogic(this.tiles[i][j]);
 
                 let entity;
