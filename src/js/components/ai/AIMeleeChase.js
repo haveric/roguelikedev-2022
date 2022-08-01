@@ -134,7 +134,7 @@ export default class AIMeleeChase extends _AI {
                 for (const actor of this.fov.visibleActors) {
                     if (actor.isAlive()) {
                         const actorHex = actor.getComponent("hex");
-                        cost[actorHex.row - this.fov.left][actorHex.col - this.fov.top] += 100;
+                        cost[actorHex.row - this.fov.left][actorHex.col - this.fov.top] += 10;
                     }
                 }
 
@@ -144,27 +144,22 @@ export default class AIMeleeChase extends _AI {
                 const end = costGraph.grid[this.chaseLocation.row - this.fov.left][this.chaseLocation.col - this.fov.top];
 
                 let lastAction;
-                if (end) { // TODO: This check is likely needed due to a bug elsewhere
-                    const path = AStar.search(costGraph, start, end);
-                    while (this.currentMovement >= 1) {
-                        if (path && path.length > 0) {
-                            const next = path.shift();
+                const path = AStar.search(costGraph, start, end);
+                while (this.currentMovement >= 1) {
+                    if (path && path.length > 0) {
+                        const next = path.shift();
 
-                            if (next) {
-                                const newRow = next.row + this.fov.left - entityHex.row;
-                                const newCol = next.col + this.fov.top - entityHex.col;
-                                const qr = HexUtil.arrayToHex(newRow, newCol);
-                                lastAction = new BumpAction(entity, qr.q, qr.r).perform();
-                            }
-                        } else {
-                            lastAction = new WaitAction(entity).perform();
+                        if (next) {
+                            const newRow = next.row + this.fov.left - entityHex.row;
+                            const newCol = next.col + this.fov.top - entityHex.col;
+                            const qr = HexUtil.arrayToHex(newRow, newCol);
+                            lastAction = new BumpAction(entity, qr.q, qr.r).perform();
                         }
-
-                        this.currentMovement -= 1;
+                    } else {
+                        lastAction = new WaitAction(entity).perform();
                     }
-                } else {
-                    lastAction = new WaitAction(entity).perform();
-                    this.currentMovement = 0;
+
+                    this.currentMovement -= 1;
                 }
 
                 return lastAction;

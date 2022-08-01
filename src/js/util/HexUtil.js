@@ -23,7 +23,7 @@ export default class HexUtil {
 
     static arrayToHex(row, col) {
         return {
-            q: row - Math.floor(col / 2),
+            q: row - Math.floor(col / 2.0),
             r: col
         };
     }
