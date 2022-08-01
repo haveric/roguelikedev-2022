@@ -23,10 +23,10 @@ export default class _HexGameMap {
 
     draw() {
         for (let i = 0; i < this.rows; i++) {
-            let y = 2 * HexUtil.HEX_RADIUS + (2 * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A)) * i;
+            let y = 2 * HexUtil.HEX_RADIUS_V + (2 * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A)) * i;
             for (let j = 0; j < this.cols; j++) {
-                const x = HexUtil.HEX_RADIUS + (HexUtil.HEX_RADIUS * (1 + Math.cos(HexUtil.HEX_A))) * j;
-                y -= (-1) ** j * HexUtil.HEX_RADIUS * Math.sin(HexUtil.HEX_A);
+                const x = HexUtil.HEX_RADIUS_H + (HexUtil.HEX_RADIUS_H * (1 + Math.cos(HexUtil.HEX_A))) * j;
+                y -= (-1) ** j * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A);
 
                 const tile = this.tiles[i][j];
                 const tileFov = tile.getComponent("fov");
