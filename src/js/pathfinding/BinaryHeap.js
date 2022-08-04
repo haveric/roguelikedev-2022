@@ -43,6 +43,7 @@ export default class BinaryHeap {
             }
         }
     }
+
     size() {
         return this.content.length;
     }

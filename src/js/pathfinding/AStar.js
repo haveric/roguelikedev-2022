@@ -23,8 +23,8 @@ export default class AStar {
     /**
      * Perform an A* Search on a graph given a start and end node.
      * @param {Graph} graph
-     * @param {GridNode} start
-     * @param {GridNode} end
+     * @param {HexNode} start
+     * @param {HexNode} end
      * @param {Object} [options]
      * @param {bool} [options.closest] Specifies whether to return the
      path to the closest node if the target is unreachable.
