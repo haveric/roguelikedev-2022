@@ -37,7 +37,7 @@ export default class AStar {
         const openHeap = this.getHeap();
         let closestNode = start; // set the start node to be the closest if required
 
-        start.h = this.heuristicManhattan(start, end);
+        start.h = this.heuristicManhattanHex(start, end);
         graph.markDirty(start);
 
         openHeap.push(start);
@@ -74,7 +74,7 @@ export default class AStar {
                     neighbor.visited = true;
                     neighbor.parent = currentNode;
 
-                    neighbor.h = neighbor.h || this.heuristicManhattan(neighbor, end);
+                    neighbor.h = neighbor.h || this.heuristicManhattanHex(neighbor, end);
 
                     neighbor.g = gScore;
                     neighbor.f = neighbor.g + neighbor.h;
@@ -107,11 +107,11 @@ export default class AStar {
     }
 
     // See list of heuristics: http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
-    static heuristicManhattan(pos0, pos1) {
+    static heuristicManhattanHex(pos0, pos1) {
         const d1 = Math.abs(pos1.q - pos0.q);
         const d2 = Math.abs(pos1.r - pos0.r);
         const d3 = Math.abs(pos1.s - pos0.s);
-        return d1 + d2 + d3;
+        return (d1 + d2 + d3) / 2;
     }
 
     static cleanNode(node) {
