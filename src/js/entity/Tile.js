@@ -70,5 +70,8 @@ export default class Tile extends _Entity {
         //
         // const hex = this.getComponent("hex");
         // sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y);
+
+        // sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y-5);
+        // sceneState.ctx.fillText(hex.row + ", " + hex.col, x, y+5);
     }
 }

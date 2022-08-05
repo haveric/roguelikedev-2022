@@ -23,8 +23,8 @@ export default class Actor extends _Entity {
     draw() {
         // TODO: Replace arbitrary 1.15
         const hex = this.getComponent("hex");
-        const drawX = HexUtil.HEX_RADIUS_H + (HexUtil.HEX_RADIUS_H * (1 + Math.cos(HexUtil.HEX_A))) * hex.getDisplayY();
-        const drawY = 1.15 * HexUtil.HEX_RADIUS_V + (2 * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A)) * hex.getDisplayX();
+        const drawX = HexUtil.HEX_RADIUS_H + (HexUtil.HEX_RADIUS_H * (1 + Math.cos(HexUtil.HEX_A))) * hex.getDisplayX();
+        const drawY = 1.15 * HexUtil.HEX_RADIUS_V + (2 * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A)) * hex.getDisplayY();
 
         super.draw(drawX, drawY);
         //HexUtil.drawHex(sceneState.ctx, drawX, drawY);

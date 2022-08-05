@@ -18,15 +18,15 @@ export default class HexUtil {
 
     static hexToArray(q, r) {
         return {
-            x: Math.floor(q + (r / 2.0)),
-            y: r
+            x: Math.floor(r + (q / 2.0)),
+            y: q
         };
     }
 
     static arrayToHex(row, col) {
         return {
-            q: row - Math.floor(col / 2.0),
-            r: col
+            q: col,
+            r: row - Math.floor(col / 2.0)
         };
     }
 

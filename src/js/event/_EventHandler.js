@@ -15,7 +15,7 @@ export default class _EventHandler {
         window.addEventListener("keydown", this);
 
         this.isPlayerTurn = true;
-        this.highlightedTiles = [];
+        this.targetedTile = null;
     }
 
     teardown() {

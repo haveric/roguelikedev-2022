@@ -48,8 +48,8 @@ export default class Hex extends _Component {
     }
 
     updateHexCoords() {
-        this.q = this.row - Math.floor(this.col / 2);
-        this.r = this.col;
+        this.q = this.col;
+        this.r = this.row - Math.floor(this.col / 2);
         this.s = -this.q - this.r;
     }
 
@@ -58,11 +58,11 @@ export default class Hex extends _Component {
     }
 
     getDisplayX() {
-        return this.q + (this.r / 2.0);
+        return this.q;
     }
 
     getDisplayY() {
-        return this.r;
+        return this.r + (this.q / 2.0);
     }
 
     getTileFromArray(map, q, r) {

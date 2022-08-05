@@ -14,7 +14,7 @@ import entityLoader from "./js/entity/EntityLoader";
         const playerHex = engine.player.getComponent("hex");
         let foundPlace = false;
         while(!foundPlace) {
-            const playerRow = Math.floor(Math.random() * (engine.gameMap.rows - 8)) + 4;
+            const playerRow = Math.floor(Math.random() * (engine.gameMap.rows - 4)) + 2;
             const playerCol = Math.floor(Math.random() * (engine.gameMap.cols - 4)) + 2;
 
             const tile = engine.gameMap.tiles[playerRow][playerCol];
