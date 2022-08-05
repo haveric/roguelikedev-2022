@@ -46,6 +46,9 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
         const tile = engine.gameMap.getTileFromHexCoords(hex.q, hex.r);
         if (tile) {
             if (this.targetedTile !== tile) {
+                for (const pathTile of this.pathTiles) {
+                    pathTile.highlighted = false;
+                }
                 if (this.targetedTile) {
                     this.targetedTile.highlighted = false;
                 }
@@ -53,8 +56,18 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                 tile.highlighted = true;
                 this.targetedTile = tile;
 
+                const costGraph = engine.player.fov.getCostGraph();
+                const playerHex = engine.player.getComponent("hex");
                 const tileHex = tile.getComponent("hex");
-                console.log(hex, tileHex.row, tileHex.col);
+                const path = engine.player.fov.getPath(costGraph, playerHex, tileHex);
+                for (const pathNode of path) {
+                    const newRow = pathNode.row + engine.player.fov.left;
+                    const newCol = pathNode.col + engine.player.fov.top;
+
+                    const pathNodeTile = engine.gameMap.getTileFromArrayCoords(newRow, newCol);
+                    pathNodeTile.highlighted = true;
+                    this.pathTiles.push(pathNodeTile);
+                }
             }
         }
 

@@ -16,6 +16,7 @@ export default class _EventHandler {
 
         this.isPlayerTurn = true;
         this.targetedTile = null;
+        this.pathTiles = [];
     }
 
     teardown() {

@@ -1,6 +1,8 @@
 import engine from "../../Engine";
 import Fov from "../../components/Fov";
 import HexUtil from "../../util/HexUtil";
+import Graph from "../../pathfinding/Graph";
+import AStar from "../../pathfinding/AStar";
 
 export default class _BaseFov {
     constructor() {
@@ -22,9 +24,13 @@ export default class _BaseFov {
         const x = this.hex.row;
         const y = this.hex.col;
 
+        let top = y - radius;
+        if (top % 2 === 1) {
+            top -= 1;
+        }
         this.left = Math.max(0, x - radius);
         this.right = Math.min(engine.gameMap.rows, x + radius);
-        this.top = Math.max(0, y - radius);
+        this.top = Math.max(0, top);
         this.bottom = Math.min(engine.gameMap.cols, y + radius);
     }
 
@@ -75,5 +81,36 @@ export default class _BaseFov {
                 tile.setComponent(new Fov({components: {fov: {explored: true, visible: true}}}));
             }
         }
+    }
+
+    getCostGraph() {
+        const fovWidth = this.right - this.left;
+        const fovHeight = this.bottom - this.top;
+        const cost = Array(fovWidth).fill().map(() => Array(fovHeight).fill(0));
+
+        for (const tile of this.visibleTiles) {
+            if (tile.isWall()) {
+                continue;
+            }
+
+            const tileHex = tile.getComponent("hex");
+            cost[tileHex.row - this.left][tileHex.col - this.top] += 10;
+        }
+
+        for (const actor of this.visibleActors) {
+            if (actor.isAlive()) {
+                const actorHex = actor.getComponent("hex");
+                cost[actorHex.row - this.left][actorHex.col - this.top] += 100;
+            }
+        }
+
+        return new Graph(cost);
+    }
+
+    getPath(costGraph, startHex, endHex) {
+        const start = costGraph.grid[startHex.row - this.left][startHex.col - this.top];
+        const end = costGraph.grid[endHex.row - this.left][endHex.col - this.top];
+
+        return AStar.search(costGraph, start, end);
     }
 }

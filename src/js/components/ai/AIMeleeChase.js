@@ -4,9 +4,7 @@ import MeleeAction from "../../actions/actionWithDirection/MeleeAction";
 import WanderAction from "../../actions/WanderAction";
 import BumpAction from "../../actions/actionWithDirection/BumpAction";
 import WaitAction from "../../actions/WaitAction";
-import AStar from "../../pathfinding/AStar";
-import Graph from "../../pathfinding/Graph";
-import HexUtil from "../../util/HexUtil";
+import engine from "../../Engine";
 
 export default class AIMeleeChase extends _AI {
     constructor(args = {}) {
@@ -118,42 +116,22 @@ export default class AIMeleeChase extends _AI {
 
             if (this.currentMovement >= 1) {
                 // Move towards enemy
-                const fovWidth = this.fov.right - this.fov.left;
-                const fovHeight = this.fov.bottom - this.fov.top;
-                const cost = Array(fovWidth).fill().map(() => Array(fovHeight).fill(0));
-
-                for (const tile of this.fov.visibleTiles) {
-                    if (tile.isWall()) {
-                        continue;
-                    }
-
-                    const tileHex = tile.getComponent("hex");
-                    cost[tileHex.row - this.fov.left][tileHex.col - this.fov.top] += 10;
-                }
-
-                for (const actor of this.fov.visibleActors) {
-                    if (actor.isAlive()) {
-                        const actorHex = actor.getComponent("hex");
-                        cost[actorHex.row - this.fov.left][actorHex.col - this.fov.top] += 10;
-                    }
-                }
-
-                const costGraph = new Graph(cost);
-
-                const start = costGraph.grid[entityHex.row - this.fov.left][entityHex.col - this.fov.top];
-                const end = costGraph.grid[this.chaseLocation.row - this.fov.left][this.chaseLocation.col - this.fov.top];
+                const costGraph = this.fov.getCostGraph();
+                const path = this.fov.getPath(costGraph, entityHex, this.chaseLocation);
 
                 let lastAction;
-                const path = AStar.search(costGraph, start, end);
                 while (this.currentMovement >= 1) {
                     if (path && path.length > 0) {
                         const next = path.shift();
 
                         if (next) {
-                            const newRow = next.row + this.fov.left - entityHex.row;
-                            const newCol = next.col + this.fov.top - entityHex.col;
-                            const qr = HexUtil.arrayToHex(newRow, newCol);
-                            lastAction = new BumpAction(entity, qr.q, qr.r).perform();
+                            const newRow = next.row + this.fov.left;// - entityHex.row;
+                            const newCol = next.col + this.fov.top;// - entityHex.col;
+                            const nextTile = engine.gameMap.getTileFromArrayCoords(newRow, newCol);
+                            const nextTileHex = nextTile.getComponent("hex");
+                            const dq = nextTileHex.q - entityHex.q;
+                            const dr = nextTileHex.r - entityHex.r;
+                            lastAction = new BumpAction(entity, dq, dr).perform();
                         }
                     } else {
                         lastAction = new WaitAction(entity).perform();
