@@ -1,5 +1,9 @@
 export default class _EventHandler {
     constructor() {
+        this.mouse = {
+            x: -1,
+            y: -1
+        };
         this.mouseDown = false;
 
         window.addEventListener("mousemove", this);
@@ -11,6 +15,7 @@ export default class _EventHandler {
         window.addEventListener("keydown", this);
 
         this.isPlayerTurn = true;
+        this.highlightedTiles = [];
     }
 
     teardown() {

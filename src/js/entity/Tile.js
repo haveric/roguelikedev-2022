@@ -27,16 +27,11 @@ export default class Tile extends _Entity {
     }
 
     draw(x, y) {
-        // sceneState.ctx.textAlign = "center";
-        // sceneState.ctx.textBaseline = "middle";
-        //
-        // sceneState.ctx.font = "16px serif";
-        // sceneState.ctx.fillStyle = "black";
-
         const fov = this.getComponent("fov");
         if (fov) {
             if (fov.explored) {
                 HexUtil.drawHex(sceneState.ctx, x, y);
+
                 if (this.color) {
                     sceneState.ctx.fillStyle = this.color;
                     sceneState.ctx.fill();
@@ -55,25 +50,25 @@ export default class Tile extends _Entity {
             }
         }
 
+        // Debug show all tiles
+        // HexUtil.drawHex(sceneState.ctx, x, y);
+        // sceneState.ctx.fillStyle = this.color;
+        // sceneState.ctx.fill();
+
+        if (this.highlighted) {
+            HexUtil.drawHex(sceneState.ctx, x, y);
+            sceneState.ctx.fillStyle = "rgba(0,0,255,0.3)";
+            sceneState.ctx.fill();
+        }
+
+        // Debug show coordinates
+        // sceneState.ctx.textAlign = "center";
+        // sceneState.ctx.textBaseline = "middle";
+        //
+        // sceneState.ctx.font = "12px serif";
+        // sceneState.ctx.fillStyle = "black";
+        //
         // const hex = this.getComponent("hex");
-        // const playerHex = engine.player.getComponent("hex");
-        //
-        // const radius = 5;
-        //
-        // const distRow = Math.abs(playerHex.row - hex.row);
-        // const distCol = Math.abs(playerHex.col - hex.col);
-        // if (distRow < radius && distCol < radius) {
-        //     sceneState.ctx.fillText("(" + hex.row + ", " + hex.col + ")", x, y+10);
-        // }
-        //
-        // const distQ = Math.abs(playerHex.q - hex.q);
-        // const distR = Math.abs(playerHex.r - hex.r);
-        // const distS = Math.abs(playerHex.s - hex.s);
-        // if (distQ < radius && distR < radius && distS < radius) {
-        //     //sceneState.ctx.fillText(playerHex.q - hex.q, x, y);
-        //
-        //     //sceneState.ctx.fillText("(" + hex.q + ", " + hex.r + ")", x, y-10);
-        //     //sceneState.ctx.fillText("(" + hex.row + ", " + hex.col + ")", x, y+10);
-        // }
+        // sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y);
     }
 }

@@ -23,16 +23,13 @@ export default class _HexGameMap {
 
     draw() {
         for (let i = 0; i < this.rows; i++) {
-            let y = 2 * HexUtil.HEX_RADIUS_V + (2 * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A)) * i;
+            let y = HexUtil.OFFSET_V + (2 * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A)) * i;
             for (let j = 0; j < this.cols; j++) {
-                const x = HexUtil.HEX_RADIUS_H + (HexUtil.HEX_RADIUS_H * (1 + Math.cos(HexUtil.HEX_A))) * j;
+                const x = HexUtil.OFFSET_H + (HexUtil.HEX_RADIUS_H * (1 + Math.cos(HexUtil.HEX_A))) * j;
                 y -= (-1) ** j * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A);
 
                 const tile = this.tiles[i][j];
-                const tileFov = tile.getComponent("fov");
-                if (tileFov && tileFov.explored) {
-                    tile.draw(x, y);
-                }
+                tile.draw(x, y);
             }
         }
 
@@ -56,7 +53,11 @@ export default class _HexGameMap {
 
     getTileFromHexCoords(q, r) {
         const xy = HexUtil.hexToArray(q, r);
-        return this.tiles[xy.x][xy.y];
+        if (this.tiles[xy.x]) {
+            return this.tiles[xy.x][xy.y];
+        }
+
+        return null;
     }
 
     getTileNeighbor(q, r, direction) {

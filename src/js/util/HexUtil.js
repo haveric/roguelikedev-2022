@@ -2,7 +2,9 @@ export default class HexUtil {
     static PI = Math.PI;
     static HEX_A = this.PI / 3;
     static HEX_RADIUS_H = 20;
-    static HEX_RADIUS_V = 15;
+    static HEX_RADIUS_V = 20;//15;
+    static OFFSET_V = 2 * this.HEX_RADIUS_V;
+    static OFFSET_H = this.HEX_RADIUS_H;
 
     constructor() {}
 
@@ -27,4 +29,37 @@ export default class HexUtil {
             r: col
         };
     }
+
+    static axialRound(fraqQ, fraqR) {
+        let q = Math.round(fraqQ);
+        let r = Math.round(fraqR);
+        const fraqS = -fraqQ - fraqR;
+        const s = Math.round(fraqS);
+
+        const qDiff = Math.abs(q - fraqQ);
+        const rDiff = Math.abs(r - fraqR);
+        const sDiff = Math.abs(s - fraqS);
+
+        if (qDiff > rDiff && qDiff > sDiff) {
+            q = -r - s;
+        } else if (rDiff > sDiff) {
+            r = -q - s;
+        }
+
+        return {
+            q: q,
+            r: r
+        };
+    }
+
+    static pixelToHex(point) {
+        point.x -= this.HEX_RADIUS_H;
+        point.y -= this.HEX_RADIUS_V;
+
+        const q = ((2/3 * point.x)) / this.HEX_RADIUS_H;
+        const r = ((-1/3 * point.x + Math.sqrt(3) / 3 * point.y)) / this.HEX_RADIUS_V;
+
+        return this.axialRound(q, r);
+    }
+
 }
