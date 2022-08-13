@@ -1,5 +1,6 @@
 import SubMessage from "./SubMessage";
 import Message from "./Message";
+import messageConsole from "../ui/MessageConsole";
 
 class MessageManager {
     constructor() {
@@ -19,6 +20,7 @@ class MessageManager {
 
     clear() {
         this.messages = [];
+        messageConsole.clear();
     }
 
     addMessage(subMessages, stack = true) {
@@ -26,33 +28,19 @@ class MessageManager {
             const lastMessage = this.messages[this.messages.length - 1];
             if (lastMessage.isEqual(subMessages)) {
                 lastMessage.count += 1;
-                this.updateLastMessageCount(lastMessage);
+                messageConsole.updateLastMessageCount(lastMessage);
             } else {
-                this.messages.push(new Message(subMessages));
-                this.addNewMessage();
+                this.addNewMessage(subMessages);
             }
         } else {
-            this.messages.push(new Message(subMessages));
-            this.addNewMessage();
+            this.addNewMessage(subMessages);
         }
     }
 
-    updateLastMessageCount(lastMessage) {
-        console.log(lastMessage);
-        // const lastMessageDom = document.querySelectorAll(".message:last-child")[0];
-        // const amountDom = lastMessageDom.querySelectorAll(".message__amount")[0];
-        //
-        // if (amountDom) {
-        //     amountDom.innerText = "x" + lastMessage.count;
-        // } else {
-        //     lastMessageDom.appendChild(lastMessage.getCountHtml());
-        // }
-    }
-
-    addNewMessage() {
-        const lastMessage = this.messages[this.messages.length - 1];
-        console.log(lastMessage);
-        //this.messagesInnerDom.appendChild(lastMessage.getHtml());
+    addNewMessage(subMessages) {
+        const newMessage = new Message(subMessages);
+        this.messages.push(newMessage);
+        messageConsole.addMessage(newMessage.getHtml());
     }
 }
 
