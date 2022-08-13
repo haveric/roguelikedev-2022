@@ -5,6 +5,7 @@ import sceneState from "./js/SceneState";
 import DefaultPlayerEventHandler from "./js/event/DefaultPlayerEventHandler";
 import CellularAutomataMap from "./js/map/CellularAutomataMap";
 import entityLoader from "./js/entity/EntityLoader";
+import messageManager from "./js/message/MessageManager";
 
 (function () {
     function init() {
@@ -27,6 +28,8 @@ import entityLoader from "./js/entity/EntityLoader";
         engine.gameMap.placeEntities("cave", 1, .03, 5);
 
         engine.eventHandler = new DefaultPlayerEventHandler();
+
+        messageManager.text("Welcome to the dungeon.").build();
 
         engine.needsRenderUpdate = true;
         engine.player.fov.compute(engine.player, 5);
