@@ -20,4 +20,39 @@ export default class Message {
 
         return true;
     }
+
+    getHtml() {
+        const messageDom = document.createElement("div");
+        messageDom.classList.add("message");
+
+        for (const subMessage of this.subMessages) {
+            const subMessageDom = document.createElement("span");
+            subMessageDom.classList.add("message__text");
+
+            if (subMessage.bold) {
+                subMessageDom.classList.add("message__bold");
+            }
+
+            if (subMessage.italics) {
+                subMessageDom.classList.add("message__italics");
+            }
+            subMessageDom.innerText = subMessage.text;
+            subMessageDom.style.color = subMessage.color;
+            messageDom.appendChild(subMessageDom);
+        }
+
+        if (this.count > 1) {
+            messageDom.appendChild(this.getCountHtml());
+        }
+
+        return messageDom;
+    }
+
+    getCountHtml() {
+        const amountDom = document.createElement("span");
+        amountDom.classList.add("message__amount");
+        amountDom.innerText = "x" + this.count;
+
+        return amountDom;
+    }
 }

@@ -42,13 +42,16 @@ export default class MeleeAction extends _ActionWithDirection {
                 let description = name + " attack" + plural + " " + blockingName;
                 if (damage > 0) {
                     description += " for " + damage + " hit points.";
-
-                    actorFighter.takeDamage(damage);
                 } else {
                     description += ", but does no damage.";
                 }
 
                 messageManager.text(description, attackColor).build();
+
+                // Apply damage after initial message sent
+                if (damage > 0) {
+                    actorFighter.takeDamage(damage);
+                }
             } else {
                 return new UnableToPerformAction(this.entity, "There's nothing to attack there!");
             }

@@ -1,4 +1,7 @@
 import engine from "./Engine";
+import details from "./ui/Details";
+import playerInfo from "./ui/PlayerInfo";
+import messageConsole from "./ui/MessageConsole";
 
 class SceneState {
     constructor() {
@@ -17,6 +20,14 @@ class SceneState {
 
         gameDom.appendChild(this.canvas);
 
+        playerInfo.open();
+        messageConsole.open();
+        details.open();
+
+        playerInfo.appendTo(details.dom);
+        messageConsole.appendTo(details.dom);
+        details.appendTo(gameDom);
+
         document.body.appendChild(gameDom);
 
         this.ctx = this.canvas.getContext("2d");
@@ -32,7 +43,7 @@ class SceneState {
     }
 
     resizeCanvas() {
-        this.canvas.width = window.innerWidth;
+        this.canvas.width = window.innerWidth * .8;
         this.canvas.height = window.innerHeight;
 
         engine.needsRenderUpdate = true;
