@@ -115,4 +115,8 @@ export default class Hex extends _Component {
 
         return Math.max(distQ, Math.max(distR, distS));
     }
+
+    equals(otherHex) {
+        return this.row === otherHex.row && this.col === otherHex.col;
+    }
 }

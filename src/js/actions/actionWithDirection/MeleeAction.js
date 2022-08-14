@@ -41,7 +41,7 @@ export default class MeleeAction extends _ActionWithDirection {
 
                 let description = name + " attack" + plural + " " + blockingName;
                 if (damage > 0) {
-                    description += " for " + damage + " hit points.";
+                    description += " for " + damage + " hp.";
                 } else {
                     description += ", but does no damage.";
                 }

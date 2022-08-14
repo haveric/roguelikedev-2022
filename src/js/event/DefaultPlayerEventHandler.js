@@ -4,6 +4,7 @@ import BumpAction from "../actions/actionWithDirection/BumpAction";
 import engine from "../Engine";
 import WaitAction from "../actions/WaitAction";
 import HexUtil from "../util/HexUtil";
+import viewInfo from "../ui/ViewInfo";
 
 export default class DefaultPlayerEventHandler extends _EventHandler {
     constructor() {
@@ -71,6 +72,8 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                         this.pathTiles.push(pathNodeTile);
                     }
                 }
+
+                viewInfo.updatePositionDetails(tile);
             }
         }
 

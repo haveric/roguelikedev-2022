@@ -1,6 +1,7 @@
 import _Component from "./_Component";
 import AIDead from "./ai/AIDead";
 import messageManager from "../message/MessageManager";
+import playerInfo from "../ui/PlayerInfo";
 
 export default class Fighter extends _Component {
     constructor(args) {
@@ -43,6 +44,7 @@ export default class Fighter extends _Component {
 
     takeDamage(damage) {
         this.hp -= damage;
+        this.updateUI();
 
         if (this.hp <= 0) {
             this.die();
@@ -76,5 +78,13 @@ export default class Fighter extends _Component {
         }
 
         this.clearSaveCache();
+    }
+
+    updateUI() {
+        if (this.isPlayer()) {
+            playerInfo.updateHealth(this.hp, this.maxHp);
+            playerInfo.updatePower(this.power);
+            playerInfo.updateDefense(this.defense);
+        }
     }
 }

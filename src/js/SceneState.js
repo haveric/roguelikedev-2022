@@ -2,6 +2,7 @@ import engine from "./Engine";
 import details from "./ui/Details";
 import playerInfo from "./ui/PlayerInfo";
 import messageConsole from "./ui/MessageConsole";
+import viewInfo from "./ui/ViewInfo";
 
 class SceneState {
     constructor() {
@@ -21,10 +22,12 @@ class SceneState {
         gameDom.appendChild(this.canvas);
 
         playerInfo.open();
+        viewInfo.open();
         messageConsole.open();
         details.open();
 
         playerInfo.appendTo(details.dom);
+        viewInfo.appendTo(details.dom);
         messageConsole.appendTo(details.dom);
         details.appendTo(gameDom);
 

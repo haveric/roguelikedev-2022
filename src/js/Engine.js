@@ -1,6 +1,7 @@
 import NoAction from "./actions/NoAction";
 import UnableToPerformAction from "./actions/UnableToPerformAction";
 import messageManager from "./message/MessageManager";
+import viewInfo from "./ui/ViewInfo";
 
 class Engine {
     constructor() {
@@ -30,6 +31,7 @@ class Engine {
                 engine.needsRenderUpdate = true;
                 engine.player.fov.compute(engine.player, 5);
                 engine.player.fov.updateMap();
+                viewInfo.updatePlayerDetails();
 
                 this.handleEnemyTurns();
 
