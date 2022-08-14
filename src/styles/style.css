@@ -45,13 +45,18 @@ body {
 }
 
 .player-info {
-    height: calc(30vh - 10px);
+    height: calc(20vh - 10px);
+    border-bottom: 1px solid #000;
+}
+
+.view-info {
+    height: 30vh;
     border-bottom: 1px solid #000;
 }
 
 .message-console {
     position: relative;
-    height: calc(70vh - 10px);
+    height: calc(50vh - 10px);
 }
 
 .messages__wrap {
@@ -92,4 +97,36 @@ body {
 
 .message__amount {
     margin-left: 1em;
+}
+
+
+.player-health {
+    position: relative;
+    width: 100%;
+    height: 2vh;
+    background-color: #000;
+}
+
+.player-health__fg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #8B0000;
+}
+
+.player-health__text {
+    display: table;
+    position: absolute;
+    left: 0;
+    right: 0;
+    font-size: 1.8vh;
+    color: #fff;
+    margin: 0 auto;
+}
+
+.player-stat {
+    display: inline-block;
+    float: left;
+    width: 50%;
 }
