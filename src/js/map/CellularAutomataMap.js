@@ -135,4 +135,25 @@ export default class CellularAutomataMap extends _HexGameMap {
             }
         }
     }
+
+    placeItems(generation, level, percentage, distFromPlayer) {
+        const playerHex = engine.player.getComponent("hex");
+
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                const tile = this.tiles[i][j];
+                if (!tile.isWall()) {
+                    const hex = tile.getComponent("hex");
+                    if (!playerHex.isInRange(hex, distFromPlayer)) {
+                        if (Math.random() < percentage) {
+                            const itemId = chanceLoader.getItemForLevel(generation, level);
+                            const item = entityLoader.createFromTemplate(itemId, {components: {hex: {row: hex.row, col: hex.col}}});
+
+                            this.items.push(item);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

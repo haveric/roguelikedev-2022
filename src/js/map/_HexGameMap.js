@@ -13,6 +13,7 @@ export default class _HexGameMap {
     init() {
         this.tiles = ArrayUtil.create2dArray(this.rows);
         this.actors = [];
+        this.items = [];
     }
 
     isInBounds(x, y) {
@@ -30,6 +31,15 @@ export default class _HexGameMap {
 
                 const tile = this.tiles[i][j];
                 tile.draw(x, y);
+            }
+        }
+
+        for (const item of this.items) {
+            const itemHex = item.getComponent("hex");
+            const tile = engine.gameMap.getTileFromArrayCoords(itemHex.row, itemHex.col);
+            const tileFov = tile.getComponent("fov");
+            if (tileFov && tileFov.visible) {
+                item.draw();
             }
         }
 

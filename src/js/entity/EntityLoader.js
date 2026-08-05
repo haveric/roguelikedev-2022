@@ -7,6 +7,9 @@ import playerList from "../../json/actors/player.json";
 import tilesBaseList from "../../json/tiles/_base.json";
 import floorsList from "../../json/tiles/floors.json";
 import wallsList from "../../json/tiles/walls.json";
+import itemsBaseList from "../../json/items/_base.json";
+import potionsList from "../../json/items/potions.json";
+import Item from "./Item";
 
 class EntityLoader {
     constructor() {
@@ -19,6 +22,7 @@ class EntityLoader {
     init() {
         this.load(new Actor());
         this.load(new Tile());
+        this.load(new Item());
 
         this.loadTemplates();
     }
@@ -78,6 +82,9 @@ class EntityLoader {
         this.loadTemplate(tilesBaseList);
         this.loadTemplate(floorsList);
         this.loadTemplate(wallsList);
+
+        this.loadTemplate(itemsBaseList);
+        this.loadTemplate(potionsList);
     }
 }
 
