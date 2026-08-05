@@ -7,6 +7,9 @@
                 "actors": [
                     {"id": "orc", "weight": 80},
                     {"id": "troll", "weight": 20}
+                ],
+                "items": [
+                    {"id": "potion_health", "weight": 30}
                 ]
             }
         ]

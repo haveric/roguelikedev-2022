@@ -6,7 +6,7 @@ export default class _AI extends _Component {
     }
 
     save() {
-        return null;
+        return super.save();
     }
 
     perform() {

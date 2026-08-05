@@ -42,6 +42,19 @@ class ChanceLoader {
         return actorOrGroup.id;
     }
 
+    getItemForLevel(name, level) {
+        const chances = this.getChancesForLevel(name, level);
+        const items = chances.items;
+
+        let itemOrGroup = this.getRandomFromGroup(items);
+        while (itemOrGroup.group !== undefined) {
+            const itemGroup = this.entityGroups.get(itemOrGroup.group);
+            itemOrGroup = this.getRandomFromGroup(itemGroup);
+        }
+
+        return itemOrGroup.id;
+    }
+
     getRandomFromGroup(group) {
         let totalWeight = 0;
         for (const chance of group) {

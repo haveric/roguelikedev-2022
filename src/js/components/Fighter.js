@@ -40,17 +40,28 @@ export default class Fighter extends _Component {
 
     setHp(newHp) {
         this.hp = Math.max(0, Math.min(newHp, this.maxHp));
+        this.updateUI();
+        this.clearSaveCache();
+    }
+
+    heal(amount) {
+        if (this.hp === this.maxHp) {
+            return 0;
+        }
+
+        const newHp = Math.min(this.maxHp, this.hp + amount);
+        const healedHp = newHp - this.hp;
+        this.setHp(newHp);
+
+        return healedHp;
     }
 
     takeDamage(damage) {
-        this.hp -= damage;
-        this.updateUI();
+        this.setHp(this.hp - damage);
 
         if (this.hp <= 0) {
             this.die();
         }
-
-        this.clearSaveCache();
     }
 
     die() {
