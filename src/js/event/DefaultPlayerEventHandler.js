@@ -56,17 +56,20 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                 tile.highlighted = true;
                 this.targetedTile = tile;
 
-                const costGraph = engine.player.fov.getCostGraph();
-                const playerHex = engine.player.getComponent("hex");
-                const tileHex = tile.getComponent("hex");
-                const path = engine.player.fov.getPath(costGraph, playerHex, tileHex);
-                for (const pathNode of path) {
-                    const newRow = pathNode.row + engine.player.fov.left;
-                    const newCol = pathNode.col + engine.player.fov.top;
+                const tileFov = tile.getComponent("fov");
+                if (tileFov && tileFov.visible) {
+                    const costGraph = engine.player.fov.getCostGraph();
+                    const playerHex = engine.player.getComponent("hex");
+                    const tileHex = tile.getComponent("hex");
+                    const path = engine.player.fov.getPath(costGraph, playerHex, tileHex);
+                    for (const pathNode of path) {
+                        const newRow = pathNode.row + engine.player.fov.left;
+                        const newCol = pathNode.col + engine.player.fov.top;
 
-                    const pathNodeTile = engine.gameMap.getTileFromArrayCoords(newRow, newCol);
-                    pathNodeTile.highlighted = true;
-                    this.pathTiles.push(pathNodeTile);
+                        const pathNodeTile = engine.gameMap.getTileFromArrayCoords(newRow, newCol);
+                        pathNodeTile.highlighted = true;
+                        this.pathTiles.push(pathNodeTile);
+                    }
                 }
             }
         }

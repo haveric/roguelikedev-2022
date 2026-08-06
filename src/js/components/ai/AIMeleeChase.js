@@ -125,8 +125,8 @@ export default class AIMeleeChase extends _AI {
                         const next = path.shift();
 
                         if (next) {
-                            const newRow = next.row + this.fov.left;// - entityHex.row;
-                            const newCol = next.col + this.fov.top;// - entityHex.col;
+                            const newRow = next.row + this.fov.left;
+                            const newCol = next.col + this.fov.top;
                             const nextTile = engine.gameMap.getTileFromArrayCoords(newRow, newCol);
                             const nextTileHex = nextTile.getComponent("hex");
                             const dq = nextTileHex.q - entityHex.q;
