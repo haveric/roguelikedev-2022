@@ -1,5 +1,5 @@
 # Hex-based roguelike
-Originally created for 2022's <a href="https://old.reddit.com/r/roguelikedev/wiki/python_tutorial_series#wiki_version_2022">RoguelikeDev Does The Complete Roguelike Tutorial</a>
+Created for reddit.com/r/roguelikedev's 2022 event: <a href="https://www.reddit.com/r/roguelikedev/wiki/python_tutorial_series#wiki_version_2022">RoguelikeDev Does The Complete Roguelike Tutorial</a>
 
 ## <a href="https://www.ryanbreuer.com/roguelikedev-2022/">Play Demo</a>
 
