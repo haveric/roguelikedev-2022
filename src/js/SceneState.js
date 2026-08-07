@@ -4,6 +4,10 @@ class SceneState {
     constructor() {
         this.setupGameHtml();
 
+        this.DEFAULT_RESOLUTION_X = 1920;
+        this.DEFAULT_RESOLUTION_Y = 1080;
+        this.DEFAULT_RATIO = this.DEFAULT_RESOLUTION_X / this.DEFAULT_RESOLUTION_Y;
+        this.scale = 1;
         this.resizeCanvas();
         window.addEventListener( "resize", this);
     }
@@ -34,6 +38,16 @@ class SceneState {
     resizeCanvas() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
+
+        const scaleX = this.canvas.width / this.DEFAULT_RESOLUTION_X;
+        const scaleY = this.canvas.height / this.DEFAULT_RESOLUTION_Y;
+        const ratio = this.canvas.width / this.canvas.height;
+        const deviceZoomLevel = window.devicePixelRatio;
+        if (ratio > this.DEFAULT_RATIO) {
+            this.scale = scaleY * deviceZoomLevel;
+        } else {
+            this.scale = scaleX * deviceZoomLevel;
+        }
 
         engine.needsRenderUpdate = true;
     }

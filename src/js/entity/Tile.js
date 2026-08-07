@@ -26,7 +26,11 @@ export default class Tile extends _Entity {
         return this.getComponent("blocksMovement")?.blocksMovement;
     }
 
-    draw(x, y) {
+    draw(qOffset, rOffset) {
+        const hex = this.getComponent("hex");
+        const x = HexUtil.getHexRadiusHScaled() + (HexUtil.getHexRadiusHScaled() * (1 + Math.cos(HexUtil.HEX_A))) * hex.getDisplayX(qOffset);
+        const y = 1.15 * HexUtil.getHexRadiusVScaled() + (2 * HexUtil.getHexRadiusVScaled() * Math.sin(HexUtil.HEX_A)) * hex.getDisplayY(qOffset, rOffset);
+
         const fov = this.getComponent("fov");
         if (fov) {
             if (fov.explored) {
@@ -65,13 +69,12 @@ export default class Tile extends _Entity {
         // sceneState.ctx.textAlign = "center";
         // sceneState.ctx.textBaseline = "middle";
         //
-        // sceneState.ctx.font = "12px serif";
+        // sceneState.ctx.font = (sceneState.scale * 12) + "px serif";
         // sceneState.ctx.fillStyle = "black";
-        //
-        // const hex = this.getComponent("hex");
-        // sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y);
 
-        // sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y-5);
-        // sceneState.ctx.fillText(hex.row + ", " + hex.col, x, y+5);
+        //sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y);
+
+        //sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y-5);
+        //sceneState.ctx.fillText(hex.row + ", " + hex.col, x, y+5);
     }
 }

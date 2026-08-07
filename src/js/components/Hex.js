@@ -57,12 +57,12 @@ export default class Hex extends _Component {
         return this.row === 0 || this.col === 0 || this.row === map.rows - 1 || this.col === map.cols - 1;
     }
 
-    getDisplayX() {
-        return this.q;
+    getDisplayX(qOffset = 0) {
+        return this.q - qOffset;
     }
 
-    getDisplayY() {
-        return this.r + (this.q / 2.0);
+    getDisplayY(qOffset = 0, rOffset = 0) {
+        return this.r - rOffset + ((this.q - qOffset) / 2.0);
     }
 
     getTileFromArray(map, q, r) {

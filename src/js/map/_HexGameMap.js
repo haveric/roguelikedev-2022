@@ -22,14 +22,18 @@ export default class _HexGameMap {
     create() {}
 
     draw() {
-        for (let i = 0; i < this.rows; i++) {
-            let y = HexUtil.OFFSET_V + (2 * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A)) * i;
-            for (let j = 0; j < this.cols; j++) {
-                const x = HexUtil.OFFSET_H + (HexUtil.HEX_RADIUS_H * (1 + Math.cos(HexUtil.HEX_A))) * j;
-                y -= (-1) ** j * HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A);
+        const playerHex = engine.player.getComponent("hex");
+        const topLeft = HexUtil.hexToArray(playerHex.q - 20, playerHex.r - 5);
+        const botRight = HexUtil.hexToArray(playerHex.q + 21, playerHex.r + 5);
 
-                const tile = this.tiles[i][j];
-                tile.draw(x, y);
+        const qOffset = playerHex.q - 19;
+        const rOffset = playerHex.r;
+        for (let i = topLeft.x; i < botRight.x; i++) {
+            for (let j = topLeft.y; j < botRight.y; j++) {
+                if (this.tiles[i] && this.tiles[i][j]) {
+                    const tile = this.tiles[i][j];
+                    tile.draw(qOffset, rOffset);
+                }
             }
         }
 
@@ -38,7 +42,7 @@ export default class _HexGameMap {
             const tile = engine.gameMap.getTileFromArrayCoords(actorHex.row, actorHex.col);
             const tileFov = tile.getComponent("fov");
             if (tileFov && tileFov.visible) {
-                actor.draw();
+                actor.draw(qOffset, rOffset);
             }
         }
     }

@@ -1,19 +1,29 @@
+import sceneState from "../SceneState";
+
 export default class HexUtil {
     static PI = Math.PI;
     static HEX_A = this.PI / 3;
     static HEX_RADIUS_H = 20;
-    static HEX_RADIUS_V = 20;//15;
-    static OFFSET_V = 2 * this.HEX_RADIUS_V;
-    static OFFSET_H = this.HEX_RADIUS_H;
+    static HEX_RADIUS_V = 20;
+    //static OFFSET_V = 2 * this.HEX_RADIUS_V;
+    //static OFFSET_H = this.HEX_RADIUS_H;
 
     constructor() {}
 
     static drawHex(ctx, x, y) {
         ctx.beginPath();
         for (let i = 0; i < 6; i ++) {
-            ctx.lineTo(x + HexUtil.HEX_RADIUS_H * Math.cos(HexUtil.HEX_A * i), y + HexUtil.HEX_RADIUS_V * Math.sin(HexUtil.HEX_A * i));
+            ctx.lineTo(x + this.getHexRadiusHScaled() * Math.cos(HexUtil.HEX_A * i), y + this.getHexRadiusVScaled() * Math.sin(HexUtil.HEX_A * i));
         }
         ctx.closePath();
+    }
+
+    static getHexRadiusHScaled() {
+        return HexUtil.HEX_RADIUS_H * sceneState.scale;
+    }
+
+    static getHexRadiusVScaled() {
+        return HexUtil.HEX_RADIUS_V * sceneState.scale;
     }
 
     static hexToArray(q, r) {
@@ -53,11 +63,11 @@ export default class HexUtil {
     }
 
     static pixelToHex(point) {
-        point.x -= this.HEX_RADIUS_H;
-        point.y -= this.HEX_RADIUS_V;
+        point.x -= this.getHexRadiusHScaled();
+        point.y -= this.getHexRadiusVScaled();
 
-        const q = ((2/3 * point.x)) / this.HEX_RADIUS_H;
-        const r = ((-1/3 * point.x + Math.sqrt(3) / 3 * point.y)) / this.HEX_RADIUS_V;
+        const q = ((2/3 * point.x)) / this.getHexRadiusHScaled();
+        const r = ((-1/3 * point.x + Math.sqrt(3) / 3 * point.y)) / this.getHexRadiusVScaled();
 
         return this.axialRound(q, r);
     }
