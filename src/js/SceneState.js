@@ -10,6 +10,8 @@ class SceneState {
         this.scale = 1;
         this.resizeCanvas();
         window.addEventListener( "resize", this);
+
+        this.debugRenderMap = false;
     }
 
     setupGameHtml() {

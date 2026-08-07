@@ -4,6 +4,7 @@ import BumpAction from "../actions/actionWithDirection/BumpAction";
 import engine from "../Engine";
 import WaitAction from "../actions/WaitAction";
 import HexUtil from "../util/HexUtil";
+import sceneState from "../SceneState";
 
 export default class DefaultPlayerEventHandler extends _EventHandler {
     constructor() {
@@ -33,6 +34,12 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
             } else if (controls.testPressed("wait")) {
                 action = new WaitAction(engine.player);
             }
+        }
+
+        // DEBUG Actions
+        if (controls.testPressed("debug_map")) {
+            sceneState.debugRenderMap = sceneState.debugRenderMap !== true;
+            engine.needsRenderUpdate = true;
         }
 
         return action;

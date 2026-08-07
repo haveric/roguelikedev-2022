@@ -1,6 +1,7 @@
 import HexUtil from "../util/HexUtil";
 import ArrayUtil from "../util/ArrayUtil";
 import engine from "../Engine";
+import sceneState from "../SceneState";
 
 export default class _HexGameMap {
     constructor(rows, cols) {
@@ -41,7 +42,7 @@ export default class _HexGameMap {
             const actorHex = actor.getComponent("hex");
             const tile = engine.gameMap.getTileFromArrayCoords(actorHex.row, actorHex.col);
             const tileFov = tile.getComponent("fov");
-            if (tileFov && tileFov.visible) {
+            if (sceneState.debugRenderMap || (tileFov && tileFov.visible)) {
                 actor.draw(qOffset, rOffset);
             }
         }

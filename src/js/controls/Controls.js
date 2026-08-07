@@ -23,6 +23,8 @@ class Controls {
         self.defaults.set("se", [Key.NUMPAD_3]);
         self.defaults.set("wait", [Key.NUMPAD_5]);
 
+        self.defaults.set("debug_map", ["F9"]);
+
         self.load();
 
         addEventListener("keydown", function (e) {

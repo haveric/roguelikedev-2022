@@ -32,32 +32,32 @@ export default class Tile extends _Entity {
         const y = 1.15 * HexUtil.getHexRadiusVScaled() + (2 * HexUtil.getHexRadiusVScaled() * Math.sin(HexUtil.HEX_A)) * hex.getDisplayY(qOffset, rOffset);
 
         const fov = this.getComponent("fov");
-        if (fov) {
-            if (fov.explored) {
+        if (sceneState.debugRenderMap || (fov && fov.explored)) {
+            HexUtil.drawHex(sceneState.ctx, x, y);
+
+            if (this.color) {
+                sceneState.ctx.fillStyle = this.color;
+                sceneState.ctx.fill();
+            }
+
+            sceneState.ctx.strokeStyle = this.borderColor;
+            sceneState.ctx.stroke();
+
+            if (sceneState.debugRenderMap || !fov.visible) {
                 HexUtil.drawHex(sceneState.ctx, x, y);
-
-                if (this.color) {
-                    sceneState.ctx.fillStyle = this.color;
-                    sceneState.ctx.fill();
-                }
-
-                sceneState.ctx.strokeStyle = this.borderColor;
+                sceneState.ctx.fillStyle = "rgba(0, 0, 0, .25)";
+                sceneState.ctx.fill();
+                sceneState.ctx.color = "rgba(0, 0, 0, .25)";
                 sceneState.ctx.stroke();
-
-                if (!fov.visible) {
-                    HexUtil.drawHex(sceneState.ctx, x, y);
-                    sceneState.ctx.fillStyle = "rgba(0, 0, 0, .25)";
-                    sceneState.ctx.fill();
-                    sceneState.ctx.color = "rgba(0, 0, 0, .25)";
-                    sceneState.ctx.stroke();
-                }
             }
         }
 
         // Debug show all tiles
-        // HexUtil.drawHex(sceneState.ctx, x, y);
-        // sceneState.ctx.fillStyle = this.color;
-        // sceneState.ctx.fill();
+        if (sceneState.debugRenderMap) {
+            HexUtil.drawHex(sceneState.ctx, x, y);
+            sceneState.ctx.fillStyle = this.color;
+            sceneState.ctx.fill();
+        }
 
         if (this.highlighted) {
             HexUtil.drawHex(sceneState.ctx, x, y);
