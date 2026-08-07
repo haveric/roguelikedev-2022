@@ -15,6 +15,13 @@ export default class MeleeAction extends _ActionWithDirection {
             const destXY = HexUtil.hexToArray(hex.q + this.dq, hex.r + this.dr);
             const blockingActor = engine.gameMap.getBlockingActorAtArrayLocation(destXY.x, destXY.y);
             if (blockingActor) {
+                const entityFaction = this.entity.getComponent("faction");
+                const blockingActorFaction = blockingActor.getComponent("faction");
+                // Allies avoid attacking each other
+                if (entityFaction && blockingActorFaction && !blockingActorFaction.isEnemyOf(entityFaction)) {
+                    return;
+                }
+
                 let name;
                 let plural;
                 if (this.isPlayer()) {
