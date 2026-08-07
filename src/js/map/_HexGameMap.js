@@ -43,7 +43,9 @@ export default class _HexGameMap {
             const tile = engine.gameMap.getTileFromArrayCoords(actorHex.row, actorHex.col);
             const tileFov = tile.getComponent("fov");
             if (sceneState.debugRenderMap || (tileFov && tileFov.visible)) {
-                actor.draw(qOffset, rOffset);
+                if (actorHex.row >= topLeft.x && actorHex.row <= botRight.x && actorHex.col >= topLeft.y && actorHex.col <= botRight.y) {
+                    actor.draw(qOffset, rOffset);
+                }
             }
         }
     }
