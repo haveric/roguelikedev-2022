@@ -18,6 +18,14 @@ export default class HexUtil {
         ctx.closePath();
     }
 
+    static getHexDrawCoords(hex, qOffset, rOffset) {
+        // TODO: Replace arbitrary 1.15
+        return {
+            "x": HexUtil.getHexRadiusHScaled() + (HexUtil.getHexRadiusHScaled() * (1 + Math.cos(HexUtil.HEX_A))) * hex.getDisplayX(qOffset),
+            "y": 1.15 * HexUtil.getHexRadiusVScaled() + (2 * HexUtil.getHexRadiusVScaled() * Math.sin(HexUtil.HEX_A)) * hex.getDisplayY(qOffset, rOffset)
+        };
+    }
+
     static getHexRadiusHScaled() {
         return HexUtil.HEX_RADIUS_H * sceneState.scale;
     }

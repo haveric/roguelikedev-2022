@@ -43,8 +43,8 @@ export default class _HexGameMap {
             const itemHex = item.getComponent("hex");
             const tile = engine.gameMap.getTileFromArrayCoords(itemHex.row, itemHex.col);
             const tileFov = tile.getComponent("fov");
-            if (tileFov && tileFov.visible) {
-                item.draw();
+            if (sceneState.debugRenderMap || (tileFov && tileFov.visible)) {
+                item.draw(qOffset, rOffset);
             }
         }
 
