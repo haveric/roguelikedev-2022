@@ -37,6 +37,15 @@ class ViewInfo extends _UIElement {
                         }
                     }
                 }
+
+                for (const item of engine.gameMap.items) {
+                    const itemHex = item.getComponent("hex");
+                    if (itemHex) {
+                        if (tileHex.equals(itemHex)) {
+                            text += this.getDetailsLine(item.name);
+                        }
+                    }
+                }
             }
         } else {
             text = this.getDetailsLine("You haven't explored here.");
