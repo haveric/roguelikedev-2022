@@ -68,6 +68,14 @@ class SceneState {
         engine.needsRenderUpdate = true;
     }
 
+    drawTextAt(text, x, y, fontSize, color = "white") {
+        this.ctx.fillStyle = color;
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.font = "bold " + (this.scale * fontSize) + "px serif";
+        this.ctx.fillText(text, x, y);
+    }
+
     clearAll() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }

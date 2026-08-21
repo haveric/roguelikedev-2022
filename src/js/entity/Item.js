@@ -22,10 +22,6 @@ export default class Item extends _Entity {
 
         super.draw(drawXY.x, drawXY.y);
 
-        sceneState.ctx.fillStyle = this.color || "white";
-        sceneState.ctx.textAlign = "center";
-        sceneState.ctx.textBaseline = "middle";
-        sceneState.ctx.font = "bold " + (sceneState.scale * 26) + "px serif";
-        sceneState.ctx.fillText(this.letter, drawXY.x, drawXY.y);
+        sceneState.drawTextAt(this.letter, drawXY.x, drawXY.y, 26, this.color);
     }
 }
