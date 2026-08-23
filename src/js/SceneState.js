@@ -56,7 +56,7 @@ class SceneState {
     }
 
     resizeCanvas() {
-        this.canvas.width = window.innerWidth * .8;
+        this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
 
         const scaleX = this.canvas.width / this.DEFAULT_RESOLUTION_X;
