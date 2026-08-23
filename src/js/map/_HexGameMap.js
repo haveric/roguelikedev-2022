@@ -14,6 +14,7 @@ export default class _HexGameMap {
     init() {
         this.tiles = ArrayUtil.create2dArray(this.rows);
         this.actors = [];
+        this.items = [];
     }
 
     isInBounds(x, y) {
@@ -25,16 +26,45 @@ export default class _HexGameMap {
     draw() {
         const playerHex = engine.player.getComponent("hex");
         const topLeft = HexUtil.hexToArray(playerHex.q - 20, playerHex.r - 5);
-        const botRight = HexUtil.hexToArray(playerHex.q + 21, playerHex.r + 5);
+        const botRight = HexUtil.hexToArray(playerHex.q + 21, playerHex.r + 6);
 
-        const qOffset = playerHex.q - 19;
+        const radius = 15;
+        const qOffset = playerHex.q;
         const rOffset = playerHex.r;
+
+        const drawXY = HexUtil.getHexDrawCoords(playerHex, qOffset, rOffset);
+        HexUtil.drawHexAngleTop(sceneState.ctx, drawXY.x, drawXY.y, 26);
+        sceneState.ctx.fillStyle = "rgba(0,0,0,1)";
+        sceneState.ctx.fill();
         for (let i = topLeft.x; i < botRight.x; i++) {
             for (let j = topLeft.y; j < botRight.y; j++) {
                 if (this.tiles[i] && this.tiles[i][j]) {
                     const tile = this.tiles[i][j];
-                    tile.draw(qOffset, rOffset);
+                    const tileHex = tile.getComponent("hex");
+                    if (playerHex.isInRange(tileHex, radius)) {
+                        tile.draw(qOffset, rOffset);
+                    }
                 }
+            }
+        }
+
+        for (const item of this.items) {
+            const itemHex = item.getComponent("hex");
+            const tile = engine.gameMap.getTileFromArrayCoords(itemHex.row, itemHex.col);
+            const tileFov = tile.getComponent("fov");
+            if (sceneState.debugRenderMap || (tileFov && tileFov.visible)) {
+                if (playerHex.isInRange(itemHex, radius)) {
+                    item.draw(qOffset, rOffset);
+                }
+            }
+        }
+
+        for (const item of this.items) {
+            const itemHex = item.getComponent("hex");
+            const tile = engine.gameMap.getTileFromArrayCoords(itemHex.row, itemHex.col);
+            const tileFov = tile.getComponent("fov");
+            if (tileFov && tileFov.visible) {
+                item.draw();
             }
         }
 
@@ -43,7 +73,7 @@ export default class _HexGameMap {
             const tile = engine.gameMap.getTileFromArrayCoords(actorHex.row, actorHex.col);
             const tileFov = tile.getComponent("fov");
             if (sceneState.debugRenderMap || (tileFov && tileFov.visible)) {
-                if (actorHex.row >= topLeft.x && actorHex.row <= botRight.x && actorHex.col >= topLeft.y && actorHex.col <= botRight.y) {
+                if (playerHex.isInRange(actorHex, radius)) {
                     actor.draw(qOffset, rOffset);
                 }
             }

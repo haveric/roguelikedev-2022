@@ -5,6 +5,8 @@ import sceneState from "./js/SceneState";
 import DefaultPlayerEventHandler from "./js/event/DefaultPlayerEventHandler";
 import CellularAutomataMap from "./js/map/CellularAutomataMap";
 import entityLoader from "./js/entity/EntityLoader";
+import messageManager from "./js/message/MessageManager";
+import viewInfo from "./js/ui/ViewInfo";
 
 (function () {
     function init() {
@@ -25,8 +27,14 @@ import entityLoader from "./js/entity/EntityLoader";
         }
         engine.gameMap.actors.push(engine.player);
         engine.gameMap.placeEntities("cave", 1, .03, 5);
+        engine.gameMap.placeItems("cave", 1, .03, 5);
 
         engine.eventHandler = new DefaultPlayerEventHandler();
+
+        const playerFighter = engine.player.getComponent("fighter");
+        playerFighter.updateUI();
+        viewInfo.updatePlayerDetails();
+        messageManager.text("Welcome to the dungeon.").build();
 
         engine.needsRenderUpdate = true;
         engine.player.fov.compute(engine.player, 5);

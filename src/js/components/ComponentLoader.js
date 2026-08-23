@@ -6,6 +6,7 @@ import Faction from "./Faction";
 import Fighter from "./Fighter";
 import Fov from "./Fov";
 import Hex from "./Hex";
+import HealingConsumable from "./consumable/HealingConsumable";
 
 class ComponentLoader {
     constructor() {
@@ -17,6 +18,8 @@ class ComponentLoader {
     init() {
         this.load(new AIDead());
         this.load(new AIMeleeChase());
+
+        this.load(new HealingConsumable());
 
         this.load(new BlocksFov());
         this.load(new BlocksMovement());

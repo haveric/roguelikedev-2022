@@ -28,8 +28,9 @@ export default class Tile extends _Entity {
 
     draw(qOffset, rOffset) {
         const hex = this.getComponent("hex");
-        const x = HexUtil.getHexRadiusHScaled() + (HexUtil.getHexRadiusHScaled() * (1 + Math.cos(HexUtil.HEX_A))) * hex.getDisplayX(qOffset);
-        const y = 1.15 * HexUtil.getHexRadiusVScaled() + (2 * HexUtil.getHexRadiusVScaled() * Math.sin(HexUtil.HEX_A)) * hex.getDisplayY(qOffset, rOffset);
+        const drawXY = HexUtil.getHexDrawCoords(hex, qOffset, rOffset);
+        const x = drawXY.x;
+        const y = drawXY.y;
 
         const fov = this.getComponent("fov");
         if (sceneState.debugRenderMap || (fov && fov.explored)) {
@@ -66,15 +67,9 @@ export default class Tile extends _Entity {
         }
 
         // Debug show coordinates
-        // sceneState.ctx.textAlign = "center";
-        // sceneState.ctx.textBaseline = "middle";
-        //
-        // sceneState.ctx.font = (sceneState.scale * 12) + "px serif";
-        // sceneState.ctx.fillStyle = "black";
+        // sceneState.drawTextAt(hex.q + ", " + hex.r, x, y, 12, "black");
 
-        //sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y);
-
-        //sceneState.ctx.fillText(hex.q + ", " + hex.r, x, y-5);
-        //sceneState.ctx.fillText(hex.row + ", " + hex.col, x, y+5);
+        // sceneState.drawTextAt(hex.q + ", " + hex.r, x, y-5, 12, "black");
+        // sceneState.drawTextAt(hex.row + ", " + hex.col, x, y+5, 12, "black");
     }
 }
