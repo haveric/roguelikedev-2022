@@ -53,7 +53,7 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
         const hex = HexUtil.pixelToHex(this.mouse);
         const playerHex = engine.player.getComponent("hex");
 
-        const qOffset = playerHex.q - 19;
+        const qOffset = playerHex.q;
         const rOffset = playerHex.r;
         const tile = engine.gameMap.getTileFromHexCoords(hex.q + qOffset, hex.r + rOffset);
         if (tile) {

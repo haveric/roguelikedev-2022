@@ -12,6 +12,10 @@ class SceneState {
         this.DEFAULT_RESOLUTION_Y = 1080;
         this.DEFAULT_RATIO = this.DEFAULT_RESOLUTION_X / this.DEFAULT_RESOLUTION_Y;
         this.scale = 1;
+        this.center = {
+            "x": this.canvas.width / 2 * this.scale,
+            "y": this.canvas.height / 2 * this.scale
+        };
         this.resizeCanvas();
         window.addEventListener( "resize", this);
 
@@ -52,7 +56,7 @@ class SceneState {
     }
 
     resizeCanvas() {
-        this.canvas.width = window.innerWidth * .8;
+        this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
 
         const scaleX = this.canvas.width / this.DEFAULT_RESOLUTION_X;
@@ -60,10 +64,16 @@ class SceneState {
         const ratio = this.canvas.width / this.canvas.height;
         const deviceZoomLevel = window.devicePixelRatio;
         if (ratio > this.DEFAULT_RATIO) {
+
             this.scale = scaleY * deviceZoomLevel;
         } else {
             this.scale = scaleX * deviceZoomLevel;
         }
+
+        this.center = {
+            "x": this.canvas.width / 2,
+            "y": this.canvas.height / 2
+        };
 
         engine.needsRenderUpdate = true;
     }
