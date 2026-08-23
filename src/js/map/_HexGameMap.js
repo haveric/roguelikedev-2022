@@ -59,6 +59,15 @@ export default class _HexGameMap {
             }
         }
 
+        for (const item of this.items) {
+            const itemHex = item.getComponent("hex");
+            const tile = engine.gameMap.getTileFromArrayCoords(itemHex.row, itemHex.col);
+            const tileFov = tile.getComponent("fov");
+            if (tileFov && tileFov.visible) {
+                item.draw();
+            }
+        }
+
         for (const actor of this.actors) {
             const actorHex = actor.getComponent("hex");
             const tile = engine.gameMap.getTileFromArrayCoords(actorHex.row, actorHex.col);
