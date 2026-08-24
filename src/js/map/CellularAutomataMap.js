@@ -18,6 +18,8 @@ export default class CellularAutomataMap extends _HexGameMap {
     }
 
     create() {
+        super.create();
+
         this.randomFillBuild();
         this.makeCaverns(15, 0);
         this.floodFillCreateRooms();

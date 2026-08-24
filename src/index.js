@@ -7,6 +7,10 @@ import CellularAutomataMap from "./js/map/CellularAutomataMap";
 import entityLoader from "./js/entity/EntityLoader";
 import messageManager from "./js/message/MessageManager";
 import viewInfo from "./js/ui/ViewInfo";
+import playerInfo from "./js/ui/PlayerInfo";
+import messageConsole from "./js/ui/MessageConsole";
+import NoAction from "./js/actions/NoAction";
+import UnableToPerformAction from "./js/actions/UnableToPerformAction";
 
 (function () {
     function init() {
@@ -33,22 +37,35 @@ import viewInfo from "./js/ui/ViewInfo";
 
         const playerFighter = engine.player.getComponent("fighter");
         playerFighter.updateUI();
-        viewInfo.updatePlayerDetails();
-        messageManager.text("Welcome to the dungeon.").build();
 
         engine.needsRenderUpdate = true;
         engine.player.fov.compute(engine.player, 5);
         engine.player.fov.updateMap();
 
+        viewInfo.updatePlayerDetails();
+        messageManager.text("Welcome to the dungeon.").build();
+
         window.requestAnimationFrame(update);
     }
 
     function update() {
-        engine.handleEvents();
+        const performedAction = engine.handleEvents();
+        if (performedAction instanceof NoAction) {
+            // Do nothing
+        } else if (performedAction instanceof UnableToPerformAction) {
+            messageManager.text(performedAction.reason).build();
+            engine.needsRenderUpdate = true;
+        } else if (performedAction) {
+            viewInfo.updatePlayerDetails();
+        }
+
+        if (engine.needsBackgroundUpdate) {
+            engine.gameMap.savedBackground = null;
+            engine.needsBackgroundUpdate = false;
+        }
 
         if (engine.needsRenderUpdate) {
             render();
-
             engine.needsRenderUpdate = false;
         }
 
@@ -58,6 +75,9 @@ import viewInfo from "./js/ui/ViewInfo";
     function render() {
         sceneState.clearAll();
         engine.gameMap.draw();
+        playerInfo.draw();
+        viewInfo.draw();
+        messageConsole.draw();
     }
 
     init();

@@ -3,7 +3,7 @@ import sceneState from "../SceneState";
 export default class HexUtil {
     static PI = Math.PI;
     static HEX_A = this.PI / 3;
-    static HEX_B = Math.PI / 6;
+    static HEX_B = this.PI / 6;
     static HEX_RADIUS_H = 20;
     static HEX_RADIUS_V = 20;
     //static OFFSET_V = 2 * this.HEX_RADIUS_V;
@@ -24,7 +24,7 @@ export default class HexUtil {
         for (let i = 0; i < 6; i ++) {
             ctx.lineTo(x + this.getHexRadiusHScaled() * Math.cos((HexUtil.HEX_A * i) - HexUtil.HEX_B)* scale, y + this.getHexRadiusVScaled() * Math.sin((HexUtil.HEX_A * i) - HexUtil.HEX_B) * scale);
         }
-        ctx.closePath();
+        //ctx.closePath();
     }
 
     static getHexDrawCoords(hex, qOffset, rOffset) {

@@ -1,9 +1,6 @@
-import html from "../../html/ui/Inventory.html";
-import _UIElement from "./_UIElement";
 
-class Inventory extends _UIElement {
+class Inventory {
     constructor() {
-        super(html);
 
         this.weapon = null;
         this.armor = null;

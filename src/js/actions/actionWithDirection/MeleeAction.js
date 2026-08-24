@@ -39,7 +39,7 @@ export default class MeleeAction extends _ActionWithDirection {
                     attackColor = "#C00";
                 } else {
                     blockingName = blockingActor.name;
-                    attackColor = "#999";
+                    attackColor = "#EEE";
                 }
 
                 const entityFighter = this.entity.getComponent("fighter");

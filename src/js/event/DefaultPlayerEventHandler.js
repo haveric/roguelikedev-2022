@@ -57,14 +57,18 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
         const rOffset = playerHex.r;
         const tile = engine.gameMap.getTileFromHexCoords(hex.q + qOffset, hex.r + rOffset);
         if (tile) {
-            if (this.targetedTile) {
-                this.targetedTile.highlighted = false;
+            if (tile !== this.targetedTile) {
+                if (this.targetedTile) {
+                    this.targetedTile.highlighted = false;
+                }
+
+                tile.highlighted = true;
+                this.targetedTile = tile;
+
+                viewInfo.updatePositionDetails(engine, tile);
+
+                engine.needsRenderUpdate = true;
             }
-
-            tile.highlighted = true;
-            this.targetedTile = tile;
-
-            viewInfo.updatePositionDetails(tile);
 
             // if (this.targetedTile !== tile) {
             //     for (const pathTile of this.pathTiles) {
@@ -92,11 +96,7 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
             //             this.pathTiles.push(pathNodeTile);
             //         }
             //     }
-            //
-            //     viewInfo.updatePositionDetails(tile);
             // }
         }
-
-        engine.needsRenderUpdate = true;
     }
 }

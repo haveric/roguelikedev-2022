@@ -1,8 +1,4 @@
 import engine from "./Engine";
-import details from "./ui/Details";
-import playerInfo from "./ui/PlayerInfo";
-import messageConsole from "./ui/MessageConsole";
-import viewInfo from "./ui/ViewInfo";
 
 class SceneState {
     constructor() {
@@ -30,17 +26,6 @@ class SceneState {
         this.canvas.classList.add("view");
 
         gameDom.appendChild(this.canvas);
-
-        playerInfo.open();
-        viewInfo.open();
-        messageConsole.open();
-        details.open();
-
-        playerInfo.appendTo(details.dom);
-        viewInfo.appendTo(details.dom);
-        messageConsole.appendTo(details.dom);
-        details.appendTo(gameDom);
-
         document.body.appendChild(gameDom);
 
         this.ctx = this.canvas.getContext("2d");
@@ -62,25 +47,23 @@ class SceneState {
         const scaleX = this.canvas.width / this.DEFAULT_RESOLUTION_X;
         const scaleY = this.canvas.height / this.DEFAULT_RESOLUTION_Y;
         const ratio = this.canvas.width / this.canvas.height;
-        const deviceZoomLevel = window.devicePixelRatio;
         if (ratio > this.DEFAULT_RATIO) {
-
-            this.scale = scaleY * deviceZoomLevel;
+            this.scale = scaleY;
         } else {
-            this.scale = scaleX * deviceZoomLevel;
+            this.scale = scaleX;
         }
-
         this.center = {
             "x": this.canvas.width / 2,
             "y": this.canvas.height / 2
         };
 
         engine.needsRenderUpdate = true;
+        engine.needsBackgroundUpdate = true;
     }
 
-    drawTextAt(text, x, y, fontSize, color = "white") {
+    drawTextAt(text, x, y, fontSize, color = "white", textAlign = "center") {
         this.ctx.fillStyle = color;
-        this.ctx.textAlign = "center";
+        this.ctx.textAlign = textAlign;
         this.ctx.textBaseline = "middle";
         this.ctx.font = "bold " + (this.scale * fontSize) + "px serif";
         this.ctx.fillText(text, x, y);

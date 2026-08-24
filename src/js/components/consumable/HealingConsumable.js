@@ -47,6 +47,6 @@ export default class HealingConsumable extends _Consumable {
     }
 
     getDescription() {
-        return "<span class='item__details-line'>Recovers <span style='color: #c00;'>" + this.amount + "</span> health</span>";
+        return "";//<span class='item__details-line'>Recovers <span style='color: #c00;'>" + this.amount + "</span> health</span>";
     }
 }

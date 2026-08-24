@@ -1,6 +1,5 @@
 import SubMessage from "./SubMessage";
 import Message from "./Message";
-import messageConsole from "../ui/MessageConsole";
 
 class MessageManager {
     constructor() {
@@ -20,7 +19,6 @@ class MessageManager {
 
     clear() {
         this.messages = [];
-        messageConsole.clear();
     }
 
     addMessage(subMessages, stack = true) {
@@ -28,7 +26,6 @@ class MessageManager {
             const lastMessage = this.messages[this.messages.length - 1];
             if (lastMessage.isEqual(subMessages)) {
                 lastMessage.count += 1;
-                messageConsole.updateLastMessageCount(lastMessage);
             } else {
                 this.addNewMessage(subMessages);
             }
@@ -40,7 +37,6 @@ class MessageManager {
     addNewMessage(subMessages) {
         const newMessage = new Message(subMessages);
         this.messages.push(newMessage);
-        messageConsole.addMessage(newMessage.getHtml());
     }
 }
 

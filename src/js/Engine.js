@@ -1,7 +1,5 @@
 import NoAction from "./actions/NoAction";
 import UnableToPerformAction from "./actions/UnableToPerformAction";
-import messageManager from "./message/MessageManager";
-import viewInfo from "./ui/ViewInfo";
 
 class Engine {
     constructor() {
@@ -12,32 +10,26 @@ class Engine {
     }
 
     handleEvents() {
-        this.processAction(this.eventHandler.handleInput());
+        return this.processAction(this.eventHandler.handleInput());
     }
 
     processAction(action) {
         if (action && this.eventHandler.isPlayerTurn) {
             const performedAction = action.perform();
-            if (performedAction instanceof NoAction) {
-                return false;
+            if (performedAction instanceof NoAction || performedAction instanceof UnableToPerformAction) {
+                return performedAction;
             }
 
-            if (performedAction instanceof UnableToPerformAction) {
-                if (performedAction.reason) {
-                    messageManager.text(performedAction.reason).build();
-                }
-                return false;
-            } else {
-                engine.needsRenderUpdate = true;
-                engine.player.fov.compute(engine.player, 5);
-                engine.player.fov.updateMap();
-                viewInfo.updatePlayerDetails();
+            engine.needsRenderUpdate = true;
+            engine.player.fov.compute(engine.player, 5);
+            engine.player.fov.updateMap();
 
-                this.handleEnemyTurns();
+            this.handleEnemyTurns();
 
-                return true;
-            }
+            return performedAction;
         }
+
+        return null;
     }
 
     handleEnemyTurns() {
