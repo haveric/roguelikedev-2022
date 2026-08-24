@@ -12,16 +12,16 @@ class Controls {
         self.defaults = new Map();
 
         self.controls = new Map();
-        self.defaults.set("up", [Key.NUMPAD_8, Key.UP]);
-        self.defaults.set("down", [Key.NUMPAD_2, Key.DOWN]);
+        self.defaults.set("up", [Key.NUMPAD_8, Key.UP, "w"]);
+        self.defaults.set("down", [Key.NUMPAD_2, Key.DOWN, "x"]);
 
         //self.defaults.set("left", [Key.NUMPAD_4, Key.LEFT]);
         //self.defaults.set("right", [Key.NUMPAD_6, Key.RIGHT]);
-        self.defaults.set("nw", [Key.NUMPAD_7]);
-        self.defaults.set("ne", [Key.NUMPAD_9]);
-        self.defaults.set("sw", [Key.NUMPAD_1]);
-        self.defaults.set("se", [Key.NUMPAD_3]);
-        self.defaults.set("wait", [Key.NUMPAD_5]);
+        self.defaults.set("nw", [Key.NUMPAD_7, "q"]);
+        self.defaults.set("ne", [Key.NUMPAD_9, "e"]);
+        self.defaults.set("sw", [Key.NUMPAD_1, "z"]);
+        self.defaults.set("se", [Key.NUMPAD_3, "c"]);
+        self.defaults.set("wait", [Key.NUMPAD_5, "s"]);
 
         self.defaults.set("debug_map", ["F9"]);
 
@@ -93,12 +93,15 @@ class Controls {
     }
 
     load() {
-        const controls = localStorage.getItem("controls");
-        if (controls) {
-            this.controls = new Map(JSON.parse(controls));
-        } else {
-            this.resetToDefault();
-        }
+        // TODO: Add versioning for controls to be able to add new ones
+        // const controls = localStorage.getItem("controls");
+        // if (controls) {
+        //     this.controls = new Map(JSON.parse(controls));
+        // } else {
+        //     this.resetToDefault();
+        // }
+
+        this.resetToDefault();
     }
 
     save() {

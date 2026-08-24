@@ -19,7 +19,6 @@ class ViewInfo {
     }
 
     updatePositionDetails(engine, tile, skipPlayer) {
-        console.log("updatePositionDetails");
         if (skipPlayer) {
             this.header = "At your location:";
         } else {
