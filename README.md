@@ -4,6 +4,7 @@ Created for reddit.com/r/roguelikedev's 2022 event: <a href="https://www.reddit.
 ## Demos:
 - <a href="https://www.ryanbreuer.com/roguelikedev-2022/week2_updated/index.html">Week 2 (Updated)</a>
 - <a href="https://www.ryanbreuer.com/roguelikedev-2022/week3/index.html">Week 3</a>
+- <a href="https://www.ryanbreuer.com/roguelikedev-2022/week4/index.html">Week 4</a>
 
 
 ## Build Steps
