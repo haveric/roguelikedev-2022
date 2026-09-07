@@ -5,6 +5,8 @@ export default class _EventHandler {
             y: -1
         };
         this.mouseDown = false;
+        this.leftClickAction = null;
+        this.rightClickAction = null;
 
         window.addEventListener("mousemove", this);
         window.addEventListener("mousedown", this);
@@ -55,7 +57,19 @@ export default class _EventHandler {
         }
     }
 
-    handleInput() {}
+    handleInput() {
+        let action = null;
+
+        if (this.leftClickAction) {
+            action = this.leftClickAction;
+            this.leftClickAction = null;
+        } else if (this.rightClickAction) {
+            action = this.rightClickAction;
+            this.rightClickAction = null;
+        }
+
+        return action;
+    }
 
     onMouseMove(/*e*/) {}
 

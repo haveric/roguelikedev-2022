@@ -23,6 +23,8 @@ class Controls {
         self.defaults.set("se", [Key.NUMPAD_3, "c"]);
         self.defaults.set("wait", [Key.NUMPAD_5, "s"]);
 
+        self.defaults.set("pickup", ["g"]);
+
         self.defaults.set("debug_map", ["F9"]);
 
         self.load();

@@ -11,46 +11,46 @@ export default class HexUtil {
 
     constructor() {}
 
-    static drawHex(ctx, x, y) {
+    static drawHex(ctx, x, y, scale = 1) {
         ctx.beginPath();
         for (let i = 0; i < 6; i ++) {
-            ctx.lineTo(x + this.getHexRadiusHScaled() * Math.cos(HexUtil.HEX_A * i), y + this.getHexRadiusVScaled() * Math.sin(HexUtil.HEX_A * i));
+            ctx.lineTo(x + this.getHexRadiusHScaled(scale) * Math.cos(HexUtil.HEX_A * i), y + this.getHexRadiusVScaled(scale) * Math.sin(HexUtil.HEX_A * i));
         }
         ctx.closePath();
     }
 
-    static drawHexAngleTop(ctx, x, y, scale) {
+    static drawHexAngleTop(ctx, x, y, scale = 1) {
         ctx.beginPath();
         for (let i = 0; i < 6; i ++) {
-            ctx.lineTo(x + this.getHexRadiusHScaled() * Math.cos((HexUtil.HEX_A * i) - HexUtil.HEX_B)* scale, y + this.getHexRadiusVScaled() * Math.sin((HexUtil.HEX_A * i) - HexUtil.HEX_B) * scale);
+            ctx.lineTo(x + this.getHexRadiusHScaled() * Math.cos((HexUtil.HEX_A * i) - HexUtil.HEX_B) * scale, y + this.getHexRadiusVScaled() * Math.sin((HexUtil.HEX_A * i) - HexUtil.HEX_B) * scale);
         }
         //ctx.closePath();
     }
 
-    static getHexDrawCoords(hex, qOffset, rOffset) {
+    static getHexDrawCoords(hex, qOffset, rOffset, scale = 1) {
         // TODO: Replace arbitrary 1.15
-        const x = HexUtil.getHexRadiusHScaled() + (HexUtil.getHexRadiusHScaled() * (1 + Math.cos(HexUtil.HEX_A))) * hex.getDisplayX(qOffset);
-        const y = 1.15 * HexUtil.getHexRadiusVScaled() + (2 * HexUtil.getHexRadiusVScaled() * Math.sin(HexUtil.HEX_A)) * hex.getDisplayY(qOffset, rOffset);
-        const centerOffset = this.getHexCenterOffset();
+        const x = HexUtil.getHexRadiusHScaled(scale) + (HexUtil.getHexRadiusHScaled(scale) * (1 + Math.cos(HexUtil.HEX_A))) * hex.getDisplayX(qOffset);
+        const y = 1.15 * HexUtil.getHexRadiusVScaled(scale) + (2 * HexUtil.getHexRadiusVScaled(scale) * Math.sin(HexUtil.HEX_A)) * hex.getDisplayY(qOffset, rOffset);
+        const centerOffset = this.getHexCenterOffset(scale);
         return {
             "x": x + centerOffset.x,
             "y": y + centerOffset.y,
         };
     }
 
-    static getHexCenterOffset() {
+    static getHexCenterOffset(scale = 1) {
         return {
-            "x": sceneState.center.x - (1.15 * this.getHexRadiusHScaled()),
-            "y": sceneState.center.y - (1.15 * this.getHexRadiusVScaled()),
+            "x": sceneState.center.x - (1.15 * this.getHexRadiusHScaled(scale)),
+            "y": sceneState.center.y - (1.15 * this.getHexRadiusVScaled(scale)),
         };
     }
 
-    static getHexRadiusHScaled() {
-        return HexUtil.HEX_RADIUS_H * sceneState.scale;
+    static getHexRadiusHScaled(scale = 1) {
+        return HexUtil.HEX_RADIUS_H * sceneState.scale * scale;
     }
 
-    static getHexRadiusVScaled() {
-        return HexUtil.HEX_RADIUS_V * sceneState.scale;
+    static getHexRadiusVScaled(scale = 1) {
+        return HexUtil.HEX_RADIUS_V * sceneState.scale * scale;
     }
 
     static hexToArray(q, r) {
@@ -89,13 +89,13 @@ export default class HexUtil {
         };
     }
 
-    static pixelToHex(point) {
-        const centerOffset = this.getHexCenterOffset();
-        point.x -= this.getHexRadiusHScaled() + centerOffset.x;
-        point.y -= this.getHexRadiusVScaled() + centerOffset.y;
+    static pixelToHex(point, scale = 1) {
+        const centerOffset = this.getHexCenterOffset(scale);
+        point.x -= this.getHexRadiusHScaled(scale) + centerOffset.x;
+        point.y -= this.getHexRadiusVScaled(scale) + centerOffset.y;
 
-        const q = ((2/3 * point.x)) / this.getHexRadiusHScaled();
-        const r = ((-1/3 * point.x + Math.sqrt(3) / 3 * point.y)) / this.getHexRadiusVScaled();
+        const q = ((2/3 * point.x)) / this.getHexRadiusHScaled(scale);
+        const r = ((-1/3 * point.x + Math.sqrt(3) / 3 * point.y)) / this.getHexRadiusVScaled(scale);
 
         return this.axialRound(q, r);
     }

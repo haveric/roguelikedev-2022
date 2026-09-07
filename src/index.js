@@ -11,6 +11,9 @@ import playerInfo from "./js/ui/PlayerInfo";
 import messageConsole from "./js/ui/MessageConsole";
 import NoAction from "./js/actions/NoAction";
 import UnableToPerformAction from "./js/actions/UnableToPerformAction";
+import inventoryView from "./js/ui/InventoryView";
+import inventoryHoverModal from "./js/ui/InventoryHoverModal";
+import inventoryActionModal from "./js/ui/InventoryActionModal";
 
 (function () {
     function init() {
@@ -77,6 +80,9 @@ import UnableToPerformAction from "./js/actions/UnableToPerformAction";
         engine.gameMap.draw();
         playerInfo.draw();
         viewInfo.draw();
+        inventoryView.draw();
+        inventoryHoverModal.draw();
+        inventoryActionModal.draw();
         messageConsole.draw();
     }
 

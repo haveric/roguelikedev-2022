@@ -16,6 +16,11 @@ class Engine {
     processAction(action) {
         if (action && this.eventHandler.isPlayerTurn) {
             const performedAction = action.perform();
+
+            if (action.afterPerform) {
+                action.afterPerform();
+            }
+
             if (performedAction instanceof NoAction || performedAction instanceof UnableToPerformAction) {
                 return performedAction;
             }

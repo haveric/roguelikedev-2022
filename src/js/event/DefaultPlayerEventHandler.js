@@ -6,6 +6,13 @@ import WaitAction from "../actions/WaitAction";
 import HexUtil from "../util/HexUtil";
 import viewInfo from "../ui/ViewInfo";
 import sceneState from "../SceneState";
+import PickupAction from "../actions/PickupAction";
+import inventoryView from "../ui/InventoryView";
+import inventoryHoverModal from "../ui/InventoryHoverModal";
+import inventoryActionModal from "../ui/InventoryActionModal";
+import InventoryActionEventHandler from "./InventoryActionEventHandler";
+import DropAction from "../actions/DropAction";
+import NoAction from "../actions/NoAction";
 
 export default class DefaultPlayerEventHandler extends _EventHandler {
     constructor() {
@@ -17,7 +24,10 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
     }
 
     handleInput() {
-        let action = null;
+        let action = super.handleInput();
+        if (action) {
+            return action;
+        }
 
         if (this.isPlayerTurn && engine.player.isAlive()) {
             if (controls.testPressed("up")) {
@@ -34,6 +44,8 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                 action = new BumpAction(engine.player, 1, 0);
             } else if (controls.testPressed("wait")) {
                 action = new WaitAction(engine.player);
+            } else if (controls.testPressed("pickup")) {
+                action = new PickupAction(engine.player);
             }
         }
 
@@ -50,7 +62,7 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
         this.mouse.x = e.clientX;
         this.mouse.y = e.clientY;
 
-        const hex = HexUtil.pixelToHex(this.mouse);
+        const hex = HexUtil.pixelToHex({"x": this.mouse.x, "y": this.mouse.y});
         const playerHex = engine.player.getComponent("hex");
 
         const qOffset = playerHex.q;
@@ -97,6 +109,74 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
             //         }
             //     }
             // }
+        }
+
+        const inventoryHex = HexUtil.pixelToHex({"x": this.mouse.x, "y": this.mouse.y}, 1.5);
+        let foundSlot = false;
+        for (const slot of inventoryView.slots) {
+            if (slot.q === inventoryHex.q && slot.r === inventoryHex.r) {
+                foundSlot = true;
+                if (slot === this.targetedSlot) {
+                    if (slot.item) {
+                        inventoryHoverModal.setPosition(this.mouse.x, this.mouse.y);
+                        engine.needsRenderUpdate = true;
+                    }
+                } else {
+                    if (this.targetedSlot) {
+                        this.targetedSlot.highlighted = false;
+                    }
+
+                    slot.highlighted = true;
+                    this.targetedSlot = slot;
+
+                    if (slot.item) {
+                        inventoryHoverModal.setPosition(this.mouse.x, this.mouse.y);
+                        inventoryHoverModal.setItem(slot.item);
+                        inventoryHoverModal.show();
+                    } else {
+                        inventoryHoverModal.hide();
+                    }
+
+                    engine.needsRenderUpdate = true;
+                }
+                break;
+            }
+        }
+
+        if (!foundSlot) {
+            if (this.targetedSlot) {
+                this.targetedSlot.highlighted = false;
+            }
+
+            inventoryHoverModal.hide();
+            this.targetedSlot = null;
+
+            engine.needsRenderUpdate = true;
+        }
+    }
+
+    onRightClick(e) {
+        e.preventDefault();
+
+        if (this.targetedSlot) {
+            if (this.targetedSlot.item) {
+                this.targetedSlot.highlighted = false;
+
+                inventoryHoverModal.hide();
+
+                inventoryActionModal.setPosition(this.mouse.x, this.mouse.y);
+                const consumableComponent = this.targetedSlot.item.getComponent("consumable");
+                if (consumableComponent) {
+                    inventoryActionModal.buttons[0].action = consumableComponent.getAction();
+                }
+                inventoryActionModal.buttons[1].action = new DropAction(engine.player, this.targetedSlot.index);
+                inventoryActionModal.buttons[2].action = new NoAction(engine.player);
+                inventoryActionModal.show();
+                engine.eventHandler.teardown();
+                engine.eventHandler = new InventoryActionEventHandler();
+
+                engine.needsRenderUpdate = true;
+            }
         }
     }
 }

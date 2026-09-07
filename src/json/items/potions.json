@@ -5,7 +5,7 @@
         "name": "Health Potion",
         "color": "#7f00ff",
         "letter": "!",
-        "description": "Recover a small amount of health",
+        "description": "Recover a small amount of health.",
         "components": {
             "healingConsumable": {
                 "amount": 4

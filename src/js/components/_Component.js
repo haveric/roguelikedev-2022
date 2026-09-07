@@ -23,8 +23,8 @@ export default class _Component {
         return this.args.components && this.args.components[this.type] !== undefined;
     }
 
-    isPlayer() {
-        return this.parentEntity === engine.player;
+    isPlayer(entity = this.parentEntity) {
+        return entity === engine.player;
     }
 
     saveBoolean(arg, defaultValue) {

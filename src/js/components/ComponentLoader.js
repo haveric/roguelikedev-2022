@@ -7,6 +7,7 @@ import Fighter from "./Fighter";
 import Fov from "./Fov";
 import Hex from "./Hex";
 import HealingConsumable from "./consumable/HealingConsumable";
+import Inventory from "./Inventory";
 
 class ComponentLoader {
     constructor() {
@@ -27,6 +28,7 @@ class ComponentLoader {
         this.load(new Fighter());
         this.load(new Fov());
         this.load(new Hex());
+        this.load(new Inventory());
     }
 
     load(component) {
