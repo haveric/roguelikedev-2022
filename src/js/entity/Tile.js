@@ -62,7 +62,7 @@ export default class Tile extends _Entity {
 
         if (this.highlighted) {
             HexUtil.drawHex(sceneState.ctx, x, y);
-            sceneState.ctx.fillStyle = "rgba(0,0,255,0.3)";
+            sceneState.ctx.fillStyle = this.highlightColor || "rgba(255,255,255,0.3)";
             sceneState.ctx.fill();
         }
 

@@ -8,6 +8,9 @@ import Fov from "./Fov";
 import Hex from "./Hex";
 import HealingConsumable from "./consumable/HealingConsumable";
 import Inventory from "./Inventory";
+import LightningDamageConsumable from "./consumable/LightningDamageConsumable";
+import ConfusionConsumable from "./consumable/ConfusionConsumable";
+import FireballConsumable from "./consumable/FireballConsumable";
 
 class ComponentLoader {
     constructor() {
@@ -20,7 +23,10 @@ class ComponentLoader {
         this.load(new AIDead());
         this.load(new AIMeleeChase());
 
+        this.load(new ConfusionConsumable());
+        this.load(new FireballConsumable());
         this.load(new HealingConsumable());
+        this.load(new LightningDamageConsumable());
 
         this.load(new BlocksFov());
         this.load(new BlocksMovement());

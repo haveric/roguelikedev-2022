@@ -1,5 +1,7 @@
 import _Component from "../_Component";
 import ItemAction from "../../actions/itemAction/ItemAction";
+import engine from "../../Engine";
+import inventoryView from "../../ui/InventoryView";
 
 export default class _Consumable extends _Component {
     constructor(args = {}, type) {
@@ -36,5 +38,8 @@ export default class _Consumable extends _Component {
         if (parentStorage) {
             parentStorage.use(item);
         }
+
+        inventoryView.update();
+        engine.needsRenderUpdate = true;
     }
 }

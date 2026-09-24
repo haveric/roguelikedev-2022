@@ -1,0 +1,71 @@
+[
+    {
+        "id": "base_scroll",
+        "extends": "base_item",
+        "letter": "~"
+    },
+    {
+        "id": "scroll_lightning",
+        "extends": "base_scroll",
+        "name": "Lightning Scroll",
+        "color": "#023e8a",
+        "description": "Zaps the nearest enemy with lightning.",
+        "components": {
+            "lightningDamageConsumable": {
+                "damage": 20,
+                "maxRange": 5
+            }
+        }
+    },
+    {
+        "id": "scroll_confusion",
+        "extends": "base_scroll",
+        "name": "Confusion Scroll",
+        "color": "#cf3fff",
+        "description": "Confuses an enemy.",
+        "components": {
+            "confusionConsumable": {
+                "turns": 10
+            }
+        }
+    },
+    {
+        "id": "scroll_fireball",
+        "extends": "base_scroll",
+        "name": "Fireball Scroll",
+        "color": "#dd0000",
+        "description": "Shoots a medium fireball in an area.",
+        "components": {
+            "fireballConsumable": {
+                "damage": 12,
+                "maxRange": 2
+            }
+        }
+    },
+    {
+        "id": "scroll_fireball_weak",
+        "extends": "base_scroll",
+        "name": "Weak Fireball Scroll",
+        "color": "#bb0000",
+        "description": "Shoots a small fireball in an area.",
+        "components": {
+            "fireballConsumable": {
+                "damage": 8,
+                "maxRange": 1
+            }
+        }
+    },
+    {
+        "id": "scroll_fireball_strong",
+        "extends": "base_scroll",
+        "name": "Strong Fireball Scroll",
+        "color": "#ff0000",
+        "description": "Shoots a large fireball in an area.",
+        "components": {
+            "fireballConsumable": {
+                "damage": 20,
+                "maxRange": 3
+            }
+        }
+    }
+]

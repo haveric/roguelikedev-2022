@@ -1,8 +1,6 @@
 import _Consumable from "./_Consumable";
 import messageManager from "../../message/MessageManager";
 import UnableToPerformAction from "../../actions/UnableToPerformAction";
-import inventoryView from "../../ui/InventoryView";
-import engine from "../../Engine";
 
 export default class HealingConsumable extends _Consumable {
     constructor(args = {}) {
@@ -40,9 +38,6 @@ export default class HealingConsumable extends _Consumable {
                 if (this.isPlayer(consumer)) {
                     messageManager.text("You consume the " + this.parentEntity.name + ", and recover " + amountHealed + " HP!").build();
                 }
-
-                inventoryView.update();
-                engine.needsRenderUpdate = true;
                 return this;
             } else {
                 return new UnableToPerformAction(action.entity, "Your health is already full");

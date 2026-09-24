@@ -9,8 +9,6 @@ import messageManager from "./js/message/MessageManager";
 import viewInfo from "./js/ui/ViewInfo";
 import playerInfo from "./js/ui/PlayerInfo";
 import messageConsole from "./js/ui/MessageConsole";
-import NoAction from "./js/actions/NoAction";
-import UnableToPerformAction from "./js/actions/UnableToPerformAction";
 import inventoryView from "./js/ui/InventoryView";
 import inventoryHoverModal from "./js/ui/InventoryHoverModal";
 import inventoryActionModal from "./js/ui/InventoryActionModal";
@@ -36,10 +34,11 @@ import inventoryActionModal from "./js/ui/InventoryActionModal";
         engine.gameMap.placeEntities("cave", 1, .03, 5);
         engine.gameMap.placeItems("cave", 1, .03, 5);
 
-        engine.eventHandler = new DefaultPlayerEventHandler();
+        engine.setEventHandler(new DefaultPlayerEventHandler());
 
         const playerFighter = engine.player.getComponent("fighter");
         playerFighter.updateUI();
+        inventoryView.update();
 
         engine.needsRenderUpdate = true;
         engine.player.fov.compute(engine.player, 5);
@@ -52,15 +51,8 @@ import inventoryActionModal from "./js/ui/InventoryActionModal";
     }
 
     function update() {
-        const performedAction = engine.handleEvents();
-        if (performedAction instanceof NoAction) {
-            // Do nothing
-        } else if (performedAction instanceof UnableToPerformAction) {
-            messageManager.text(performedAction.reason).build();
-            engine.needsRenderUpdate = true;
-        } else if (performedAction) {
-            viewInfo.updatePlayerDetails();
-        }
+        engine.handleEvents();
+        viewInfo.updatePlayerDetails();
 
         if (engine.needsBackgroundUpdate) {
             engine.gameMap.savedBackground = null;

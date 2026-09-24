@@ -24,10 +24,7 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
     }
 
     handleInput() {
-        let action = super.handleInput();
-        if (action) {
-            return action;
-        }
+        let action = null;
 
         if (this.isPlayerTurn && engine.player.isAlive()) {
             if (controls.testPressed("up")) {
@@ -74,6 +71,7 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                     this.targetedTile.highlighted = false;
                 }
 
+                tile.highlightColor = "rgba(0,0,255,0.3)";
                 tile.highlighted = true;
                 this.targetedTile = tile;
 
@@ -167,13 +165,13 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                 inventoryActionModal.setPosition(this.mouse.x, this.mouse.y);
                 const consumableComponent = this.targetedSlot.item.getComponent("consumable");
                 if (consumableComponent) {
-                    inventoryActionModal.buttons[0].action = consumableComponent.getAction();
+                    inventoryActionModal.buttons[0].actionOrComponent = consumableComponent;
                 }
-                inventoryActionModal.buttons[1].action = new DropAction(engine.player, this.targetedSlot.index);
-                inventoryActionModal.buttons[2].action = new NoAction(engine.player);
+                inventoryActionModal.buttons[1].actionOrComponent = new DropAction(engine.player, this.targetedSlot.index);
+                inventoryActionModal.buttons[2].actionOrComponent = new NoAction(engine.player);
                 inventoryActionModal.show();
-                engine.eventHandler.teardown();
-                engine.eventHandler = new InventoryActionEventHandler();
+
+                engine.setEventHandler(new InventoryActionEventHandler());
 
                 engine.needsRenderUpdate = true;
             }

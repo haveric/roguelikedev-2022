@@ -244,7 +244,6 @@ export default class CellularAutomataMap extends _HexGameMap {
                         if (Math.random() < percentage) {
                             const itemId = chanceLoader.getItemForLevel(generation, level);
                             const item = entityLoader.createFromTemplate(itemId, {components: {hex: {row: hex.row, col: hex.col}}});
-
                             this.items.push(item);
                         }
                     }

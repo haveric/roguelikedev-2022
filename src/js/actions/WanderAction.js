@@ -1,6 +1,6 @@
 import _Action from "./_Action";
 import WaitAction from "./WaitAction";
-import MovementAction from "./actionWithDirection/MovementAction";
+import BumpAction from "./actionWithDirection/BumpAction";
 
 export default class WanderAction extends _Action {
     constructor(entity) {
@@ -39,7 +39,7 @@ export default class WanderAction extends _Action {
                     break;
             }
 
-            return new MovementAction(this.entity, q, r);
+            return new BumpAction(this.entity, q, r).perform();
         }
     }
 }

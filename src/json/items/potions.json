@@ -1,14 +1,42 @@
 [
     {
-        "id": "potion_health",
+        "id": "base_potion",
         "extends": "base_item",
+        "letter": "!"
+    },
+    {
+        "id": "potion_health",
+        "extends": "base_potion",
         "name": "Health Potion",
         "color": "#7f00ff",
-        "letter": "!",
+        "description": "Recover a moderate amount of health.",
+        "components": {
+            "healingConsumable": {
+                "amount": 12
+            }
+        }
+    },
+    {
+        "id": "potion_health_minor",
+        "extends": "base_potion",
+        "name": "Minor Health Potion",
+        "color": "#b266ff",
         "description": "Recover a small amount of health.",
         "components": {
             "healingConsumable": {
                 "amount": 4
+            }
+        }
+    },
+    {
+        "id": "potion_health_major",
+        "extends": "base_potion",
+        "name": "Major Health Potion",
+        "color": "#4c0099",
+        "description": "Recover a large amount of health.",
+        "components": {
+            "healingConsumable": {
+                "amount": 40
             }
         }
     }

@@ -9,7 +9,14 @@
                     {"id": "troll", "weight": 20}
                 ],
                 "items": [
-                    {"id": "potion_health", "weight": 30}
+                    {"id": "potion_health_minor", "weight": 140},
+                    {"id": "potion_health", "weight": 10},
+                    {"id": "potion_health_major", "weight": 2},
+                    {"id": "scroll_lightning", "weight": 20},
+                    {"id": "scroll_confusion", "weight": 20},
+                    {"id": "scroll_fireball_weak", "weight": 20},
+                    {"id": "scroll_fireball", "weight": 4},
+                    {"id": "scroll_fireball_strong", "weight": 2}
                 ]
             }
         ]

@@ -9,6 +9,7 @@ import floorsList from "../../json/tiles/floors.json";
 import wallsList from "../../json/tiles/walls.json";
 import itemsBaseList from "../../json/items/_base.json";
 import potionsList from "../../json/items/potions.json";
+import scrollsList from "../../json/items/scrolls.json";
 import Item from "./Item";
 
 class EntityLoader {
@@ -85,6 +86,7 @@ class EntityLoader {
 
         this.loadTemplate(itemsBaseList);
         this.loadTemplate(potionsList);
+        this.loadTemplate(scrollsList);
     }
 }
 

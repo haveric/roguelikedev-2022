@@ -154,11 +154,76 @@ export default class _HexGameMap {
         }
     }
 
-    getBlockingActorAtArrayLocation(x, y) {
+    getHexNeighbor(hex, direction) {
+        switch(direction) {
+            case 1: // N
+                return {q: hex.q - 1, r: hex.r};
+            case 2: // NE
+                return {q: hex.q - 1, r: hex.r + 1};
+            case 3: // SE
+                return {q: hex.q, r: hex.r + 1};
+            case 4: // S
+                return {q: hex.q + 1, r: hex.r};
+            case 5: // SW
+                return {q: hex.q + 1, r: hex.r - 1};
+            case 6: // NW
+            default:
+                return {q: hex.q, r: hex.r - 1};
+        }
+    }
+
+    getTilesInRing(q, r, radius) {
+        const tiles = [];
+
+        // Start SW and go clockwise
+        let hex = {
+            q: q + radius,
+            r: r - radius
+        };
+        for (let i = 1; i <= 6; i++) {
+            for (let j = 0; j < radius; j++) {
+                const tile = this.getTileFromHexCoords(hex.q, hex.r);
+                if (tile) {
+                    tiles.push(tile);
+                }
+                hex = this.getHexNeighbor(hex, i);
+            }
+        }
+
+        return tiles;
+    }
+
+    getTilesInRadius(q, r, radius) {
+        const tiles = [];
+
+        for (let i = 1; i <= radius; i++) {
+            tiles.push(...this.getTilesInRing(q, r, i));
+        }
+
+        return tiles;
+    }
+
+    getActorAtArrayLocation(xRow, yCol) {
+        let foundActor = null;
+        for (const actor of this.actors) {
+            if (!actor.isAlive()) {
+                continue;
+            }
+            const hex = actor.getComponent("hex");
+            if (hex && xRow === hex.row && yCol === hex.col) {
+                foundActor = actor;
+                break;
+            }
+        }
+
+        return foundActor;
+    }
+
+    getBlockingActorAtArrayLocation(xRow, yCol) {
         let blockingActor = null;
         for (const actor of this.actors) {
             const hex = actor.getComponent("hex");
-            if (hex && x === hex.row && y === hex.col) {
+            if (hex && xRow === hex.row && yCol === hex.col) {
                 const component = actor.getComponent("blocksMovement");
                 if (component && component.blocksMovement) {
                     blockingActor = actor;

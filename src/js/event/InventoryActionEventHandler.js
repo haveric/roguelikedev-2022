@@ -4,6 +4,8 @@ import engine from "../Engine";
 import sceneState from "../SceneState";
 import inventoryActionModal from "../ui/InventoryActionModal";
 import DefaultPlayerEventHandler from "./DefaultPlayerEventHandler";
+import _Action from "../actions/_Action";
+import _Component from "../components/_Component";
 
 export default class InventoryActionEventHandler extends _EventHandler {
     constructor() {
@@ -15,10 +17,7 @@ export default class InventoryActionEventHandler extends _EventHandler {
     }
 
     handleInput() {
-        const action = super.handleInput();
-        if (action) {
-            return action;
-        }
+        const action = null;
 
         // DEBUG Actions
         if (controls.testPressed("debug_map")) {
@@ -50,17 +49,31 @@ export default class InventoryActionEventHandler extends _EventHandler {
 
         for (const button of inventoryActionModal.buttons) {
             if (this.mouse.x > button.position.x && this.mouse.x < button.position.x + button.position.width && this.mouse.y > button.position.y && this.mouse.y < button.position.y + button.position.height) {
-                if (button.action) {
-                    button.action.afterPerform = () => {
-                        engine.eventHandler.teardown();
-                        engine.eventHandler = new DefaultPlayerEventHandler();
+                const actionOrComponent = button.actionOrComponent;
+                if (actionOrComponent) {
+                    e.preventDefault();
+
+                    if (actionOrComponent instanceof _Action) {
+                        engine.processAction(actionOrComponent);
+
+                        engine.setEventHandler(new DefaultPlayerEventHandler());
 
                         engine.needsRenderUpdate = true;
-                    };
+                    } else if (actionOrComponent instanceof _Component) {
+                        const action = actionOrComponent.getAction();
+                        if (action) {
+                            engine.processAction(action);
 
-                    this.leftClickAction = button.action;
+                            engine.setEventHandler(new DefaultPlayerEventHandler());
+
+                            engine.needsRenderUpdate = true;
+                        }
+                    } else {
+                        console.error("Unknown actionOrComponent type");
+                    }
 
                     inventoryActionModal.hide();
+                    engine.needsRenderUpdate = true;
                 }
                 break;
             }
