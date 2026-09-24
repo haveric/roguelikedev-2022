@@ -11,20 +11,20 @@ class Engine {
     }
 
     handleEvents() {
-        this.processAction(this.eventHandler.handleInput());
+        return this.processAction(this.eventHandler.handleInput());
     }
 
     processAction(action) {
         if (action && this.eventHandler.isPlayerTurn) {
             const performedAction = action.perform();
             if (performedAction instanceof NoAction) {
-                return;
+                return false;
             } else if (performedAction instanceof UnableToPerformAction) {
                 if (performedAction.reason) {
                     messageManager.text(performedAction.reason).build();
                     engine.needsRenderUpdate = true;
                 }
-                return;
+                return false;
             }
 
             engine.needsRenderUpdate = true;
@@ -32,6 +32,7 @@ class Engine {
             engine.player.fov.updateMap();
 
             this.handleEnemyTurns();
+            return true;
         }
     }
 

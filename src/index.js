@@ -51,8 +51,9 @@ import inventoryActionModal from "./js/ui/InventoryActionModal";
     }
 
     function update() {
-        engine.handleEvents();
-        viewInfo.updatePlayerDetails();
+        if (engine.handleEvents()) {
+            viewInfo.updatePlayerDetails();
+        }
 
         if (engine.needsBackgroundUpdate) {
             engine.gameMap.savedBackground = null;

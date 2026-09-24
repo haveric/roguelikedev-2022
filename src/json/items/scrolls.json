@@ -38,7 +38,7 @@
         "components": {
             "fireballConsumable": {
                 "damage": 12,
-                "maxRange": 2
+                "radius": 2
             }
         }
     },
@@ -51,7 +51,7 @@
         "components": {
             "fireballConsumable": {
                 "damage": 8,
-                "maxRange": 1
+                "radius": 1
             }
         }
     },
@@ -64,7 +64,7 @@
         "components": {
             "fireballConsumable": {
                 "damage": 20,
-                "maxRange": 3
+                "radius": 3
             }
         }
     }

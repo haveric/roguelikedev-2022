@@ -72,7 +72,7 @@ export default class FireballConsumable extends _Consumable {
             }
             const actorHex = actor.getComponent("hex");
             const distance = hex.distanceTo(actorHex);
-            if (distance < this.radius) {
+            if (distance <= this.radius) {
                 messageManager.text("The " + actor.name + " is engulfed in a fiery explosion, taking " + this.damage + " damage!").build();
                 actor.getComponent("fighter").takeDamage(this.damage);
                 anyTargetsHit = true;
