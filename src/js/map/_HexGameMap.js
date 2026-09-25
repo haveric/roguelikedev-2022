@@ -3,15 +3,19 @@ import ArrayUtil from "../util/ArrayUtil";
 import engine from "../Engine";
 import sceneState from "../SceneState";
 import parchmentFoldedCrinkledSrc from "../../assets/kenney/parchmentFoldedCrinkled.png";
+import entityLoader from "../entity/EntityLoader";
 
 export default class _HexGameMap {
     constructor(rows, cols) {
         this.rows = rows;
         this.cols = cols;
 
-        this.init();}
+        this.init();
+    }
 
     init() {
+        this.saveCache = null;
+
         this.tiles = ArrayUtil.create2dArray(this.rows);
         this.actors = [];
         this.items = [];
@@ -233,5 +237,108 @@ export default class _HexGameMap {
         }
 
         return blockingActor;
+    }
+
+    save() {
+        if (this.saveCache) {
+            return this.saveCache;
+        }
+
+        const saveData = {
+            rows: this.rows,
+            cols: this.cols
+        };
+
+        const tileArray = [];
+        const letterArray = [];
+        let key = "";
+        let charCode = 65;
+
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                const tile = this.tiles[i][j];
+                if (tile) {
+                    const tileJson = tile.save();
+                    tileJson.components.hex.row = 0;
+                    tileJson.components.hex.col = 0;
+                    const tileJsonString = JSON.stringify(tileJson);
+                    const index = tileArray.indexOf(tileJsonString);
+                    if (index > -1) {
+                        key += letterArray[index];
+                    } else {
+                        tileArray.push(tileJsonString);
+                        letterArray.push(String.fromCharCode(charCode));
+                        key += String.fromCharCode(charCode);
+
+                        charCode++;
+                    }
+                } else {
+                    key += " ";
+                }
+            }
+        }
+
+        saveData["tiles"] = {};
+        saveData["tiles"]["key"] = key;
+        saveData["tiles"]["map"] = {};
+
+        for (let i = 0; i < tileArray.length; i++) {
+            saveData["tiles"]["map"][letterArray[i]] = tileArray[i];
+        }
+
+        const actorJson = [];
+        for (const actor of this.actors) {
+            actorJson.push(JSON.stringify(actor.save()));
+        }
+        saveData["actors"] = actorJson;
+
+        const itemJson = [];
+        for (const item of this.items) {
+            itemJson.push(JSON.stringify(item.save()));
+        }
+        saveData["items"] = itemJson;
+
+        this.saveCache = saveData;
+        return saveData;
+    }
+
+    load(json) {
+        this.rows = json.rows;
+        this.cols = json.cols;
+        this.init();
+
+        const tilesToLoad = json.tiles;
+        if (tilesToLoad) {
+            const key = tilesToLoad.key;
+            const map = tilesToLoad.map;
+
+            for (let i = 0; i < this.rows; i++) {
+                for (let j = 0; j < this.cols; j++) {
+                    const index = i * this.cols + j;
+                    const tile = map[key[index]];
+
+                    if (tile) {
+                        this.tiles[i][j] = entityLoader.create(tile);
+                        const tileHex = this.tiles[i][j].getComponent("hex");
+                        tileHex.moveTo(i, j);
+                    }
+                }
+            }
+
+            const actors = json.actors;
+            for (const actor of actors) {
+                const createdActor = entityLoader.create(actor);
+                if (createdActor.id === "player") {
+                    engine.player = createdActor;
+                }
+                this.actors.push(createdActor);
+            }
+
+            const items = json.items;
+            for (const item of items) {
+                const createdItem = entityLoader.create(item);
+                this.items.push(createdItem);
+            }
+        }
     }
 }

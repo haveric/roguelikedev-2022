@@ -2,6 +2,10 @@ import _Component from "./_Component";
 import AIDead from "./ai/AIDead";
 import messageManager from "../message/MessageManager";
 import playerInfo from "../ui/PlayerInfo";
+import engine from "../Engine";
+import GameOverEventHandler from "../event/GameOverEventHandler";
+import gameOver from "../ui/GameOver";
+import sceneState from "../SceneState";
 
 export default class Fighter extends _Component {
     constructor(args) {
@@ -89,6 +93,13 @@ export default class Fighter extends _Component {
         }
 
         this.clearSaveCache();
+
+        if (this.isPlayer()) {
+            gameOver.setPosition(sceneState.center.x - 100, sceneState.center.y * .7);
+            gameOver.show();
+            engine.setEventHandler(new GameOverEventHandler());
+            engine.needsRenderUpdate = true;
+        }
     }
 
     updateUI() {

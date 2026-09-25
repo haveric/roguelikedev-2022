@@ -1,10 +1,12 @@
 import NoAction from "./actions/NoAction";
 import UnableToPerformAction from "./actions/UnableToPerformAction";
 import messageManager from "./message/MessageManager";
+import Settings from "./Settings";
 
 class Engine {
     constructor() {
         this.eventHandler = null;
+        this.settings = new Settings();
         this.player = null;
         this.gameMap = null;
         this.needsRenderUpdate = false;
@@ -56,6 +58,17 @@ class Engine {
             this.eventHandler.teardown();
         }
         this.eventHandler = eventHandler;
+    }
+
+    save(name) {
+        const saveJson = {
+            "version": 1,
+            "name": name,
+            "date": new Date(),
+            "map": this.gameMap.save()
+        };
+
+        localStorage.setItem(name, JSON.stringify(saveJson));
     }
 }
 

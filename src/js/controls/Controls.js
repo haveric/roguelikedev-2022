@@ -25,6 +25,7 @@ class Controls {
 
         self.defaults.set("pickup", ["g"]);
 
+        self.defaults.set("pause", [Key.ESCAPE, "p"]);
         self.defaults.set("debug_map", ["F9"]);
 
         self.load();

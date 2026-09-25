@@ -6,6 +6,10 @@ import AStar from "../../pathfinding/AStar";
 
 export default class _BaseFov {
     constructor() {
+        this.clear();
+    }
+
+    clear() {
         this.previousVisibleTiles = [];
         this.visibleTiles = [];
         this.visibleActors = [];
@@ -35,6 +39,10 @@ export default class _BaseFov {
     }
 
     addVisibleTile(tile) {
+        if (!tile) {
+            return;
+        }
+
         if (this.visibleTiles.indexOf(tile) === -1) {
             this.visibleTiles.push(tile);
         }

@@ -13,6 +13,8 @@ import inventoryActionModal from "../ui/InventoryActionModal";
 import InventoryActionEventHandler from "./InventoryActionEventHandler";
 import DropAction from "../actions/DropAction";
 import NoAction from "../actions/NoAction";
+import mainMenu from "../ui/MainMenu";
+import MainMenuEventHandler from "./MainMenuEventHandler";
 
 export default class DefaultPlayerEventHandler extends _EventHandler {
     constructor() {
@@ -20,6 +22,10 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
     }
 
     teardown() {
+        if (this.targetedTile) {
+            this.targetedTile.highlighted = false;
+        }
+
         super.teardown();
     }
 
@@ -44,6 +50,15 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
             } else if (controls.testPressed("pickup")) {
                 action = new PickupAction(engine.player);
             }
+        }
+
+        if (controls.testPressed("pause")) {
+            mainMenu.setPosition(sceneState.center.x - 100, sceneState.center.y * .7);
+
+            mainMenu.show();
+
+            engine.setEventHandler(new MainMenuEventHandler());
+            engine.needsRenderUpdate = true;
         }
 
         // DEBUG Actions
