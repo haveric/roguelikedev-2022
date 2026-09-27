@@ -14,6 +14,7 @@ import gameOver from "./js/ui/GameOver";
 import saveManager from "./js/SaveManager";
 import loadGame from "./js/ui/LoadGame";
 import saveGame from "./js/ui/SaveGame";
+import levelUp from "./js/ui/LevelUp";
 
 (function () {
     function init() {
@@ -61,6 +62,7 @@ import saveGame from "./js/ui/SaveGame";
             inventoryHoverModal.draw();
             inventoryActionModal.draw();
             messageConsole.draw();
+            levelUp.draw();
         }
         mainMenu.draw();
         gameOver.draw();

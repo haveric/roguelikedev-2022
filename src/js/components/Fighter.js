@@ -42,6 +42,24 @@ export default class Fighter extends _Component {
         return saveJson;
     }
 
+    setPower(newPower) {
+        this.power = newPower;
+        this.updateUI();
+        this.clearSaveCache();
+    }
+
+    setDefense(newDefense) {
+        this.defense = newDefense;
+        this.updateUI();
+        this.clearSaveCache();
+    }
+
+    setMaxHp(newMaxHp) {
+        this.maxHp = newMaxHp;
+        this.updateUI();
+        this.clearSaveCache();
+    }
+
     setHp(newHp) {
         this.hp = Math.max(0, Math.min(newHp, this.maxHp));
         this.updateUI();
@@ -74,6 +92,11 @@ export default class Fighter extends _Component {
             messageManager.text("You died!", "#f00").build();
         } else {
             messageManager.text(entity.name + " dies!", "#ffa030").build();
+            const playerLevel = engine.player.getComponent("level");
+            const entityLevel = entity.getComponent("level");
+            if (playerLevel && entityLevel) {
+                playerLevel.addXp(entityLevel.xp);
+            }
         }
 
         entity.callEvent("onEntityDeath");

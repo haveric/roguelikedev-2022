@@ -1,5 +1,9 @@
 import _Component from "./_Component";
 import messageManager from "../message/MessageManager";
+import LevelUpEventHandler from "../event/LevelUpEventHandler";
+import levelUp from "../ui/LevelUp";
+import engine from "../Engine";
+import sceneState from "../SceneState";
 
 export default class Level extends _Component {
     constructor(args) {
@@ -7,12 +11,10 @@ export default class Level extends _Component {
 
         this.level = 1;
         this.xp = 0;
-        this.xpGiven = 0;
 
         if (this.hasComponent()) {
-            this.level = this.loadArg("level");
-            this.xp = this.loadArg("xp");
-            this.xpGiven = this.loadArg("xpGiven");
+            this.level = this.loadArg("level", 1);
+            this.xp = this.loadArg("xp", 0);
         }
     }
 
@@ -27,7 +29,6 @@ export default class Level extends _Component {
 
         saveJson.level.level = this.level;
         saveJson.level.xp = this.xp;
-        saveJson.level.xpGiven = this.xpGiven;
 
         this.cachedSave = saveJson;
         return saveJson;
@@ -48,6 +49,15 @@ export default class Level extends _Component {
         return (xpAdjusted / levelXpAdjusted) * 100;
     }
 
+    addXp(xp) {
+        if (xp > 0) {
+            this.xp += xp;
+            if (this.requiresLevelUp()) {
+                this.levelUp();
+            }
+        }
+    }
+
     levelUp() {
         this.level += 1;
         messageManager.text("You are now level " + this.level + "!").build();
@@ -56,5 +66,33 @@ export default class Level extends _Component {
         fighter.heal(fighter.maxHp);
 
         this.clearSaveCache();
+
+        levelUp.setPosition(sceneState.center.x - 150, sceneState.center.y * .7);
+        levelUp.show();
+        engine.setEventHandler(new LevelUpEventHandler());
+        engine.needsRenderUpdate = true;
+    }
+
+    increaseMaxHp(amount) {
+        const fighter = this.parentEntity.getComponent("fighter");
+
+        fighter.setMaxHp(fighter.maxHp + amount);
+        fighter.setHp(fighter.hp + amount);
+
+        messageManager.text("Your health has increased by " + amount + "!").build();
+    }
+
+    increasePower(amount) {
+        const fighter = this.parentEntity.getComponent("fighter");
+        fighter.setPower(fighter.power + amount);
+
+        messageManager.text("Your power has increased by " + amount + ". You feel stronger!").build();
+    }
+
+    increaseDefense(amount) {
+        const fighter = this.parentEntity.getComponent("fighter");
+        fighter.setDefense(fighter.defense + amount);
+
+        messageManager.text("Your defense has increased by " + amount + ". Your movements are getting swifter!").build();
     }
 }

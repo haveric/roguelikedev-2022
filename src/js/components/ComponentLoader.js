@@ -11,6 +11,7 @@ import Inventory from "./Inventory";
 import LightningDamageConsumable from "./consumable/LightningDamageConsumable";
 import ConfusionConsumable from "./consumable/ConfusionConsumable";
 import FireballConsumable from "./consumable/FireballConsumable";
+import Level from "./Level";
 
 class ComponentLoader {
     constructor() {
@@ -35,6 +36,7 @@ class ComponentLoader {
         this.load(new Fov());
         this.load(new Hex());
         this.load(new Inventory());
+        this.load(new Level());
     }
 
     load(component) {

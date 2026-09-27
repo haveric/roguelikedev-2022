@@ -21,6 +21,10 @@
                 "items": [
                     {"load": "potion_health_minor"}
                 ]
+            },
+            "level": {
+                "level": 1,
+                "xp": 0
             }
         }
     }

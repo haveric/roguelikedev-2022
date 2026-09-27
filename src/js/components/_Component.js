@@ -51,6 +51,7 @@ export default class _Component {
     }
 
     loadArg(name, defaultValue) {
+        // TODO: 0 should be a valid value
         return this.args.components[this.type][name] || defaultValue;
     }
 

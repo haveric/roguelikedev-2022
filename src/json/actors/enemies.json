@@ -12,7 +12,10 @@
                 "defense": 0,
                 "power": 3
             },
-            "aiMeleeChase": {}
+            "aiMeleeChase": {},
+            "level": {
+                "xp": 30
+            }
         }
     },
     {
@@ -28,7 +31,10 @@
                 "defense": 1,
                 "power": 4
             },
-            "aiMeleeChase": {}
+            "aiMeleeChase": {},
+            "level": {
+                "xp": 75
+            }
         }
     }
 ]

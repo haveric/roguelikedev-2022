@@ -2,31 +2,21 @@ import sceneState from "../SceneState";
 import Hex from "../components/Hex";
 import HexUtil from "../util/HexUtil";
 import engine from "../Engine";
-import viewInfo from "./ViewInfo";
-import inventoryView from "./InventoryView";
-import entityLoader from "../entity/EntityLoader";
-import CellularAutomataMap from "../map/CellularAutomataMap";
 import DefaultPlayerEventHandler from "../event/DefaultPlayerEventHandler";
-import messageManager from "../message/MessageManager";
-import loadGame from "./LoadGame";
-import saveGame from "./SaveGame";
-import LoadGameEventHandler from "../event/LoadGameEventHandler";
-import SaveGameEventHandler from "../event/SaveGameEventHandler";
-import gameWorld from "../GameWorld";
 
-class MainMenu {
+class LevelUp {
     constructor() {
         this.visible = false;
         this.x = 0;
         this.y = 0;
-        this.width = 200;
-        this.height = 100;
+        this.width = 300;
+        this.height = 140;
     }
 
     setButtons() {
         this.buttons = [
             {
-                text: "New Game",
+                text: "Constitution (+20 HP)",
                 hover: false,
                 position: {
                     x: 0,
@@ -34,9 +24,9 @@ class MainMenu {
                     width: 0,
                     height: 0
                 },
-                callback: this.startNewGame.bind(this)
+                callback: this.increaseMaxHp.bind(this)
             },{
-                text: "Load Game",
+                text: "Strength (+1 Power)",
                 hover: false,
                 position: {
                     x: 0,
@@ -44,24 +34,19 @@ class MainMenu {
                     width: 0,
                     height: 0
                 },
-                callback: this.openLoadGame.bind(this)
+                callback: this.increasePower.bind(this)
+            },{
+                text: "Agility (+1 Defense)",
+                hover: false,
+                position: {
+                    x: 0,
+                    y: 0,
+                    width: 0,
+                    height: 0
+                },
+                callback: this.increaseDefense.bind(this)
             }
         ];
-
-        if (engine.state === "game") {
-            this.height = 140;
-            this.buttons.push({
-                text: "Save Game",
-                hover: false,
-                position: {
-                    x: 0,
-                    y: 0,
-                    width: 0,
-                    height: 0
-                },
-                callback: this.openSaveGame.bind(this)
-            });
-        }
     }
 
     setPosition(x, y) {
@@ -70,9 +55,6 @@ class MainMenu {
     }
 
     show() {
-        if (engine.state === "start") {
-            this.startFakeGame();
-        }
         this.setButtons();
         this.visible = true;
     }
@@ -104,9 +86,9 @@ class MainMenu {
             const qStart = hex.q - 4;
             const rStart = hex.r - 1;
             let rOffset = 0;
-            const title = "HEXAGON";
+            const title = "LEVEL UP!";
             let i = 0;
-            for (let q = qStart + 6; q >= qStart; q --) {
+            for (let q = qStart + 8; q >= qStart; q --) {
                 if (q % 2 === 0) {
                     rOffset += 1;
                 }
@@ -143,72 +125,34 @@ class MainMenu {
         }
     }
 
-    startFakeGame() {
-        engine.gameMap = new CellularAutomataMap(80, 80, 1);
+    increaseMaxHp() {
+        const playerLevel = engine.player.getComponent("level");
+        playerLevel.increaseMaxHp(20);
 
-        engine.player = entityLoader.createFromTemplate("player", {components: {hex: {row: 0, col: 0}}});
-        const playerHex = engine.player.getComponent("hex");
-        let foundPlace = false;
-        while(!foundPlace) {
-            const playerRow = Math.floor(Math.random() * (engine.gameMap.rows * .5)) + Math.round(.25 * engine.gameMap.rows);
-            const playerCol = Math.floor(Math.random() * (engine.gameMap.cols * .5)) + Math.round(.25 * engine.gameMap.cols);
-
-            const tile = engine.gameMap.tiles[playerRow][playerCol];
-            if (!tile.isWall()) {
-                playerHex.moveTo(playerRow, playerCol);
-                foundPlace = true;
-            }
-        }
-        engine.gameMap.actors.push(engine.player);
-        engine.gameMap.placeEntities("cave", 1, .03, 5);
-        engine.gameMap.placeItems("cave", 1, .03, 5);
-
-        sceneState.debugRenderMap = true;
-        engine.needsRenderUpdate = true;
-        engine.player.fov.compute(engine.player, 5);
-        engine.player.fov.updateMap();
-
-        viewInfo.updatePlayerDetails();
+        this.afterClick();
     }
 
-    startNewGame() {
-        engine.state = "game";
-        sceneState.debugRenderMap = false;
-        messageManager.clear();
+    increasePower() {
+        const playerLevel = engine.player.getComponent("level");
+        playerLevel.increasePower(1);
 
-        engine.gameMap = null; // Reset gameMap to start on level 1
-        gameWorld.generateFloor();
+        this.afterClick();
+    }
 
+    increaseDefense() {
+        const playerLevel = engine.player.getComponent("level");
+        playerLevel.increaseDefense(1);
+
+        this.afterClick();
+    }
+
+    afterClick() {
+        this.hide();
         engine.setEventHandler(new DefaultPlayerEventHandler());
-
-        const playerFighter = engine.player.getComponent("fighter");
-        playerFighter.updateUI();
-        inventoryView.update();
-
-        viewInfo.updatePlayerDetails();
-
-        engine.needsRenderUpdate = true;
-    }
-
-    openLoadGame() {
-        this.hide();
-        loadGame.setPosition(sceneState.center.x - 350, sceneState.center.y * .7);
-        loadGame.show();
-
-        engine.setEventHandler(new LoadGameEventHandler());
-        engine.needsRenderUpdate = true;
-    }
-
-    openSaveGame() {
-        this.hide();
-        saveGame.setPosition(sceneState.center.x - 350, sceneState.center.y * .7);
-        saveGame.show();
-
-        engine.setEventHandler(new SaveGameEventHandler());
         engine.needsRenderUpdate = true;
     }
 }
 
 
-const mainMenu = new MainMenu();
-export default mainMenu;
+const levelUp = new LevelUp();
+export default levelUp;
