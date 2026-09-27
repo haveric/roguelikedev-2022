@@ -1,6 +1,7 @@
 import _Entity from "./_Entity";
 import HexUtil from "../util/HexUtil";
 import sceneState from "../SceneState";
+import engine from "../Engine";
 
 export default class Tile extends _Entity {
     constructor(args = {}) {
@@ -53,16 +54,17 @@ export default class Tile extends _Entity {
             }
 
             if (this.spriteImage) {
-                if (!this.canvas) {
+                if (this.canvas) {
+                    sceneState.ctx.drawImage(this.canvas, 0, 0, this.canvas.width, this.canvas.height, x - (.5 * this.canvas.width * sceneState.scale), y - (.5 * this.canvas.height * sceneState.scale), this.canvas.width * sceneState.scale, this.canvas.height * sceneState.scale);
+                } else {
                     this.canvas = new OffscreenCanvas(this.spriteImage.width, this.spriteImage.height);
                     this.ctx = this.canvas.getContext("2d");
                     HexUtil.drawHex(this.ctx, .5 * this.canvas.width, .5 * this.canvas.height, 1/sceneState.scale);
 
                     this.ctx.clip();
                     this.ctx.drawImage(this.spriteImage, 0, 0, this.spriteImage.width, this.spriteImage.height, 0, 0, this.canvas.width, this.canvas.height);
+                    engine.needsRedraw = true;
                 }
-
-                sceneState.ctx.drawImage(this.canvas, 0, 0, this.canvas.width, this.canvas.height, x - (.5 * this.canvas.width * sceneState.scale), y - (.5 * this.canvas.height * sceneState.scale), this.canvas.width * sceneState.scale, this.canvas.height * sceneState.scale);
             }
         }
 
