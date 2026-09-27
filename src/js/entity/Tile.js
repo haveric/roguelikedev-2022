@@ -44,20 +44,26 @@ export default class Tile extends _Entity {
             sceneState.ctx.strokeStyle = this.borderColor;
             sceneState.ctx.stroke();
 
-            if (sceneState.debugRenderMap || !fov.visible) {
+            if (!sceneState.debugRenderMap && !fov.visible) {
                 HexUtil.drawHex(sceneState.ctx, x, y);
                 sceneState.ctx.fillStyle = "rgba(0, 0, 0, .25)";
                 sceneState.ctx.fill();
                 sceneState.ctx.color = "rgba(0, 0, 0, .25)";
                 sceneState.ctx.stroke();
             }
-        }
 
-        // Debug show all tiles
-        if (sceneState.debugRenderMap) {
-            HexUtil.drawHex(sceneState.ctx, x, y);
-            sceneState.ctx.fillStyle = this.color;
-            sceneState.ctx.fill();
+            if (this.spriteImage) {
+                if (!this.canvas) {
+                    this.canvas = new OffscreenCanvas(this.spriteImage.width, this.spriteImage.height);
+                    this.ctx = this.canvas.getContext("2d");
+                    HexUtil.drawHex(this.ctx, .5 * this.canvas.width, .5 * this.canvas.height, 1/sceneState.scale);
+
+                    this.ctx.clip();
+                    this.ctx.drawImage(this.spriteImage, 0, 0, this.spriteImage.width, this.spriteImage.height, 0, 0, this.canvas.width, this.canvas.height);
+                }
+
+                sceneState.ctx.drawImage(this.canvas, 0, 0, this.canvas.width, this.canvas.height, x - (.5 * this.canvas.width * sceneState.scale), y - (.5 * this.canvas.height * sceneState.scale), this.canvas.width * sceneState.scale, this.canvas.height * sceneState.scale);
+            }
         }
 
         if (this.highlighted) {

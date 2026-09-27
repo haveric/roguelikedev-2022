@@ -12,6 +12,7 @@ import loadGame from "./LoadGame";
 import saveGame from "./SaveGame";
 import LoadGameEventHandler from "../event/LoadGameEventHandler";
 import SaveGameEventHandler from "../event/SaveGameEventHandler";
+import gameWorld from "../GameWorld";
 
 class MainMenu {
     constructor() {
@@ -143,7 +144,7 @@ class MainMenu {
     }
 
     startFakeGame() {
-        engine.gameMap = new CellularAutomataMap(80, 80);
+        engine.gameMap = new CellularAutomataMap(80, 80, 1);
 
         engine.player = entityLoader.createFromTemplate("player", {components: {hex: {row: 0, col: 0}}});
         const playerHex = engine.player.getComponent("hex");
@@ -173,24 +174,9 @@ class MainMenu {
     startNewGame() {
         engine.state = "game";
         sceneState.debugRenderMap = false;
-        engine.gameMap = new CellularAutomataMap(80, 80);
+        messageManager.clear();
 
-        engine.player = entityLoader.createFromTemplate("player", {components: {hex: {row: 0, col: 0}}});
-        const playerHex = engine.player.getComponent("hex");
-        let foundPlace = false;
-        while(!foundPlace) {
-            const playerRow = Math.floor(Math.random() * (engine.gameMap.rows - 4)) + 2;
-            const playerCol = Math.floor(Math.random() * (engine.gameMap.cols - 4)) + 2;
-
-            const tile = engine.gameMap.tiles[playerRow][playerCol];
-            if (!tile.isWall()) {
-                playerHex.moveTo(playerRow, playerCol);
-                foundPlace = true;
-            }
-        }
-        engine.gameMap.actors.push(engine.player);
-        engine.gameMap.placeEntities("cave", 1, .03, 5);
-        engine.gameMap.placeItems("cave", 1, .03, 5);
+        gameWorld.generateFloor();
 
         engine.setEventHandler(new DefaultPlayerEventHandler());
 
@@ -198,13 +184,9 @@ class MainMenu {
         playerFighter.updateUI();
         inventoryView.update();
 
-        engine.needsRenderUpdate = true;
-        engine.player.fov.compute(engine.player, 5);
-        engine.player.fov.updateMap();
-
         viewInfo.updatePlayerDetails();
-        messageManager.clear();
-        messageManager.text("Welcome to the dungeon.").build();
+
+        engine.needsRenderUpdate = true;
     }
 
     openLoadGame() {

@@ -15,6 +15,7 @@ import DropAction from "../actions/DropAction";
 import NoAction from "../actions/NoAction";
 import mainMenu from "../ui/MainMenu";
 import MainMenuEventHandler from "./MainMenuEventHandler";
+import TakeStairsAction from "../actions/TakeStairsAction";
 
 export default class DefaultPlayerEventHandler extends _EventHandler {
     constructor() {
@@ -49,6 +50,8 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                 action = new WaitAction(engine.player);
             } else if (controls.testPressed("pickup")) {
                 action = new PickupAction(engine.player);
+            } else if (controls.testPressed("stairs_down")) {
+                action = new TakeStairsAction(engine.player);
             }
         }
 
@@ -122,6 +125,12 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
             //         }
             //     }
             // }
+        } else {
+            if (this.targetedTile) {
+                this.targetedTile.highlighted = false;
+                this.targetedTile = null;
+                engine.needsRenderUpdate = true;
+            }
         }
 
         const inventoryHex = HexUtil.pixelToHex({"x": this.mouse.x, "y": this.mouse.y}, 1.5);

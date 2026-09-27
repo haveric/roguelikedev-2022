@@ -12,5 +12,11 @@
         "name": "Floor",
         "color": "#ddd",
         "borderColor": "#999"
+    },
+    {
+        "id": "stairs_down",
+        "extends": "base_floor",
+        "name": "Stairs Down",
+        "sprite": "./assets/kenney/stairs_down_40x36.png"
     }
 ]

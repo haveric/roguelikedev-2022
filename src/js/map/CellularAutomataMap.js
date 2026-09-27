@@ -6,8 +6,8 @@ import AStar from "../pathfinding/AStar";
 import Graph from "../pathfinding/Graph";
 
 export default class CellularAutomataMap extends _HexGameMap {
-    constructor(rows, cols) {
-        super(rows, cols);
+    constructor(rows, cols, level) {
+        super(rows, cols, level);
 
         this.percentAreWalls = .35; // 1 = 100%
 
@@ -24,6 +24,7 @@ export default class CellularAutomataMap extends _HexGameMap {
         this.makeCaverns(15, 0);
         this.floodFillCreateRooms();
         this.createCorridors();
+        this.placeStairs();
     }
 
     randomFillBuild() {
@@ -209,6 +210,13 @@ export default class CellularAutomataMap extends _HexGameMap {
             entity.getComponent("hex").moveTo(pathNode.row, pathNode.col);
             this.tiles[pathNode.row][pathNode.col] = entity;
         }
+    }
+
+    placeStairs() {
+        const room = this.rooms[Math.floor(Math.random() * this.rooms.length)];
+        const randomRoomTile = room.tiles[Math.floor(Math.random() * room.tiles.length)];
+        const hex = randomRoomTile.getComponent("hex");
+        this.tiles[hex.row][hex.col] = entityLoader.createFromTemplate("stairs_down", {components: {hex: {row: hex.row, col: hex.col}}});
     }
 
     placeEntities(generation, level, percentage, distFromPlayer) {

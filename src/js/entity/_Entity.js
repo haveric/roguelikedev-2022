@@ -19,6 +19,13 @@ export default class _Entity {
             this.callEvent("onComponentsLoaded");
         }
 
+        this.spriteImage = null;
+        if (this.sprite && this.sprite !== "") {
+            this.spriteImage = new Image();
+            this.spriteImage.src = this.sprite;
+        }
+        this.cachedSpriteImage = null;
+
         this.cachedSave = null;
     }
 

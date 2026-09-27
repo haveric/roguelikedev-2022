@@ -1,8 +1,6 @@
 import sceneState from "../SceneState";
 import engine from "../Engine";
 import HexUtil from "../util/HexUtil";
-import elementDiamondSrc from "../../assets/kenney/elementDiamond.png";
-import elementShieldSrc from "../../assets/kenney/elementShield.png";
 
 class PlayerInfo {
     constructor() {
@@ -16,12 +14,12 @@ class PlayerInfo {
 
     init() {
         this.powerImage = new Image();
-        this.powerImage.src = elementDiamondSrc;
+        this.powerImage.src = "/assets/kenney/elementDiamond.png";
         this.powerImage.onload = () => {
             engine.needsRenderUpdate = true;
         };
         this.defenseImage = new Image();
-        this.defenseImage.src = elementShieldSrc;
+        this.defenseImage.src = "/assets/kenney/elementShield.png";
         this.defenseImage.onload = () => {
             engine.needsRenderUpdate = true;
         };

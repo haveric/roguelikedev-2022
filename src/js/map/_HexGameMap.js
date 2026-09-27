@@ -2,13 +2,13 @@ import HexUtil from "../util/HexUtil";
 import ArrayUtil from "../util/ArrayUtil";
 import engine from "../Engine";
 import sceneState from "../SceneState";
-import parchmentFoldedCrinkledSrc from "../../assets/kenney/parchmentFoldedCrinkled.png";
 import entityLoader from "../entity/EntityLoader";
 
 export default class _HexGameMap {
-    constructor(rows, cols) {
+    constructor(rows, cols, level) {
         this.rows = rows;
         this.cols = cols;
+        this.level = level;
 
         this.init();
     }
@@ -21,7 +21,7 @@ export default class _HexGameMap {
         this.items = [];
 
         this.map_background = new Image();
-        this.map_background.src = parchmentFoldedCrinkledSrc;
+        this.map_background.src = "/assets/kenney/parchmentFoldedCrinkled.png";
 
         this.backgroundLoaded = false;
         const self = this;
@@ -246,7 +246,8 @@ export default class _HexGameMap {
 
         const saveData = {
             rows: this.rows,
-            cols: this.cols
+            cols: this.cols,
+            level: this.level
         };
 
         const tileArray = [];
@@ -305,6 +306,7 @@ export default class _HexGameMap {
     load(json) {
         this.rows = json.rows;
         this.cols = json.cols;
+        this.level = json.level;
         this.init();
 
         const tilesToLoad = json.tiles;
