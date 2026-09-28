@@ -2,13 +2,14 @@
     {
         "id": "base_potion",
         "extends": "base_item",
-        "letter": "!"
+        "letter": "!",
+        "sprite": "./assets/kenney/potion.png"
     },
     {
         "id": "potion_health",
         "extends": "base_potion",
         "name": "Health Potion",
-        "color": "#7f00ff",
+        "color": "#ff0000",
         "description": "Recover a moderate amount of health.",
         "components": {
             "healingConsumable": {
@@ -20,7 +21,7 @@
         "id": "potion_health_minor",
         "extends": "base_potion",
         "name": "Minor Health Potion",
-        "color": "#b266ff",
+        "color": "#ff5252",
         "description": "Recover a small amount of health.",
         "components": {
             "healingConsumable": {
@@ -32,7 +33,7 @@
         "id": "potion_health_major",
         "extends": "base_potion",
         "name": "Major Health Potion",
-        "color": "#4c0099",
+        "color": "#a70000",
         "description": "Recover a large amount of health.",
         "components": {
             "healingConsumable": {

@@ -23,11 +23,13 @@ export default class _Entity {
         if (this.sprite && this.sprite !== "") {
             this.spriteImage = new Image();
             this.spriteImage.src = this.sprite;
+            this.spriteImage.onload = this.spriteImageLoaded.bind(this);
         }
-        this.cachedSpriteImage = null;
 
         this.cachedSave = null;
     }
+
+    spriteImageLoaded() {}
 
     /**
      * @returns {_Entity}

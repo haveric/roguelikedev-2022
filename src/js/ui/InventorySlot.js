@@ -24,8 +24,16 @@ export default class InventorySlot {
         sceneState.ctx.strokeStyle = "rgba(50, 50, 50, 1)";
         sceneState.ctx.stroke();
 
-        if (this.item) {
-            sceneState.drawTextAt(this.item.letter, drawXY.x, drawXY.y, 39, this.item.color);
+        const item = this.item;
+        if (item) {
+            if (item.spriteImage) {
+                if (item.canvas) {
+                    sceneState.ctx.drawImage(item.canvas, 0, 0, item.canvas.width, item.canvas.height, drawXY.x - (.5 * item.canvas.width * sceneState.scale * scale), drawXY.y - (.5 * item.canvas.height * sceneState.scale * scale), item.canvas.width * sceneState.scale * scale, item.canvas.height * sceneState.scale * scale);
+
+                }
+            } else {
+                sceneState.drawTextAt(item.letter, drawXY.x, drawXY.y, 39, item.color);
+            }
         }
     }
 }
