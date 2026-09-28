@@ -111,7 +111,11 @@ export default class _HexGameMap {
             }
         }
 
+        // Render dead actors before living ones
         for (const actor of this.actors) {
+            if (actor === engine.player || actor.isAlive()) {
+                continue;
+            }
             const actorHex = actor.getComponent("hex");
             const tile = engine.gameMap.getTileFromArrayCoords(actorHex.row, actorHex.col);
             const tileFov = tile.getComponent("fov");
@@ -120,6 +124,26 @@ export default class _HexGameMap {
                     actor.draw(qOffset, rOffset);
                 }
             }
+        }
+
+        // Render living actors after dead ones
+        for (const actor of this.actors) {
+            if (actor === engine.player || !actor.isAlive()) {
+                continue;
+            }
+            const actorHex = actor.getComponent("hex");
+            const tile = engine.gameMap.getTileFromArrayCoords(actorHex.row, actorHex.col);
+            const tileFov = tile.getComponent("fov");
+            if (sceneState.debugRenderMap || (tileFov && tileFov.visible)) {
+                if (playerHex.isInRange(actorHex, radius)) {
+                    actor.draw(qOffset, rOffset);
+                }
+            }
+        }
+
+        // Always render player on top
+        if (engine.player) {
+            engine.player.draw(qOffset, rOffset);
         }
     }
 

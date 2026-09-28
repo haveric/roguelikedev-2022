@@ -5,7 +5,7 @@
             {
                 "level": 1,
                 "actors": [
-                    {"id": "orc", "weight": 80},
+                    {"id": "goblin", "weight": 80},
                     {"id": "troll", "weight": 20}
                 ],
                 "items": [

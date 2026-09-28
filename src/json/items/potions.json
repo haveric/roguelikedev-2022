@@ -3,7 +3,8 @@
         "id": "base_potion",
         "extends": "base_item",
         "letter": "!",
-        "sprite": "assets/kenney/potion.png"
+        "sprite": "assets/kenney/item/potion_front.png",
+        "spriteBG": "assets/kenney/item/potion_back.png"
     },
     {
         "id": "potion_health",

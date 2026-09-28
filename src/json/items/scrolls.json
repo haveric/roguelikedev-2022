@@ -3,7 +3,8 @@
         "id": "base_scroll",
         "extends": "base_item",
         "letter": "~",
-        "sprite": "assets/kenney/scroll.png"
+        "sprite": "assets/kenney/item/scroll_front.png",
+        "spriteBG": "assets/kenney/item/scroll_back.png"
     },
     {
         "id": "scroll_lightning",

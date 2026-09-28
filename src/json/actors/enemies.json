@@ -1,10 +1,12 @@
 [
     {
-        "id": "orc",
+        "id": "goblin",
         "extends": "base_enemy",
-        "name": "Orc",
+        "name": "Goblin",
         "color": "#3f7f3f",
-        "letter": "o",
+        "letter": "g",
+        "sprite": "assets/kenney/actor/goblin_front.png",
+        "spriteBG": "assets/kenney/actor/goblin_back.png",
         "components": {
             "fighter": {
                 "hp": 10,
@@ -24,6 +26,8 @@
         "name": "Troll",
         "color": "#007f00",
         "letter": "T",
+        "sprite": "assets/kenney/actor/troll_front.png",
+        "spriteBG": "assets/kenney/actor/troll_back.png",
         "components": {
             "fighter": {
                 "hp": 16,

@@ -18,7 +18,7 @@ export default class Item extends _Entity {
         return new Item(this.save());
     }
 
-    spriteImageLoaded() {
+    allSpritesLoaded() {
         this.canvas = new OffscreenCanvas(this.spriteImage.width, this.spriteImage.height);
         this.ctx = this.canvas.getContext("2d");
 
@@ -38,7 +38,9 @@ export default class Item extends _Entity {
         }
 
         this.ctx.putImageData(imageData, 0, 0);
-
+        if (this.spriteBGImage) {
+            this.ctx.drawImage(this.spriteBGImage, 0, 0, this.spriteBGImage.width, this.spriteBGImage.height, 0, 0, this.canvas.width, this.canvas.height);
+        }
         engine.needsRedraw = true;
     }
 

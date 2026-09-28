@@ -9,7 +9,11 @@ export default class _Entity {
         this.name = args.name || "";
         this.description = args.description || "";
         this.sprite = args.sprite || "";
+        this.spriteBG = args.spriteBG || "";
+        this.spriteCorpse = args.spriteCorpse || "";
+        this.spriteCorpseBG = args.spriteCorpseBG || "";
         this.letter = args.letter || "?";
+        this.letterCorpse = args.letterCorpse || "?";
         this.color = args.color || "#fff";
 
         this.componentArray = [];
@@ -19,17 +23,65 @@ export default class _Entity {
             this.callEvent("onComponentsLoaded");
         }
 
+        const hasSprite = this.sprite && this.sprite !== "";
+        const hasSpriteBG = this.spriteBG && this.spriteBG !== "";
+        const hasSpriteCorpse = this.spriteCorpse && this.spriteCorpse !== "";
+        const hasSpriteCorpseBG = this.spriteCorpseBG && this.spriteCorpseBG !== "";
+        this.numSprites = 0;
+        if (hasSprite) {
+            this.numSprites ++;
+        }
+        if (hasSpriteBG) {
+            this.numSprites ++;
+        }
+        if (hasSpriteCorpse) {
+            this.numSprites ++;
+        }
+        if (hasSpriteCorpseBG) {
+            this.numSprites ++;
+        }
+
+
+        this.numSpritesLoaded = 0;
         this.spriteImage = null;
-        if (this.sprite && this.sprite !== "") {
+        if (hasSprite) {
             this.spriteImage = new Image();
             this.spriteImage.src = this.sprite;
             this.spriteImage.onload = this.spriteImageLoaded.bind(this);
         }
 
+        this.spriteBGImage = null;
+        if (hasSpriteBG) {
+            this.spriteBGImage = new Image();
+            this.spriteBGImage.src = this.spriteBG;
+            this.spriteBGImage.onload = this.spriteImageLoaded.bind(this);
+        }
+
+        this.spriteCorpseImage = null;
+        if (hasSpriteCorpse) {
+            this.spriteCorpseImage = new Image();
+            this.spriteCorpseImage.src = this.spriteCorpse;
+            this.spriteCorpseImage.onload = this.spriteImageLoaded.bind(this);
+        }
+
+        this.spriteCorpseBGImage = null;
+        if (hasSpriteCorpseBG) {
+            this.spriteCorpseBGImage = new Image();
+            this.spriteCorpseBGImage.src = this.spriteCorpseBG;
+            this.spriteCorpseBGImage.onload = this.spriteImageLoaded.bind(this);
+        }
+
         this.cachedSave = null;
     }
 
-    spriteImageLoaded() {}
+    spriteImageLoaded() {
+        this.numSpritesLoaded ++;
+        if (this.numSpritesLoaded === this.numSprites) {
+            this.allSpritesLoaded();
+        }
+    }
+
+    allSpritesLoaded() {}
 
     /**
      * @returns {_Entity}

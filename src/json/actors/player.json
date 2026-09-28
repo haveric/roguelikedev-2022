@@ -3,8 +3,10 @@
         "id": "player",
         "extends": "base_actor",
         "name": "Player",
-        "color": "#00f",
+        "color": "#CC9C80",
         "letter": "@",
+        "sprite": "assets/kenney/actor/player_front.png",
+        "spriteBG": "assets/kenney/actor/player_back.png",
         "components": {
             "faction": {
                 "factions": "player",

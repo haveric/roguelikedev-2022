@@ -27,7 +27,7 @@ export default class Tile extends _Entity {
         return this.getComponent("blocksMovement")?.blocksMovement;
     }
 
-    spriteImageLoaded() {
+    allSpritesLoaded() {
         this.canvas = new OffscreenCanvas(this.spriteImage.width, this.spriteImage.height);
         this.ctx = this.canvas.getContext("2d");
         HexUtil.drawHex(this.ctx, .5 * this.canvas.width, .5 * this.canvas.height, 1/sceneState.scale);
