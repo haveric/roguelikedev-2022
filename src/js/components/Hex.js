@@ -45,6 +45,7 @@ export default class Hex extends _Component {
         this.col = col;
 
         this.updateHexCoords();
+        this.clearSaveCache();
     }
 
     updateHexCoords() {

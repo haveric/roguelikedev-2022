@@ -240,9 +240,10 @@ export default class _HexGameMap {
     }
 
     save() {
-        if (this.saveCache) {
-            return this.saveCache;
-        }
+        // TODO: Revisit map caching (cache busting isn't happening correctly currently)
+        // if (this.saveCache) {
+        //     return this.saveCache;
+        // }
 
         const saveData = {
             rows: this.rows,
@@ -299,7 +300,7 @@ export default class _HexGameMap {
         }
         saveData["items"] = itemJson;
 
-        this.saveCache = saveData;
+        //this.saveCache = saveData;
         return saveData;
     }
 

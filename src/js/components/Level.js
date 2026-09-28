@@ -56,6 +56,8 @@ export default class Level extends _Component {
                 this.levelUp();
             }
         }
+
+        this.clearSaveCache();
     }
 
     levelUp() {
@@ -64,8 +66,6 @@ export default class Level extends _Component {
 
         const fighter = this.parentEntity.getComponent("fighter");
         fighter.heal(fighter.maxHp);
-
-        this.clearSaveCache();
 
         levelUp.setPosition(sceneState.center.x - 150, sceneState.center.y * .7);
         levelUp.show();

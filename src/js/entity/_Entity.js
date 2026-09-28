@@ -60,6 +60,8 @@ export default class _Entity {
                 }
             }
         });
+
+        this.clearSaveCache();
     }
 
     setComponent(component) {
@@ -67,6 +69,7 @@ export default class _Entity {
         this.components[component.baseType] = component;
         this.componentArray.push(component);
 
+        this.clearSaveCache();
     }
 
     getComponent(baseType) {
@@ -86,6 +89,8 @@ export default class _Entity {
                 break;
             }
         }
+
+        this.clearSaveCache();
     }
 
     clearSaveCache() {

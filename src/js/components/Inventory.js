@@ -63,6 +63,7 @@ export default class Inventory extends _Component {
                 itemToAdd.parentEntity = this;
                 itemToAdd.index = i;
                 this.items[i] = itemToAdd;
+                this.clearSaveCache();
                 return true;
             }
         }
@@ -73,6 +74,7 @@ export default class Inventory extends _Component {
     remove(indexToRemove) {
         const item = this.items[indexToRemove];
         this.items[indexToRemove] = null;
+        this.clearSaveCache();
         return item;
     }
 

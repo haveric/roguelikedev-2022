@@ -41,5 +41,6 @@ export default class Fov extends _Component {
 
     setVisible(visible) {
         this.visible = visible;
+        this.clearSaveCache();
     }
 }

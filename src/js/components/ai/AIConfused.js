@@ -33,12 +33,17 @@ export default class AIConfused extends _AI {
         return saveJson;
     }
 
+    setTurnsRemaining(turnsRemaining) {
+        this.turnsRemaining = turnsRemaining;
+        this.clearSaveCache();
+    }
+
     perform() {
         if (this.turnsRemaining <= 0) {
             messageManager.text("The " + this.parentEntity.name + " is no longer confused.").build();
             this.parentEntity.setComponent(this.previousAI);
         } else {
-            this.turnsRemaining--;
+            this.setTurnsRemaining(this.turnsRemaining - 1);
 
             return new WanderAction(this.parentEntity).perform();
         }
