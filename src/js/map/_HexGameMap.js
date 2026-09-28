@@ -21,7 +21,7 @@ export default class _HexGameMap {
         this.items = [];
 
         this.map_background = new Image();
-        this.map_background.src = "/assets/kenney/parchmentFoldedCrinkled.png";
+        this.map_background.src = "assets/kenney/parchmentFoldedCrinkled.png";
 
         this.backgroundLoaded = false;
         const self = this;

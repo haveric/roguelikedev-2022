@@ -14,12 +14,12 @@ class PlayerInfo {
 
     init() {
         this.powerImage = new Image();
-        this.powerImage.src = "/assets/kenney/elementDiamond.png";
+        this.powerImage.src = "assets/kenney/elementDiamond.png";
         this.powerImage.onload = () => {
             engine.needsRenderUpdate = true;
         };
         this.defenseImage = new Image();
-        this.defenseImage.src = "/assets/kenney/elementShield.png";
+        this.defenseImage.src = "assets/kenney/elementShield.png";
         this.defenseImage.onload = () => {
             engine.needsRenderUpdate = true;
         };
