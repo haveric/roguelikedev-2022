@@ -31,6 +31,38 @@ class PlayerInfo {
     }
 
     draw() {
+        this.drawTop();
+        this.drawBottom();
+    }
+
+    drawTop() {
+        const player = engine.player;
+        const playerHex = player.getComponent("hex");
+        const drawXY = HexUtil.getHexDrawCoords(playerHex, playerHex.q, playerHex.r);
+        const xOffset = HexUtil.getHexRadiusHScaled() * 17 * 1.3;
+        const yOffset = HexUtil.getHexRadiusVScaled() * 19 * 1.3;
+
+        const yStart = drawXY.y - yOffset;
+        const yLineHeight = HexUtil.getHexRadiusVScaled() * 1.15;
+        let y = yStart;
+
+        const level = player.getComponent("level");
+
+        sceneState.drawTextAt("Player Level: " + level.level, drawXY.x - xOffset, y - yLineHeight, 18, "#ddd", "left");
+        y += yLineHeight;
+
+        sceneState.drawTextAt("XP: ", drawXY.x - xOffset, y, 18, "#ddd", "left");
+        sceneState.ctx.fillStyle = "lightyellow";
+        sceneState.ctx.fillRect(drawXY.x - xOffset + (40 * sceneState.scale), y - (10 * sceneState.scale), 150 * sceneState.scale, 20 * sceneState.scale);
+
+        const percent = level.getPercentXPTowardsLevel();
+        sceneState.ctx.fillStyle = "gold";
+        sceneState.ctx.fillRect(drawXY.x - xOffset + (40 * sceneState.scale), y - (10 * sceneState.scale), (percent / 100) * (150 * sceneState.scale), 20 * sceneState.scale);
+
+        sceneState.drawTextAt(level.xp + " / " + level.xpForLevel(level.level), drawXY.x - xOffset + (50 * sceneState.scale), y, 18, "#000", "left");
+    }
+
+    drawBottom() {
         const player = engine.player;
         const playerHex = player.getComponent("hex");
         const drawXY = HexUtil.getHexDrawCoords(playerHex, playerHex.q, playerHex.r);

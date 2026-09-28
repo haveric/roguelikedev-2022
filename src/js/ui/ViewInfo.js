@@ -72,6 +72,8 @@ class ViewInfo {
         const yLineHeight = HexUtil.getHexRadiusVScaled() * 1.15;
         let y = yStart;
 
+        sceneState.drawTextAt("Dungeon Level: " + engine.gameMap.level, drawXY.x + xOffset, y - yLineHeight, 18, "#ddd", "left");
+        y += yLineHeight;
         sceneState.drawTextAt(this.header, drawXY.x + xOffset, y - yLineHeight, 26, "#ddd", "left");
         for (const line of this.lines) {
             sceneState.drawTextAt(line, drawXY.x + xOffset, y, 18, "#ddd", "left");
