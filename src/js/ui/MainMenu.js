@@ -177,6 +177,7 @@ class MainMenu {
         messageManager.clear();
 
         engine.gameMap = null; // Reset gameMap to start on level 1
+        engine.player = null; // Reset player to create a new one
         gameWorld.generateFloor();
 
         engine.setEventHandler(new DefaultPlayerEventHandler());
