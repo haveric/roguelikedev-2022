@@ -58,9 +58,20 @@ class SaveManager {
     }
 
     getSavesAsList() {
+        const settings = engine.settings;
         const saveList = [];
         for (const save of Object.values(this.saves)) {
-            saveList.push(save);
+            if (localStorage.getItem(save.name)) {
+                saveList.push(save);
+            }
+            if (save.lastAutosave > -1) {
+                for (let i = 1; i < settings.autosaveAmount; i++) {
+                    const autosave = localStorage.getItem(save.name + "-autosave" + i);
+                    if (autosave) {
+                        saveList.push(JSON.parse(autosave));
+                    }
+                }
+            }
         }
 
         return saveList;
@@ -76,7 +87,12 @@ class SaveManager {
     }
 
     saveSaves() {
-        this.saves[this.saveName] = {"name": this.getCurrentSaveName(), "lastAutosave": -1, "date": new Date()};
+        const save = this.saves[this.saveName];
+        if (save === undefined) {
+            this.saves[this.saveName] = {"name": this.getCurrentSaveName(), "lastAutosave": -1, "date": new Date()};
+        } else {
+            save.date = new Date();
+        }
 
         localStorage.setItem("saves", JSON.stringify(this.saves));
     }
