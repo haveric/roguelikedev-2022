@@ -34,7 +34,7 @@ export default class Tile extends _Entity {
 
         this.ctx.clip();
         this.ctx.drawImage(this.spriteImage, 0, 0, this.spriteImage.width, this.spriteImage.height, 0, 0, this.canvas.width, this.canvas.height);
-        engine.needsRedraw = true;
+        engine.needsRenderUpdate = true;
     }
 
     draw(qOffset, rOffset) {

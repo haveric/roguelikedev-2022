@@ -26,7 +26,7 @@ export default class Actor extends _Entity {
         this.canvas = this.createSpriteCanvas(this.spriteImage, this.spriteBGImage, this.color);
         this.canvasCorpse = this.createSpriteCanvas(this.spriteCorpseImage, this.spriteCorpseBGImage, this.color);
 
-        engine.needsRedraw = true;
+        engine.needsRenderUpdate = true;
     }
 
     createSpriteCanvas(spriteImage, spriteBGImage, color) {
