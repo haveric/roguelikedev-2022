@@ -1,8 +1,15 @@
 const EquipmentType = Object.freeze({
-    WEAPON: "weapon",
-    ARMOR: "armor",
-    POTION: "potion",
-    SCROLL: "scroll"
+    MAIN_HAND: "main_hand",
+    OFF_HAND: "off_hand",
+    HELMET: "helmet",
+    AMULET: "amulet",
+    BODY_ARMOR: "body_armor",
+    RING: "ring",
+    GLOVES: "gloves",
+    BELT: "belt",
+    BOOTS: "boots",
+    TORCH: "torch",
+    BAG: "bag"
 });
 
 export default EquipmentType;
