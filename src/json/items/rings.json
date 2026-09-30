@@ -3,6 +3,8 @@
         "id": "base_ring",
         "extends": "base_item",
         "letter": "o",
+        "sprite": "assets/kenney/item/ring_front.png",
+        "spriteBG": "assets/kenney/item/ring_back.png",
         "components": {
             "equippable": {
                 "slot": "ring"

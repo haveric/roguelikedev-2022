@@ -14,6 +14,7 @@
         "extends": "base_boots",
         "name": "Work Boots",
         "color": "#4f361b",
+        "sprite": "assets/kenney/item/work_boots.png",
         "description": "",
         "components": {
             "equippable": {
@@ -26,6 +27,7 @@
         "extends": "base_boots",
         "name": "Leather Boots",
         "color": "#4f361b",
+        "sprite": "assets/kenney/item/leather_boots.png",
         "description": "",
         "components": {
             "equippable": {
@@ -38,6 +40,7 @@
         "extends": "base_boots",
         "name": "Plate Greaves",
         "color": "#dce5e7",
+        "sprite": "assets/kenney/item/plate_greaves.png",
         "description": "",
         "components": {
             "equippable": {

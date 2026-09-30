@@ -3,6 +3,7 @@
         "id": "base_belt",
         "extends": "base_item",
         "letter": "\"",
+        "sprite": "assets/kenney/item/belt.png",
         "components": {
             "equippable": {
                 "slot": "belt"

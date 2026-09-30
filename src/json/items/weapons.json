@@ -14,6 +14,8 @@
         "name": "Dagger",
         "color": "#4f361b",
         "letter": "/",
+        "sprite": "assets/kenney/item/dagger_front.png",
+        "spriteBG": "assets/kenney/item/dagger_back.png",
         "description": "",
         "components": {
             "equippable": {
@@ -27,6 +29,8 @@
         "name": "Club",
         "color": "#4f361b",
         "letter": "|",
+        "sprite": "assets/kenney/item/club_front.png",
+        "spriteBG": "assets/kenney/item/club_back.png",
         "description": "",
         "components": {
             "equippable": {
@@ -39,6 +43,8 @@
         "extends": "base_weapon",
         "name": "Hatchet",
         "color": "#4f361b",
+        "sprite": "assets/kenney/item/hatchet_front.png",
+        "spriteBG": "assets/kenney/item/hatchet_back.png",
         "letter": "|",
         "description": "",
         "components": {
@@ -53,6 +59,8 @@
         "name": "Short Sword",
         "color": "#cccdce",
         "letter": "†",
+        "sprite": "assets/kenney/item/short_sword_front.png",
+        "spriteBG": "assets/kenney/item/short_sword_back.png",
         "description": "",
         "components": {
             "equippable": {
@@ -66,6 +74,8 @@
         "name": "Long Sword",
         "color": "#cccdce",
         "letter": "†",
+        "sprite": "assets/kenney/item/long_sword_front.png",
+        "spriteBG": "assets/kenney/item/long_sword_back.png",
         "description": "",
         "components": {
             "equippable": {
@@ -79,6 +89,8 @@
         "name": "Warhammer",
         "color": "#cccdce",
         "letter": "†",
+        "sprite": "assets/kenney/item/warhammer_front.png",
+        "spriteBG": "assets/kenney/item/warhammer_back.png",
         "description": "",
         "components": {
             "equippable": {
@@ -92,6 +104,8 @@
         "name": "Greataxe",
         "color": "#cccdce",
         "letter": "†",
+        "sprite": "assets/kenney/item/greataxe_front.png",
+        "spriteBG": "assets/kenney/item/greataxe_back.png",
         "description": "",
         "components": {
             "equippable": {

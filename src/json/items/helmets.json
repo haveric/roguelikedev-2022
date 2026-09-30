@@ -14,6 +14,7 @@
         "extends": "base_helmet",
         "name": "Leather Cap",
         "color": "#4f361b",
+        "sprite": "assets/kenney/item/leather_cap.png",
         "description": "",
         "components": {
             "equippable": {
@@ -26,6 +27,7 @@
         "extends": "base_helmet",
         "name": "Leather Helmet",
         "color": "#4f361b",
+        "sprite": "assets/kenney/item/leather_helmet.png",
         "description": "",
         "components": {
             "equippable": {
@@ -38,6 +40,7 @@
         "extends": "base_helmet",
         "name": "Full helm",
         "color": "#dce5e7",
+        "sprite": "assets/kenney/item/full_helm.png",
         "description": "",
         "components": {
             "equippable": {
@@ -51,6 +54,7 @@
         "extends": "base_helmet",
         "name": "Crown",
         "color": "#ffbf00",
+        "sprite": "assets/kenney/item/crown.png",
         "description": "",
         "components": {
             "equippable": {
