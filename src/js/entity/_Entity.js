@@ -160,6 +160,9 @@ export default class _Entity {
             name: this.name,
             description: this.description,
             sprite: this.sprite,
+            spriteBG: this.spriteBG,
+            spriteCorpse: this.spriteCorpse,
+            spriteCorpseBG: this.spriteCorpseBG,
             letter: this.letter,
             color: this.color
         };
