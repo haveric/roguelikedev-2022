@@ -44,7 +44,10 @@ export default class MeleeAction extends _ActionWithDirection {
 
                 const entityFighter = this.entity.getComponent("fighter");
                 const actorFighter = blockingActor.getComponent("fighter");
-                const damage = entityFighter.power - actorFighter.defense;
+                const damageToDo = entityFighter.getDamage();
+                const blocked = actorFighter.getBlockedDamage();
+
+                const damage = damageToDo - blocked;
 
                 let description = name + " attack" + plural + " " + blockingName;
                 if (damage > 0) {

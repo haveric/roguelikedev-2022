@@ -23,12 +23,11 @@ export default class Level extends _Component {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            level: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
-        saveJson.level.level = this.level;
-        saveJson.level.xp = this.xp;
+        typeJson.level = this.level;
+        typeJson.xp = this.xp;
 
         this.cachedSave = saveJson;
         return saveJson;
@@ -84,14 +83,14 @@ export default class Level extends _Component {
 
     increasePower(amount) {
         const fighter = this.parentEntity.getComponent("fighter");
-        fighter.setPower(fighter.power + amount);
+        fighter.setBasePower(fighter.power + amount);
 
         messageManager.text("Your power has increased by " + amount + ". You feel stronger!").build();
     }
 
     increaseDefense(amount) {
         const fighter = this.parentEntity.getComponent("fighter");
-        fighter.setDefense(fighter.defense + amount);
+        fighter.setBaseDefense(fighter.defense + amount);
 
         messageManager.text("Your defense has increased by " + amount + ". Your movements are getting swifter!").build();
     }

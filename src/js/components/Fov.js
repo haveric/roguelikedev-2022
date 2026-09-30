@@ -18,16 +18,15 @@ export default class Fov extends _Component {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            fov: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
         if (this.explored !== false) {
-            saveJson.fov.explored = this.explored;
+            typeJson.explored = this.explored;
         }
 
         if (this.visible !== false) {
-            saveJson.fov.visible = this.visible;
+            typeJson.visible = this.visible;
         }
 
         this.cachedSave = saveJson;

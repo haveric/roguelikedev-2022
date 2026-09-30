@@ -9,14 +9,55 @@
                     {"id": "troll", "weight": 20}
                 ],
                 "items": [
-                    {"id": "potion_health_minor", "weight": 140},
-                    {"id": "potion_health", "weight": 10},
-                    {"id": "potion_health_major", "weight": 2},
-                    {"id": "scroll_lightning", "weight": 20},
-                    {"id": "scroll_confusion", "weight": 20},
-                    {"id": "scroll_fireball_weak", "weight": 20},
-                    {"id": "scroll_fireball", "weight": 4},
-                    {"id": "scroll_fireball_strong", "weight": 2}
+                    {"group": "potion_tier1", "weight": 100},
+                    {"group": "scroll_tier1", "weight": 50},
+                    {"group": "weapon_tier1", "weight": 25},
+                    {"group": "armor_tier1", "weight": 100},
+                    {"group": "accessory_tier1", "weight": 5}
+                ]
+            },
+            {
+                "level": 3,
+                "actors": [
+                    {"id": "goblin", "weight": 80},
+                    {"id": "troll", "weight": 20}
+                ],
+                "items": [
+                    {"group": "potion_tier2", "weight": 75},
+                    {"group": "scroll_tier2", "weight": 50},
+                    {"group": "weapon_tier2", "weight": 25},
+                    {"group": "armor_tier2", "weight": 100},
+                    {"group": "accessory_tier1", "weight": 10},
+                    {"group": "accessory_tier2", "weight": 5}
+                ]
+            },
+            {
+                "level": 5,
+                "actors": [
+                    {"id": "goblin", "weight": 80},
+                    {"id": "troll", "weight": 20}
+                ],
+                "items": [
+                    {"group": "potion_tier3", "weight": 60},
+                    {"group": "scroll_tier3", "weight": 50},
+                    {"group": "weapon_tier3", "weight": 25},
+                    {"group": "armor_tier3", "weight": 100},
+                    {"group": "accessory_tier3", "weight": 10},
+                    {"group": "accessory_tier2", "weight": 5}
+                ]
+            },
+            {
+                "level": 7,
+                "actors": [
+                    {"id": "goblin", "weight": 80},
+                    {"id": "troll", "weight": 20}
+                ],
+                "items": [
+                    {"group": "potion_tier4", "weight": 50},
+                    {"group": "scroll_tier4", "weight": 40},
+                    {"group": "weapon_tier4", "weight": 25},
+                    {"group": "armor_tier4", "weight": 100},
+                    {"group": "accessory_tier3", "weight": 20}
                 ]
             }
         ]

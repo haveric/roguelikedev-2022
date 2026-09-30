@@ -1,0 +1,230 @@
+[
+    {
+        "id": "potion_tier1",
+        "items": [
+            {"id": "potion_health_minor", "weight": 140},
+            {"id": "potion_health", "weight": 10},
+            {"id": "potion_health_major", "weight": 2}
+        ]
+    },
+    {
+        "id": "potion_tier2",
+        "items": [
+            {"id": "potion_health_minor", "weight": 100},
+            {"id": "potion_health", "weight": 40},
+            {"id": "potion_health_major", "weight": 10}
+        ]
+    },
+    {
+        "id": "potion_tier3",
+        "items": [
+            {"id": "potion_health_minor", "weight": 40},
+            {"id": "potion_health", "weight": 60},
+            {"id": "potion_health_major", "weight": 30}
+        ]
+    },
+    {
+        "id": "potion_tier4",
+        "items": [
+            {"id": "potion_health_minor", "weight": 20},
+            {"id": "potion_health", "weight": 40},
+            {"id": "potion_health_major", "weight": 60}
+        ]
+    },
+    {
+        "id": "scroll_tier1",
+        "items": [
+            {"id": "scroll_lightning", "weight": 5},
+            {"id": "scroll_confusion", "weight": 20},
+            {"id": "scroll_fireball_weak", "weight": 20},
+            {"id": "scroll_fireball", "weight": 4},
+            {"id": "scroll_fireball_strong", "weight": 2}
+        ]
+    },
+    {
+        "id": "scroll_tier2",
+        "items": [
+            {"id": "scroll_lightning", "weight": 10},
+            {"id": "scroll_confusion", "weight": 20},
+            {"id": "scroll_fireball_weak", "weight": 10},
+            {"id": "scroll_fireball", "weight": 10},
+            {"id": "scroll_fireball_strong", "weight": 5}
+        ]
+    },
+    {
+        "id": "scroll_tier3",
+        "items": [
+            {"id": "scroll_lightning", "weight": 15},
+            {"id": "scroll_confusion", "weight": 10},
+            {"id": "scroll_fireball_weak", "weight": 5},
+            {"id": "scroll_fireball", "weight": 15},
+            {"id": "scroll_fireball_strong", "weight": 10}
+        ]
+    },
+    {
+        "id": "scroll_tier4",
+        "items": [
+            {"id": "scroll_lightning", "weight": 20},
+            {"id": "scroll_confusion", "weight": 10},
+            {"id": "scroll_fireball", "weight": 20},
+            {"id": "scroll_fireball_strong", "weight": 15}
+        ]
+    },
+    {
+        "id": "weapon_tier1",
+        "items": [
+            {"id": "dagger", "weight": 75},
+            {"id": "club", "weight": 50},
+            {"id": "hatchet", "weight": 25},
+            {"id": "short_sword", "weight": 15},
+            {"id": "long_sword", "weight": 1}
+        ]
+    },
+    {
+        "id": "weapon_tier2",
+        "items": [
+            {"id": "dagger", "weight": 50},
+            {"id": "club", "weight": 40},
+            {"id": "hatchet", "weight": 35},
+            {"id": "short_sword", "weight": 25},
+            {"id": "long_sword", "weight": 15},
+            {"id": "warhammer", "weight": 1}
+        ]
+    },
+    {
+        "id": "weapon_tier3",
+        "items": [
+            {"id": "dagger", "weight": 25},
+            {"id": "club", "weight": 30},
+            {"id": "hatchet", "weight": 50},
+            {"id": "short_sword", "weight": 40},
+            {"id": "long_sword", "weight": 30},
+            {"id": "warhammer", "weight": 15},
+            {"id": "greataxe", "weight": 1}
+        ]
+    },
+    {
+        "id": "weapon_tier4",
+        "items": [
+            {"id": "dagger", "weight": 10},
+            {"id": "club", "weight": 15},
+            {"id": "hatchet", "weight": 30},
+            {"id": "short_sword", "weight": 60},
+            {"id": "long_sword", "weight": 45},
+            {"id": "warhammer", "weight": 30},
+            {"id": "greataxe", "weight": 15}
+        ]
+    },
+    {
+        "id": "armor_tier1",
+        "items": [
+            {"id": "leather_armor", "weight": 50},
+            {"id": "leather_boots", "weight": 25},
+            {"id": "leather_gloves", "weight": 25},
+            {"id": "leather_helmet", "weight": 25},
+            {"id": "buckler", "weight": 15},
+            {"id": "torch_burnt", "weight": 15}
+        ]
+    },
+    {
+        "id": "armor_tier2",
+        "items": [
+            {"id": "leather_armor", "weight": 50},
+            {"id": "plate_mail", "weight": 10},
+            {"id": "leather_boots", "weight": 25},
+            {"id": "plate_greaves", "weight": 5},
+            {"id": "leather_gloves", "weight": 25},
+            {"id": "plate_gauntlets", "weight": 5},
+            {"id": "leather_helmet", "weight": 25},
+            {"id": "full_helm", "weight": 5},
+            {"id": "buckler", "weight": 15},
+            {"id": "shield_large", "weight": 3},
+            {"id": "torch_burnt", "weight": 5},
+            {"id": "torch", "weight": 15}
+        ]
+    },
+    {
+        "id": "armor_tier3",
+        "items": [
+            {"id": "leather_armor", "weight": 25},
+            {"id": "plate_mail", "weight": 25},
+            {"id": "leather_boots", "weight": 25},
+            {"id": "plate_greaves", "weight": 25},
+            {"id": "leather_gloves", "weight": 25},
+            {"id": "plate_gauntlets", "weight": 25},
+            {"id": "leather_helmet", "weight": 25},
+            {"id": "full_helm", "weight": 25},
+            {"id": "buckler", "weight": 15},
+            {"id": "shield_large", "weight": 15},
+            {"id": "torch", "weight": 15},
+            {"id": "torch_large", "weight": 5},
+            {"id": "crown", "weight": 1}
+        ]
+    },
+    {
+        "id": "armor_tier4",
+        "items": [
+            {"id": "leather_armor", "weight": 10},
+            {"id": "plate_mail", "weight": 50},
+            {"id": "leather_boots", "weight": 5},
+            {"id": "plate_greaves", "weight": 25},
+            {"id": "leather_gloves", "weight": 5},
+            {"id": "plate_gauntlets", "weight": 25},
+            {"id": "leather_helmet", "weight": 5},
+            {"id": "full_helm", "weight": 25},
+            {"id": "buckler", "weight": 5},
+            {"id": "shield_large", "weight": 25},
+            {"id": "torch", "weight": 25},
+            {"id": "torch_large", "weight": 20},
+            {"id": "crown", "weight": 3}
+        ]
+    },
+    {
+        "id": "accessory_tier1",
+        "items": [
+            {"id": "amulet_of_minor_health", "weight": 25},
+            {"id": "amulet_of_health", "weight": 5},
+            {"id": "amulet_of_defense", "weight": 15},
+            {"id": "amulet_of_power", "weight": 15},
+            {"id": "amulet_of_light", "weight": 5},
+            {"id": "ring_of_minor_health", "weight": 50},
+            {"id": "ring_of_health", "weight": 10},
+            {"id": "ring_of_defense", "weight": 30},
+            {"id": "ring_of_power", "weight": 30}
+        ]
+    },
+    {
+        "id": "accessory_tier2",
+        "items": [
+            {"id": "amulet_of_minor_health", "weight": 25},
+            {"id": "amulet_of_health", "weight": 15},
+            {"id": "amulet_of_defense", "weight": 20},
+            {"id": "amulet_of_power", "weight": 20},
+            {"id": "amulet_of_light", "weight": 10},
+            {"id": "ring_of_minor_health", "weight": 50},
+            {"id": "ring_of_health", "weight": 25},
+            {"id": "ring_of_defense", "weight": 40},
+            {"id": "ring_of_power", "weight": 40},
+            {"id": "amulet_of_major_health", "weight": 5},
+            {"id": "ring_of_major_health", "weight": 10},
+            {"id": "ring_of_light", "weight": 5}
+        ]
+    },
+    {
+        "id": "accessory_tier3",
+        "items": [
+            {"id": "amulet_of_minor_health", "weight": 15},
+            {"id": "amulet_of_health", "weight": 25},
+            {"id": "amulet_of_defense", "weight": 20},
+            {"id": "amulet_of_power", "weight": 20},
+            {"id": "amulet_of_light", "weight": 15},
+            {"id": "ring_of_minor_health", "weight": 25},
+            {"id": "ring_of_health", "weight": 50},
+            {"id": "ring_of_defense", "weight": 40},
+            {"id": "ring_of_power", "weight": 40},
+            {"id": "amulet_of_major_health", "weight": 10},
+            {"id": "ring_of_major_health", "weight": 20},
+            {"id": "ring_of_light", "weight": 10}
+        ]
+    }
+]

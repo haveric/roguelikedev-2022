@@ -1,0 +1,48 @@
+[
+    {
+        "id": "base_torch",
+        "extends": "base_item",
+        "letter": "|",
+        "components": {
+            "equippable": {
+                "slot": "torch"
+            }
+        }
+    },
+    {
+        "id": "torch",
+        "extends": "base_torch",
+        "name": "Torch",
+        "color": "#ee9f27",
+        "description": "",
+        "components": {
+            "equippable": {
+                "lightRadius": "2"
+            }
+        }
+    },
+    {
+        "id": "torch_burnt",
+        "extends": "base_torch",
+        "name": "Burnt Torch",
+        "color": "#ee9f27",
+        "description": "",
+        "components": {
+            "equippable": {
+                "lightRadius": "1"
+            }
+        }
+    },
+    {
+        "id": "torch_large",
+        "extends": "base_torch",
+        "name": "Large Torch",
+        "color": "#ee9f27",
+        "description": "",
+        "components": {
+            "equippable": {
+                "lightRadius": "3-5"
+            }
+        }
+    }
+]

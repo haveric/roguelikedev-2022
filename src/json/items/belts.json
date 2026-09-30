@@ -1,0 +1,24 @@
+[
+    {
+        "id": "base_belt",
+        "extends": "base_item",
+        "letter": "\"",
+        "components": {
+            "equippable": {
+                "slot": "belt"
+            }
+        }
+    },
+    {
+        "id": "leather_belt",
+        "extends": "base_belt",
+        "name": "Leather Belt",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "1-5"
+            }
+        }
+    }
+]

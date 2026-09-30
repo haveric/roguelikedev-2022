@@ -29,20 +29,19 @@ export default class AIMeleeChase extends _AI {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            aiMeleeChase: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
         if (this.radius !== 5) {
-            saveJson.aiMeleeChase.radius = this.radius;
+            typeJson.radius = this.radius;
         }
 
         if (this.movementActions !== 1) {
-            saveJson.aiMeleeChase.movementActions = this.movementActions;
+            typeJson.movementActions = this.movementActions;
         }
 
         if (this.currentMovement !== 0) {
-            saveJson.aiMeleeChase.currentMovement = this.currentMovement;
+            typeJson.currentMovement = this.currentMovement;
         }
 
         this.cachedSave = saveJson;

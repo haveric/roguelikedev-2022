@@ -11,11 +11,15 @@ import inventoryView from "../ui/InventoryView";
 import inventoryHoverModal from "../ui/InventoryHoverModal";
 import inventoryActionModal from "../ui/InventoryActionModal";
 import InventoryActionEventHandler from "./InventoryActionEventHandler";
-import DropAction from "../actions/DropAction";
+import DropInventoryAction from "../actions/DropInventoryAction";
 import NoAction from "../actions/NoAction";
 import mainMenu from "../ui/MainMenu";
 import MainMenuEventHandler from "./MainMenuEventHandler";
 import TakeStairsAction from "../actions/TakeStairsAction";
+import equipmentView from "../ui/EquipmentView";
+import DropEquipmentAction from "../actions/DropEquipmentAction";
+import UnequipAction from "../actions/UnequipAction";
+import EquipAction from "../actions/EquipAction";
 
 export default class DefaultPlayerEventHandler extends _EventHandler {
     constructor() {
@@ -133,30 +137,31 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
             }
         }
 
+        let foundAnyItem = false;
         const inventoryHex = HexUtil.pixelToHex({"x": this.mouse.x, "y": this.mouse.y}, 1.5);
-        let foundSlot = false;
+        let foundInventorySlot = false;
         for (const slot of inventoryView.slots) {
             if (slot.q === inventoryHex.q && slot.r === inventoryHex.r) {
-                foundSlot = true;
-                if (slot === this.targetedSlot) {
+                foundInventorySlot = true;
+                if (slot === this.targetedInventorySlot) {
                     if (slot.item) {
                         inventoryHoverModal.setPosition(this.mouse.x, this.mouse.y);
                         engine.needsRenderUpdate = true;
+                        foundAnyItem = true;
                     }
                 } else {
-                    if (this.targetedSlot) {
-                        this.targetedSlot.highlighted = false;
+                    if (this.targetedInventorySlot) {
+                        this.targetedInventorySlot.highlighted = false;
                     }
 
                     slot.highlighted = true;
-                    this.targetedSlot = slot;
+                    this.targetedInventorySlot = slot;
 
                     if (slot.item) {
                         inventoryHoverModal.setPosition(this.mouse.x, this.mouse.y);
                         inventoryHoverModal.setItem(slot.item);
                         inventoryHoverModal.show();
-                    } else {
-                        inventoryHoverModal.hide();
+                        foundAnyItem = true;
                     }
 
                     engine.needsRenderUpdate = true;
@@ -165,13 +170,59 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
             }
         }
 
-        if (!foundSlot) {
-            if (this.targetedSlot) {
-                this.targetedSlot.highlighted = false;
+        if (!foundInventorySlot) {
+            if (this.targetedInventorySlot) {
+                this.targetedInventorySlot.highlighted = false;
             }
 
+            this.targetedInventorySlot = null;
+
+            engine.needsRenderUpdate = true;
+        }
+
+        const equipmentHex = HexUtil.pixelToHex({"x": this.mouse.x - 40, "y": this.mouse.y}, 2.5);
+        let foundEquipmentSlot = false;
+        for (const slot of equipmentView.slots) {
+            if (slot.q === equipmentHex.q && slot.r === equipmentHex.r) {
+                foundEquipmentSlot = true;
+                if (slot === this.targetedEquipmentSlot) {
+                    if (slot.item) {
+                        inventoryHoverModal.setPosition(this.mouse.x, this.mouse.y);
+                        engine.needsRenderUpdate = true;
+                        foundAnyItem = true;
+                    }
+                } else {
+                    if (this.targetedEquipmentSlot) {
+                        this.targetedEquipmentSlot.highlighted = false;
+                    }
+
+                    slot.highlighted = true;
+                    this.targetedEquipmentSlot = slot;
+
+                    if (slot.item) {
+                        inventoryHoverModal.setPosition(this.mouse.x, this.mouse.y);
+                        inventoryHoverModal.setItem(slot.item);
+                        inventoryHoverModal.show();
+                        foundAnyItem = true;
+                    }
+
+                    engine.needsRenderUpdate = true;
+                }
+                break;
+            }
+        }
+
+        if (!foundEquipmentSlot) {
+            if (this.targetedEquipmentSlot) {
+                this.targetedEquipmentSlot.highlighted = false;
+            }
+            this.targetedEquipmentSlot = null;
+
+            engine.needsRenderUpdate = true;
+        }
+
+        if (!foundAnyItem) {
             inventoryHoverModal.hide();
-            this.targetedSlot = null;
 
             engine.needsRenderUpdate = true;
         }
@@ -180,18 +231,42 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
     onRightClick(e) {
         e.preventDefault();
 
-        if (this.targetedSlot) {
-            if (this.targetedSlot.item) {
-                this.targetedSlot.highlighted = false;
+        if (this.targetedInventorySlot) {
+            if (this.targetedInventorySlot.item) {
+                this.targetedInventorySlot.highlighted = false;
 
                 inventoryHoverModal.hide();
 
                 inventoryActionModal.setPosition(this.mouse.x, this.mouse.y);
-                const consumableComponent = this.targetedSlot.item.getComponent("consumable");
+                const consumableComponent = this.targetedInventorySlot.item.getComponent("consumable");
+                const equippableComponent = this.targetedInventorySlot.item.getComponent("equippable");
                 if (consumableComponent) {
+                    inventoryActionModal.buttons[0].text = "Use";
                     inventoryActionModal.buttons[0].actionOrComponent = consumableComponent;
+                } else if (equippableComponent) {
+                    inventoryActionModal.buttons[0].text = "Equip";
+                    inventoryActionModal.buttons[0].actionOrComponent = new EquipAction(engine.player, this.targetedInventorySlot.index);
                 }
-                inventoryActionModal.buttons[1].actionOrComponent = new DropAction(engine.player, this.targetedSlot.index);
+                inventoryActionModal.buttons[1].actionOrComponent = new DropInventoryAction(engine.player, this.targetedInventorySlot.index);
+                inventoryActionModal.buttons[2].actionOrComponent = new NoAction(engine.player);
+                inventoryActionModal.show();
+
+                engine.setEventHandler(new InventoryActionEventHandler());
+
+                engine.needsRenderUpdate = true;
+            }
+        }
+
+        if (this.targetedEquipmentSlot) {
+            if (this.targetedEquipmentSlot.item) {
+                this.targetedEquipmentSlot.highlighted = false;
+
+                inventoryHoverModal.hide();
+
+                inventoryActionModal.setPosition(this.mouse.x, this.mouse.y);
+                inventoryActionModal.buttons[0].text = "Unequip";
+                inventoryActionModal.buttons[0].actionOrComponent = new UnequipAction(engine.player, this.targetedEquipmentSlot.index);
+                inventoryActionModal.buttons[1].actionOrComponent = new DropEquipmentAction(engine.player, this.targetedEquipmentSlot.index);
                 inventoryActionModal.buttons[2].actionOrComponent = new NoAction(engine.player);
                 inventoryActionModal.show();
 

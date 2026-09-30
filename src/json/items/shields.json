@@ -1,0 +1,36 @@
+[
+    {
+        "id": "base_shield",
+        "extends": "base_item",
+        "letter": "\"",
+        "components": {
+            "equippable": {
+                "slot": "off_hand"
+            }
+        }
+    },
+    {
+        "id": "buckler",
+        "extends": "base_shield",
+        "name": "Buckler",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "1-10"
+            }
+        }
+    },
+    {
+        "id": "shield_large",
+        "extends": "base_shield",
+        "name": "Large Shield",
+        "color": "#dce5e7",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "5-15"
+            }
+        }
+    }
+]

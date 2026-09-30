@@ -33,7 +33,7 @@ class InventoryView {
         sceneState.ctx.shadowBlur = 2;
         sceneState.ctx.shadowOffsetX = 1;
         sceneState.ctx.shadowOffsetY = 1;
-        sceneState.drawTextAt("Inventory", drawXY.x, drawXY.y, 32, "#000", "left");
+        sceneState.drawTextAt("Inventory", drawXY.x + 30, drawXY.y, 32, "#000", "left");
         sceneState.ctx.shadowColor = lastShadowColor;
 
         const qStart = hex.q + 12;

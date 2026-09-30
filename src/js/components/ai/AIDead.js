@@ -16,11 +16,10 @@ export default class AIDead extends _AI {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            aiDead: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
-        saveJson.aiDead.previousAI = this.previousAI;
+        typeJson.previousAI = this.previousAI;
 
         this.cachedSave = saveJson;
         return saveJson;

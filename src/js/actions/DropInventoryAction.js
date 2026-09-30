@@ -1,0 +1,29 @@
+import _Action from "./_Action";
+import engine from "../Engine";
+import inventoryView from "../ui/InventoryView";
+import Hex from "../components/Hex";
+
+export default class DropInventoryAction extends _Action {
+    constructor(entity, index) {
+        super(entity);
+
+        this.index = index;
+    }
+
+    perform() {
+        const entityHex = this.entity.getComponent("hex");
+        const droppedItem = this.entity.getComponent("inventory").remove(this.index);
+
+        const droppedItemHex = droppedItem.getComponent("hex");
+        if (droppedItemHex) {
+            droppedItemHex.moveTo(entityHex.row, entityHex.col);
+        } else {
+            droppedItem.setComponent(new Hex({components: {hex: {row: entityHex.row, col: entityHex.col}}}));
+        }
+        engine.gameMap.items.push(droppedItem);
+
+        inventoryView.update();
+        engine.needsRenderUpdate = true;
+        return this;
+    }
+}

@@ -40,7 +40,8 @@ class GameWorld {
         engine.gameMap.placeEntities("cave", level, .03, 5);
         engine.gameMap.placeItems("cave", level, .03, 5);
 
-        engine.player.fov.compute(engine.player, 5);
+        const lightRadius = engine.player.getComponent("fighter").lightRadius;
+        engine.player.fov.compute(engine.player, lightRadius);
         engine.player.fov.updateMap();
 
         engine.needsRenderUpdate = true;

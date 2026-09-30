@@ -1,12 +1,29 @@
+import entityGroups from "../../json/generation/_entityGroups.json";
+import itemGroups from "../../json/generation/_itemGroups.json";
 import cave from "../../json/generation/cave.json";
 
 class ChanceLoader {
     constructor() {
         this.entityGroups = new Map();
-
+        this.itemGroups = new Map();
         this.generators = new Map();
 
+        this.loadEntityGroups(entityGroups);
+        this.loadItemGroups(itemGroups);
+
         this.loadGenerator(cave);
+    }
+
+    loadEntityGroups(entityGroups) {
+        for (const group of entityGroups) {
+            this.entityGroups.set(group.id, group.entities);
+        }
+    }
+
+    loadItemGroups(itemGroups) {
+        for (const group of itemGroups) {
+            this.itemGroups.set(group.id, group.items);
+        }
     }
 
     loadGenerator(generatorJson) {
@@ -48,7 +65,7 @@ class ChanceLoader {
 
         let itemOrGroup = this.getRandomFromGroup(items);
         while (itemOrGroup.group !== undefined) {
-            const itemGroup = this.entityGroups.get(itemOrGroup.group);
+            const itemGroup = this.itemGroups.get(itemOrGroup.group);
             itemOrGroup = this.getRandomFromGroup(itemGroup);
         }
 

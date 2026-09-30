@@ -1,0 +1,64 @@
+[
+    {
+        "id": "base_helmet",
+        "extends": "base_item",
+        "letter": "∩",
+        "components": {
+            "equippable": {
+                "slot": "helmet"
+            }
+        }
+    },
+    {
+        "id": "leather_cap",
+        "extends": "base_helmet",
+        "name": "Leather Cap",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "1"
+            }
+        }
+    },
+    {
+        "id": "leather_helmet",
+        "extends": "base_helmet",
+        "name": "Leather Helmet",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "1-3"
+            }
+        }
+    },
+    {
+        "id": "full_helm",
+        "extends": "base_helmet",
+        "name": "Full helm",
+        "color": "#dce5e7",
+        "description": "",
+        "components": {
+            "equippable": {
+                "power": "0-1",
+                "defense": "4-6"
+            }
+        }
+    },
+    {
+        "id": "crown",
+        "extends": "base_helmet",
+        "name": "Crown",
+        "color": "#ffbf00",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "0-10",
+                "power": "0-2",
+                "health": "0-15",
+                "lightRadius": "0-2"
+            }
+        }
+    }
+]

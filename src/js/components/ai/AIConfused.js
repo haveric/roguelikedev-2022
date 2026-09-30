@@ -20,14 +20,13 @@ export default class AIConfused extends _AI {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            aiConfused: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
         if (this.previousAI !== null) {
-            saveJson.aiConfused.previousAI = this.previousAI;
+            typeJson.previousAI = this.previousAI;
         }
-        saveJson.aiConfused.turnsRemaining = this.turnsRemaining;
+        typeJson.turnsRemaining = this.turnsRemaining;
 
         this.cachedSave = saveJson;
         return saveJson;

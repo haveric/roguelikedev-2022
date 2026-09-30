@@ -45,15 +45,24 @@ export default class Inventory extends _Component {
             }
         }
 
-        const saveJson = {
-            inventory: {
-                capacity: this.capacity,
-                items: itemJson
-            }
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
+        typeJson.capacity = this.capacity;
+        typeJson.items = itemJson;
 
         this.cachedSave = saveJson;
         return saveJson;
+    }
+
+    canAdd() {
+        for (let i = 0; i < this.capacity; i++) {
+            const item = this.items[i];
+            if (!item) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     add(itemToAdd) {
@@ -69,6 +78,16 @@ export default class Inventory extends _Component {
         }
 
         return false;
+    }
+
+    get(index) {
+        return this.items[index];
+    }
+
+    set(index, value) {
+        this.items[index] = value;
+
+        this.clearSaveCache();
     }
 
     remove(indexToRemove) {

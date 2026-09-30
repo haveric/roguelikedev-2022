@@ -1,0 +1,84 @@
+[
+    {
+        "id": "base_ring",
+        "extends": "base_item",
+        "letter": "o",
+        "components": {
+            "equippable": {
+                "slot": "ring"
+            }
+        }
+    },
+    {
+        "id": "ring_of_minor_health",
+        "extends": "base_ring",
+        "name": "Ring of Minor Health",
+        "color": "#990f02",
+        "description": "",
+        "components": {
+            "equippable": {
+                "health": "1-5"
+            }
+        }
+    },
+    {
+        "id": "ring_of_health",
+        "extends": "base_ring",
+        "name": "Ring of Health",
+        "color": "#990f02",
+        "description": "",
+        "components": {
+            "equippable": {
+                "health": "5-10"
+            }
+        }
+    },
+    {
+        "id": "ring_of_major_health",
+        "extends": "base_ring",
+        "name": "Ring of Major Health",
+        "color": "#990f02",
+        "description": "",
+        "components": {
+            "equippable": {
+                "health": "10-15"
+            }
+        }
+    },
+    {
+        "id": "ring_of_defense",
+        "extends": "base_ring",
+        "name": "Ring of Defense",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "1-2"
+            }
+        }
+    },
+    {
+        "id": "ring_of_power",
+        "extends": "base_ring",
+        "name": "Ring of Power",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "power": "1-2"
+            }
+        }
+    },
+    {
+        "id": "ring_of_light",
+        "extends": "base_ring",
+        "name": "Ring of Light",
+        "color": "#ee9f27",
+        "description": "",
+        "components": {
+            "equippable": {
+                "lightRadius": "1"
+            }
+        }
+    }
+]

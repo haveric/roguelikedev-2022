@@ -1,11 +1,12 @@
 import engine from "../Engine";
+import MathUtil from "../util/MathUtil";
 
 export default class _Component {
-    constructor(args = {}, baseType, type) {
-        this.args = args;
+    constructor(argsJson = {}, baseType, type) {
+        this.argsJson = argsJson;
         this.baseType = baseType || "component";
         this.type = type || this.baseType;
-        this.parentEntity = args.parentEntity;
+        this.parentEntity = argsJson.parentEntity;
 
         this.cachedSave = null;
     }
@@ -15,12 +16,19 @@ export default class _Component {
         this.parentEntity?.clearSaveCache();
     }
 
+    getDefaultSaveJson() {
+        const json = {};
+        json[this.type] = {};
+
+        return json;
+    }
+
     save() {
         return null;
     }
 
     hasComponent() {
-        return this.args.components && this.args.components[this.type] !== undefined;
+        return this.argsJson.components && this.argsJson.components[this.type] !== undefined;
     }
 
     isPlayer(entity = this.parentEntity) {
@@ -42,26 +50,70 @@ export default class _Component {
     }
 
     loadBooleanOrObject(name) {
-        const type = typeof this.args.components[this.type];
+        const type = typeof this.argsJson.components[this.type];
         if (type === "boolean") {
-            return this.args.components[this.type];
+            return this.argsJson.components[this.type];
         } else if (type === "object") {
-            return this.args.components[this.type][name];
+            return this.argsJson.components[this.type][name];
         }
     }
 
     loadArg(name, defaultValue) {
         // TODO: 0 should be a valid value
-        return this.args.components[this.type][name] || defaultValue;
+        return this.argsJson.components[this.type][name] || defaultValue;
     }
 
     loadArgArray(name) {
         const array = [];
-        const items = this.args.components[this.type][name].split(",");
+        const items = this.argsJson.components[this.type][name].split(",");
         for (const item of items) {
             array.push(item.trim());
         }
 
         return array;
+    }
+
+    loadRandArg(name, defaultValue) {
+        this[name] = defaultValue;
+
+        const arg = this.argsJson.components[this.type][name];
+        if (arg !== undefined) {
+            this[name] = this.parseRandIntBetween(arg);
+        }
+    }
+
+    loadRandArgRange(name, minName, maxName, defaultMinValue, defaultMaxValue) {
+        this[minName] = defaultMinValue;
+        this[maxName] = defaultMaxValue;
+
+        const arg = this.argsJson.components[this.type][name];
+        if (arg !== undefined) {
+            const type = typeof arg;
+            if (type === "string") {
+                const values = arg.split(",");
+                this[minName] = this.parseRandIntBetween(values[0]);
+                if (values.length > 1) {
+                    this[maxName] = this.parseRandIntBetween(values[1]);
+                } else {
+                    this[maxName] = this[minName];
+                }
+            } else {
+                this[minName] = arg;
+                this[maxName] = arg;
+            }
+        }
+    }
+
+    parseRandIntBetween(value) {
+        if (typeof value === "string") {
+            const split = value.trim().split("-");
+            if (split.length > 1) {
+                return MathUtil.randIntBetween(parseInt(split[0].trim()), parseInt(split[1].trim()));
+            } else {
+                return parseInt(split[0].trim());
+            }
+        } else {
+            return value;
+        }
     }
 }

@@ -18,12 +18,11 @@ export default class Faction extends _Component {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            faction: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
-        saveJson.faction.factions = this.factions.toString();
-        saveJson.faction.enemies = this.enemies.toString();
+        typeJson.factions = this.factions.toString();
+        typeJson.enemies = this.enemies.toString();
 
         this.cachedSave = saveJson;
         return saveJson;

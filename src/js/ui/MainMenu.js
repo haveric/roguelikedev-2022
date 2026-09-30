@@ -13,6 +13,7 @@ import saveGame from "./SaveGame";
 import LoadGameEventHandler from "../event/LoadGameEventHandler";
 import SaveGameEventHandler from "../event/SaveGameEventHandler";
 import gameWorld from "../GameWorld";
+import equipmentView from "./EquipmentView";
 
 class MainMenu {
     constructor() {
@@ -165,7 +166,8 @@ class MainMenu {
 
         sceneState.debugRenderMap = true;
         engine.needsRenderUpdate = true;
-        engine.player.fov.compute(engine.player, 5);
+        const lightRadius = engine.player.getComponent("fighter").lightRadius;
+        engine.player.fov.compute(engine.player, lightRadius);
         engine.player.fov.updateMap();
 
         viewInfo.updatePlayerDetails();
@@ -183,8 +185,9 @@ class MainMenu {
         engine.setEventHandler(new DefaultPlayerEventHandler());
 
         const playerFighter = engine.player.getComponent("fighter");
-        playerFighter.updateUI();
+        playerFighter.calculateStats();
         inventoryView.update();
+        equipmentView.update();
 
         viewInfo.updatePlayerDetails();
 

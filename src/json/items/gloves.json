@@ -1,0 +1,49 @@
+[
+    {
+        "id": "base_gloves",
+        "extends": "base_item",
+        "letter": "″",
+        "components": {
+            "equippable": {
+                "slot": "gloves"
+            }
+        }
+    },
+    {
+        "id": "work_gloves",
+        "extends": "base_gloves",
+        "name": "Work Gloves",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "1"
+            }
+        }
+    },
+    {
+        "id": "leather_gloves",
+        "extends": "base_gloves",
+        "name": "Leather Gloves",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "2-3"
+            }
+        }
+    },
+    {
+        "id": "plate_gauntlets",
+        "extends": "base_gloves",
+        "name": "Plate Gauntlets",
+        "color": "#dce5e7",
+        "description": "",
+        "components": {
+            "equippable": {
+                "power": "0-1",
+                "defense": "4-7"
+            }
+        }
+    }
+]

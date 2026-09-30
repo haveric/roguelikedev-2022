@@ -22,11 +22,10 @@ export default class ConfusionConsumable extends _Consumable {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            confusionConsumable: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
-        saveJson.confusionConsumable.turns = this.turns;
+        typeJson.turns = this.turns;
 
         this.cachedSave = saveJson;
         return saveJson;
@@ -46,7 +45,7 @@ export default class ConfusionConsumable extends _Consumable {
 
     activate(action) {
         const consumer = this.getConsumer();
-        const hex = action.args.hex;
+        const hex = action.argsJson.hex;
         if (!hex) {
             return new UnableToPerformAction(consumer, "No tile selected.");
         }

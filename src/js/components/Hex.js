@@ -24,16 +24,15 @@ export default class Hex extends _Component {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            hex: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
         if (this.row !== 0) {
-            saveJson.hex.row = this.row;
+            typeJson.row = this.row;
         }
 
         if (this.col !== 0) {
-            saveJson.hex.col = this.col;
+            typeJson.col = this.col;
         }
 
         this.cachedSave = saveJson;

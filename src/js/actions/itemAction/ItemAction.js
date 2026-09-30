@@ -5,7 +5,7 @@ export default class ItemAction extends _Action {
         super(entity);
 
         this.item = item;
-        this.args = args;
+        this.argsJson = args;
     }
 
     perform() {

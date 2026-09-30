@@ -12,6 +12,8 @@ import LightningDamageConsumable from "./consumable/LightningDamageConsumable";
 import ConfusionConsumable from "./consumable/ConfusionConsumable";
 import FireballConsumable from "./consumable/FireballConsumable";
 import Level from "./Level";
+import Equipment from "./equipment/Equipment";
+import Equippable from "./equipment/Equippable";
 
 class ComponentLoader {
     constructor() {
@@ -28,6 +30,9 @@ class ComponentLoader {
         this.load(new FireballConsumable());
         this.load(new HealingConsumable());
         this.load(new LightningDamageConsumable());
+
+        this.load(new Equipment());
+        this.load(new Equippable());
 
         this.load(new BlocksFov());
         this.load(new BlocksMovement());

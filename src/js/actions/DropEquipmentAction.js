@@ -1,9 +1,9 @@
 import _Action from "./_Action";
 import engine from "../Engine";
-import inventoryView from "../ui/InventoryView";
 import Hex from "../components/Hex";
+import equipmentView from "../ui/EquipmentView";
 
-export default class DropAction extends _Action {
+export default class DropEquipmentAction extends _Action {
     constructor(entity, index) {
         super(entity);
 
@@ -12,7 +12,7 @@ export default class DropAction extends _Action {
 
     perform() {
         const entityHex = this.entity.getComponent("hex");
-        const droppedItem = this.entity.getComponent("inventory").remove(this.index);
+        const droppedItem = this.entity.getComponent("equipment").removeItem(this.index);
 
         const droppedItemHex = droppedItem.getComponent("hex");
         if (droppedItemHex) {
@@ -22,7 +22,10 @@ export default class DropAction extends _Action {
         }
         engine.gameMap.items.push(droppedItem);
 
-        inventoryView.update();
+        equipmentView.update();
+
+        this.entity.getComponent("fighter").calculateStats();
+
         engine.needsRenderUpdate = true;
         return this;
     }

@@ -13,10 +13,11 @@
                 "enemies": "monsters"
             },
             "fighter": {
+                "baseHp": 30,
                 "hp": 30,
-                "maxHp": 30,
                 "defense": 2,
-                "power": 5
+                "power": 5,
+                "lightRadius": 5
             },
             "inventory": {
                 "capacity": 40,
@@ -27,6 +28,21 @@
             "level": {
                 "level": 1,
                 "xp": 0
+            },
+            "equipment": {
+                "slots": [
+                    null,
+                    null,
+                    {"load": "leather_cap"},
+                    null,
+                    {"load": "shirt_peasant"},
+                    null,
+                    {"load": "work_gloves"},
+                    null,
+                    null,
+                    null,
+                    null
+                ]
             }
         }
     }

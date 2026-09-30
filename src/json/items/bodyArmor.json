@@ -1,0 +1,48 @@
+[
+    {
+        "id": "base_body_armor",
+        "extends": "base_item",
+        "letter": "[",
+        "components": {
+            "equippable": {
+                "slot": "body_armor"
+            }
+        }
+    },
+    {
+        "id": "shirt_peasant",
+        "extends": "base_body_armor",
+        "name": "Peasant Shirt",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "1-2"
+            }
+        }
+    },
+    {
+        "id": "leather_armor",
+        "extends": "base_body_armor",
+        "name": "Leather Armor",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "2-10"
+            }
+        }
+    },
+    {
+        "id": "plate_mail",
+        "extends": "base_body_armor",
+        "name": "Plate Mail",
+        "color": "#dce5e7",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "7-25"
+            }
+        }
+    }
+]

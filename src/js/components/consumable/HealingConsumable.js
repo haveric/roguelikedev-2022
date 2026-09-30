@@ -18,11 +18,10 @@ export default class HealingConsumable extends _Consumable {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            healingConsumable: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
-        saveJson.healingConsumable.amount = this.amount;
+        typeJson.amount = this.amount;
 
         this.cachedSave = saveJson;
         return saveJson;

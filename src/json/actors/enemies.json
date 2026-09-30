@@ -9,9 +9,9 @@
         "spriteBG": "assets/kenney/actor/goblin_back.png",
         "components": {
             "fighter": {
+                "baseHp": 10,
                 "hp": 10,
-                "maxHp": 10,
-                "defense": 0,
+                "defense": 1,
                 "power": 3
             },
             "aiMeleeChase": {},
@@ -30,9 +30,9 @@
         "spriteBG": "assets/kenney/actor/troll_back.png",
         "components": {
             "fighter": {
+                "baseHp": 16,
                 "hp": 16,
-                "maxHp": 16,
-                "defense": 1,
+                "defense": 2,
                 "power": 4
             },
             "aiMeleeChase": {},

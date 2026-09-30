@@ -30,7 +30,8 @@ class Engine {
             }
 
             engine.needsRenderUpdate = true;
-            engine.player.fov.compute(engine.player, 5);
+            const lightRadius = engine.player.getComponent("fighter").lightRadius;
+            engine.player.fov.compute(engine.player, lightRadius);
             engine.player.fov.updateMap();
 
             this.handleEnemyTurns();

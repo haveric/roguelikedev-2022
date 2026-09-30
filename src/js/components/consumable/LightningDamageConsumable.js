@@ -22,12 +22,11 @@ export default class LightningDamageConsumable extends _Consumable {
             return this.cachedSave;
         }
 
-        const saveJson = {
-            lightningDamageConsumable: {}
-        };
+        const saveJson = this.getDefaultSaveJson();
+        const typeJson = saveJson[this.type];
 
-        saveJson.lightningDamageConsumable.damage = this.damage;
-        saveJson.lightningDamageConsumable.maxRange = this.maxRange;
+        typeJson.damage = this.damage;
+        typeJson.maxRange = this.maxRange;
 
         this.cachedSave = saveJson;
         return saveJson;

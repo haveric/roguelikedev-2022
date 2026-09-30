@@ -15,6 +15,7 @@ import saveManager from "./js/SaveManager";
 import loadGame from "./js/ui/LoadGame";
 import saveGame from "./js/ui/SaveGame";
 import levelUp from "./js/ui/LevelUp";
+import equipmentView from "./js/ui/EquipmentView";
 
 (function () {
     function init() {
@@ -55,9 +56,11 @@ import levelUp from "./js/ui/LevelUp";
         sceneState.clearAll();
 
         engine.gameMap.draw();
+
         if (engine.state === "game") {
             playerInfo.draw();
             viewInfo.draw();
+            equipmentView.draw();
             inventoryView.draw();
             inventoryHoverModal.draw();
             inventoryActionModal.draw();

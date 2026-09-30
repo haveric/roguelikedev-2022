@@ -8,8 +8,7 @@ const EquipmentType = Object.freeze({
     GLOVES: "gloves",
     BELT: "belt",
     BOOTS: "boots",
-    TORCH: "torch",
-    BAG: "bag"
+    TORCH: "torch"
 });
 
 export default EquipmentType;

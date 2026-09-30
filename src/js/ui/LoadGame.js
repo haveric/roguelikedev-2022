@@ -10,6 +10,7 @@ import DateUtil from "../util/DateUtil";
 import viewInfo from "./ViewInfo";
 import inventoryView from "./InventoryView";
 import messageManager from "../message/MessageManager";
+import equipmentView from "./EquipmentView";
 
 class LoadGame {
     constructor() {
@@ -179,11 +180,13 @@ class LoadGame {
         const playerFighter = engine.player.getComponent("fighter");
         playerFighter.updateUI();
         inventoryView.update();
+        equipmentView.update();
 
         engine.state = "game";
         sceneState.debugRenderMap = false;
 
-        engine.player.fov.compute(engine.player, 5);
+        const lightRadius = engine.player.getComponent("fighter").lightRadius;
+        engine.player.fov.compute(engine.player, lightRadius);
         engine.player.fov.updateMap();
 
         viewInfo.updatePlayerDetails();

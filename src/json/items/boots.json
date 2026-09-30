@@ -1,0 +1,48 @@
+[
+    {
+        "id": "base_boots",
+        "extends": "base_item",
+        "letter": "\"",
+        "components": {
+            "equippable": {
+                "slot": "boots"
+            }
+        }
+    },
+    {
+        "id": "work_boots",
+        "extends": "base_boots",
+        "name": "Work Boots",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "1"
+            }
+        }
+    },
+    {
+        "id": "leather_boots",
+        "extends": "base_boots",
+        "name": "Leather Boots",
+        "color": "#4f361b",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "2-3"
+            }
+        }
+    },
+    {
+        "id": "plate_greaves",
+        "extends": "base_boots",
+        "name": "Plate Greaves",
+        "color": "#dce5e7",
+        "description": "",
+        "components": {
+            "equippable": {
+                "defense": "4-6"
+            }
+        }
+    }
+]
