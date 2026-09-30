@@ -71,6 +71,9 @@ export default class _Entity {
             this.spriteCorpseBGImage.onload = this.spriteImageLoaded.bind(this);
         }
 
+        // Extra dynamic description (for Equippable items). Should not be saved.
+        this.displayDescription = "";
+
         this.cachedSave = null;
     }
 

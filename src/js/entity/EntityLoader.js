@@ -66,19 +66,19 @@ class EntityLoader {
         const equippable = newEntity.getComponent("equippable");
         if (equippable) {
             if (equippable.minDamage !== 0 || equippable.maxDamage !== 0) {
-                newEntity.description += "\nDamage: " + equippable.getDamageDisplay();
+                newEntity.displayDescription += "\nDamage: " + equippable.getDamageDisplay();
             }
             if (equippable.power !== 0) {
-                newEntity.description += "\nPower: +" + equippable.power;
+                newEntity.displayDescription += "\nPower: +" + equippable.power;
             }
             if (equippable.defense !== 0) {
-                newEntity.description += "\nDefense: +" + equippable.defense;
+                newEntity.displayDescription += "\nDefense: +" + equippable.defense;
             }
             if (equippable.health !== 0) {
-                newEntity.description += "\nHealth: +" + equippable.health;
+                newEntity.displayDescription += "\nHealth: +" + equippable.health;
             }
             if (equippable.lightRadius !== 0) {
-                newEntity.description += "\nLight Radius: +" + equippable.lightRadius;
+                newEntity.displayDescription += "\nLight Radius: +" + equippable.lightRadius;
             }
         }
         return newEntity;

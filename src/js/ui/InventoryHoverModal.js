@@ -20,6 +20,9 @@ class InventoryHoverModal {
     setItem(item) {
         this.title = item.name;
         this.description = item.description;
+        if (item.displayDescription) {
+            this.description += item.displayDescription;
+        }
     }
 
     show() {
