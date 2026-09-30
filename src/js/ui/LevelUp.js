@@ -64,7 +64,7 @@ class LevelUp {
     }
 
     drawHex(drawXY, scale, letter) {
-        HexUtil.drawHex(sceneState.ctx, drawXY.x - 75, drawXY.y, scale);
+        HexUtil.drawHex(sceneState.ctx, drawXY.x + 25, drawXY.y, scale);
 
         sceneState.ctx.fillStyle = "rgba(200, 200, 200, 1)";
         sceneState.ctx.fill();
@@ -72,7 +72,7 @@ class LevelUp {
         sceneState.ctx.strokeStyle = "rgba(50, 50, 50, 1)";
         sceneState.ctx.stroke();
 
-        sceneState.drawTextAt(letter, drawXY.x - 75, drawXY.y, 60, "#000");
+        sceneState.drawTextAt(letter, drawXY.x + 25, drawXY.y, 60, "#000");
     }
 
     draw() {
@@ -84,7 +84,7 @@ class LevelUp {
             const hex = new Hex();
 
             const qStart = hex.q - 4;
-            const rStart = hex.r - 1;
+            const rStart = hex.r - 3;
             let rOffset = 0;
             const title = "LEVEL UP!";
             let i = 0;
