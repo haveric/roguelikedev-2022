@@ -47,20 +47,20 @@ export default class Equipment extends _Component {
             return this.cachedSave;
         }
 
-        const itemJson = [];
+        const slotsJson = [];
         for (const slot of this.slots) {
             const item = slot.item;
             if (item) {
-                itemJson.push(JSON.stringify(item.save()));
+                slotsJson.push(JSON.stringify(item.save()));
             } else {
-                itemJson.push(null);
+                slotsJson.push(null);
             }
         }
 
         const saveJson = this.getDefaultSaveJson();
         const typeJson = saveJson[this.type];
 
-        typeJson.slots = itemJson.slots;
+        typeJson.slots = slotsJson;
 
         this.cachedSave = saveJson;
         return saveJson;
