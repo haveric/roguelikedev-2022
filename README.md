@@ -1,5 +1,7 @@
 # Hex-based roguelike
-Created for reddit.com/r/roguelikedev's 2022 event: <a href="https://www.reddit.com/r/roguelikedev/wiki/python_tutorial_series#wiki_version_2022">RoguelikeDev Does The Complete Roguelike Tutorial</a>
+Originally created for reddit.com/r/roguelikedev's 2022 event: <a href="https://www.reddit.com/r/roguelikedev/wiki/python_tutorial_series#wiki_version_2022">RoguelikeDev Does The Complete Roguelike Tutorial</a>
+
+Updated and finished for 2026's event.
 
 ## Demos:
 - <a href="https://www.ryanbreuer.com/roguelikedev-2022/week2_updated/index.html">Week 2 (Updated)</a>
@@ -17,3 +19,10 @@ Created for reddit.com/r/roguelikedev's 2022 event: <a href="https://www.reddit.
 
 ## Prod Deploy
 - In a terminal, run `npm run build`
+
+## Credits / Extra thanks to:
+Kenney <a href="www.kenney.nl">(www.kenney.nl)</a>: Most art assets
+
+Amit Patel <a href="www.redblobgames.com">(www.redblobgames.com)</a>: For their great hex grid guides
+
+<a href="www.reddit.com/r/roguelikedev">(www.reddit.com/r/roguelikedev)</a>: For hosting Tutorial Tuesdays
