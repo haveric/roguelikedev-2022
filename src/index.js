@@ -16,6 +16,8 @@ import loadGame from "./js/ui/LoadGame";
 import saveGame from "./js/ui/SaveGame";
 import levelUp from "./js/ui/LevelUp";
 import equipmentView from "./js/ui/EquipmentView";
+import controlsMenu from "./js/ui/ControlsMenu";
+import creditsMenu from "./js/ui/CreditsMenu";
 
 (function () {
     function init() {
@@ -71,6 +73,8 @@ import equipmentView from "./js/ui/EquipmentView";
         gameOver.draw();
         loadGame.draw();
         saveGame.draw();
+        controlsMenu.draw();
+        creditsMenu.draw();
     }
 
     init();

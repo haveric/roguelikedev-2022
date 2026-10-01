@@ -14,6 +14,10 @@ import LoadGameEventHandler from "../event/LoadGameEventHandler";
 import SaveGameEventHandler from "../event/SaveGameEventHandler";
 import gameWorld from "../GameWorld";
 import equipmentView from "./EquipmentView";
+import controlsMenu from "./ControlsMenu";
+import creditsMenu from "./CreditsMenu";
+import ControlsMenuEventHandler from "../event/ControlsMenuEventHandler";
+import CreditsMenuEventHandler from "../event/CreditsMenuEventHandler";
 
 class MainMenu {
     constructor() {
@@ -21,10 +25,11 @@ class MainMenu {
         this.x = 0;
         this.y = 0;
         this.width = 200;
-        this.height = 100;
+        this.height = 95;
     }
 
     setButtons() {
+        this.height = 95;
         this.buttons = [
             {
                 text: "New Game",
@@ -50,7 +55,7 @@ class MainMenu {
         ];
 
         if (engine.state === "game") {
-            this.height = 140;
+            this.height += 45;
             this.buttons.push({
                 text: "Save Game",
                 hover: false,
@@ -63,6 +68,32 @@ class MainMenu {
                 callback: this.openSaveGame.bind(this)
             });
         }
+
+        this.height += 45;
+        this.buttons.push({
+            text: "Controls",
+            hover: false,
+            position: {
+                x: 0,
+                y: 0,
+                width: 0,
+                height: 0
+            },
+            callback: this.openControls.bind(this)
+        });
+
+        this.height += 45;
+        this.buttons.push({
+            text: "Credits",
+            hover: false,
+            position: {
+                x: 0,
+                y: 0,
+                width: 0,
+                height: 0
+            },
+            callback: this.openCredits.bind(this)
+        });
     }
 
     setPosition(x, y) {
@@ -195,7 +226,6 @@ class MainMenu {
     }
 
     openLoadGame() {
-        this.hide();
         loadGame.setPosition(sceneState.center.x - 350, sceneState.center.y * .7);
         loadGame.show();
 
@@ -204,11 +234,26 @@ class MainMenu {
     }
 
     openSaveGame() {
-        this.hide();
         saveGame.setPosition(sceneState.center.x - 350, sceneState.center.y * .7);
         saveGame.show();
 
         engine.setEventHandler(new SaveGameEventHandler());
+        engine.needsRenderUpdate = true;
+    }
+
+    openControls() {
+        controlsMenu.setPosition(sceneState.center.x - 350, sceneState.center.y * .7);
+        controlsMenu.show();
+
+        engine.setEventHandler(new ControlsMenuEventHandler());
+        engine.needsRenderUpdate = true;
+    }
+
+    openCredits() {
+        creditsMenu.setPosition(sceneState.center.x - 350, sceneState.center.y * .7);
+        creditsMenu.show();
+
+        engine.setEventHandler(new CreditsMenuEventHandler());
         engine.needsRenderUpdate = true;
     }
 }
