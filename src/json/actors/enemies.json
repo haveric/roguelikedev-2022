@@ -5,8 +5,10 @@
         "name": "Goblin",
         "color": "#3f7f3f",
         "letter": "g",
-        "sprite": "assets/kenney/actor/goblin_front.png",
-        "spriteBG": "assets/kenney/actor/goblin_back.png",
+        "sprites": [
+            { "path": "assets/kenney/actor/goblin_front.png", "color": "#3f7f3f" },
+            { "path": "assets/kenney/actor/goblin_back.png" }
+        ],
         "components": {
             "fighter": {
                 "baseHp": 10,
@@ -26,8 +28,10 @@
         "name": "Troll",
         "color": "#007f00",
         "letter": "T",
-        "sprite": "assets/kenney/actor/troll_front.png",
-        "spriteBG": "assets/kenney/actor/troll_back.png",
+        "sprites": [
+            { "path": "assets/kenney/actor/troll_front.png", "color": "#007f00" },
+            { "path": "assets/kenney/actor/troll_back.png" }
+        ],
         "components": {
             "fighter": {
                 "baseHp": 16,

@@ -14,7 +14,9 @@
         "extends": "base_helmet",
         "name": "Leather Cap",
         "color": "#4f361b",
-        "sprite": "assets/kenney/item/leather_cap.png",
+        "sprites": [
+            { "path": "assets/kenney/item/leather_cap.png", "color": "default" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -26,8 +28,10 @@
         "id": "leather_helmet",
         "extends": "base_helmet",
         "name": "Leather Helmet",
-        "color": "#4f361b",
-        "sprite": "assets/kenney/item/leather_helmet.png",
+        "color": "#8c5841",
+        "sprites": [
+            { "path": "assets/kenney/item/leather_helmet.png", "color": "default" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -39,8 +43,10 @@
         "id": "full_helm",
         "extends": "base_helmet",
         "name": "Full helm",
-        "color": "#dce5e7",
-        "sprite": "assets/kenney/item/full_helm.png",
+        "color": "#666",
+        "sprites": [
+            { "path": "assets/kenney/item/full_helm.png", "color": "default" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -54,7 +60,9 @@
         "extends": "base_helmet",
         "name": "Crown",
         "color": "#ffbf00",
-        "sprite": "assets/kenney/item/crown.png",
+        "sprites": [
+            { "path": "assets/kenney/item/crown.png" }
+        ],
         "description": "",
         "components": {
             "equippable": {

@@ -16,7 +16,7 @@ class LevelUp {
     setButtons() {
         this.buttons = [
             {
-                text: "Constitution (+20 HP)",
+                text: "Constitution (+10 HP)",
                 hover: false,
                 position: {
                     x: 0,
@@ -127,7 +127,7 @@ class LevelUp {
 
     increaseMaxHp() {
         const playerLevel = engine.player.getComponent("level");
-        playerLevel.increaseMaxHp(20);
+        playerLevel.increaseMaxHp(10);
 
         this.afterClick();
     }

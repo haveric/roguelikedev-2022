@@ -14,8 +14,10 @@
         "extends": "base_torch",
         "name": "Torch",
         "color": "#ee9f27",
-        "sprite": "assets/kenney/item/torch_front.png",
-        "spriteBG": "assets/kenney/item/torch_back.png",
+        "sprites": [
+            { "path": "assets/kenney/item/torch_front.png" },
+            { "path": "assets/kenney/item/torch_back.png", "color": "#4f361b" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -28,8 +30,10 @@
         "extends": "base_torch",
         "name": "Burnt Torch",
         "color": "#ee9f27",
-        "sprite": "assets/kenney/item/torch_burnt_front.png",
-        "spriteBG": "assets/kenney/item/torch_burnt_back.png",
+        "sprites": [
+            { "path": "assets/kenney/item/torch_burnt_front.png" },
+            { "path": "assets/kenney/item/torch_burnt_back.png", "color": "#4f361b" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -42,8 +46,10 @@
         "extends": "base_torch",
         "name": "Large Torch",
         "color": "#ee9f27",
-        "sprite": "assets/kenney/item/torch_large_front.png",
-        "spriteBG": "assets/kenney/item/torch_large_back.png",
+        "sprites": [
+            { "path": "assets/kenney/item/torch_large_front.png" },
+            { "path": "assets/kenney/item/torch_large_back.png", "color": "#4f361b" }
+        ],
         "description": "",
         "components": {
             "equippable": {

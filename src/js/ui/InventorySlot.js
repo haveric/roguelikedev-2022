@@ -31,11 +31,8 @@ export default class InventorySlot {
 
         const item = this.item;
         if (item) {
-            if (item.spriteImage) {
-                if (item.canvas) {
-                    sceneState.ctx.drawImage(item.canvas, 0, 0, item.canvas.width, item.canvas.height, drawXY.x + offsetX - (.5 * item.canvas.width * sceneState.scale * scale), drawXY.y - (.5 * item.canvas.height * sceneState.scale * scale), item.canvas.width * sceneState.scale * scale, item.canvas.height * sceneState.scale * scale);
-
-                }
+            if (item.canvas) {
+                sceneState.ctx.drawImage(item.canvas, 0, 0, item.canvas.width, item.canvas.height, drawXY.x + offsetX - (.5 * item.canvas.width * sceneState.scale * scale), drawXY.y - (.5 * item.canvas.height * sceneState.scale * scale), item.canvas.width * sceneState.scale * scale, item.canvas.height * sceneState.scale * scale);
             } else {
                 sceneState.drawTextAt(item.letter, drawXY.x + offsetX, drawXY.y, 39, item.color);
             }

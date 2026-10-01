@@ -14,7 +14,9 @@
         "extends": "base_gloves",
         "name": "Work Gloves",
         "color": "#4f361b",
-        "sprite": "assets/kenney/item/work_gloves.png",
+        "sprites": [
+            { "path": "assets/kenney/item/work_gloves.png" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -26,8 +28,10 @@
         "id": "leather_gloves",
         "extends": "base_gloves",
         "name": "Leather Gloves",
-        "color": "#4f361b",
-        "sprite": "assets/kenney/item/leather_gloves.png",
+        "color": "#8c5841",
+        "sprites": [
+            { "path": "assets/kenney/item/leather_gloves.png", "color": "default" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -39,8 +43,10 @@
         "id": "plate_gauntlets",
         "extends": "base_gloves",
         "name": "Plate Gauntlets",
-        "color": "#dce5e7",
-        "sprite": "assets/kenney/item/plate_gauntlets.png",
+        "color": "#666",
+        "sprites": [
+            { "path": "assets/kenney/item/plate_gauntlets.png", "color": "default" }
+        ],
         "description": "",
         "components": {
             "equippable": {

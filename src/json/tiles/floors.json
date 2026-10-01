@@ -17,6 +17,8 @@
         "id": "stairs_down",
         "extends": "base_floor",
         "name": "Stairs Down",
-        "sprite": "assets/kenney/tile/stairs_down.png"
+        "sprites": [
+            { "path": "assets/kenney/tile/stairs_down.png" }
+        ]
     }
 ]

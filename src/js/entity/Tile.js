@@ -2,6 +2,7 @@ import _Entity from "./_Entity";
 import HexUtil from "../util/HexUtil";
 import sceneState from "../SceneState";
 import engine from "../Engine";
+import SpriteCache from "../SpriteCache";
 
 export default class Tile extends _Entity {
     constructor(args = {}) {
@@ -9,6 +10,10 @@ export default class Tile extends _Entity {
         super(args);
 
         this.borderColor = args.borderColor || "#000";
+
+        for (const sprite of this.sprites) {
+            SpriteCache.getOrSet(sprite, this.spriteImageLoaded.bind(this));
+        }
     }
 
     clone() {
@@ -28,13 +33,16 @@ export default class Tile extends _Entity {
     }
 
     allSpritesLoaded() {
-        this.canvas = new OffscreenCanvas(this.spriteImage.width, this.spriteImage.height);
-        this.ctx = this.canvas.getContext("2d");
-        HexUtil.drawHex(this.ctx, .5 * this.canvas.width, .5 * this.canvas.height, 1/sceneState.scale);
+        if (this.sprites.length > 0) {
+            const canvas = SpriteCache.getOrCreateCanvas(this.id, this.sprites, this.color);
+            this.canvas = new OffscreenCanvas(canvas.width, canvas.height);
+            this.ctx = this.canvas.getContext("2d");
+            HexUtil.drawHex(this.ctx, .5 * this.canvas.width, .5 * this.canvas.height, 1/sceneState.scale);
 
-        this.ctx.clip();
-        this.ctx.drawImage(this.spriteImage, 0, 0, this.spriteImage.width, this.spriteImage.height, 0, 0, this.canvas.width, this.canvas.height);
-        engine.needsRenderUpdate = true;
+            this.ctx.clip();
+            this.ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, this.canvas.width, this.canvas.height);
+            engine.needsRenderUpdate = true;
+        }
     }
 
     draw(qOffset, rOffset) {
@@ -63,10 +71,8 @@ export default class Tile extends _Entity {
                 sceneState.ctx.stroke();
             }
 
-            if (this.spriteImage) {
-                if (this.canvas) {
-                    sceneState.ctx.drawImage(this.canvas, 0, 0, this.canvas.width, this.canvas.height, x - (.5 * this.canvas.width * sceneState.scale), y - (.5 * this.canvas.height * sceneState.scale), this.canvas.width * sceneState.scale, this.canvas.height * sceneState.scale);
-                }
+            if (this.canvas) {
+                sceneState.ctx.drawImage(this.canvas, 0, 0, this.canvas.width, this.canvas.height, x - (.5 * this.canvas.width * sceneState.scale), y - (.5 * this.canvas.height * sceneState.scale), this.canvas.width * sceneState.scale, this.canvas.height * sceneState.scale);
             }
         }
 

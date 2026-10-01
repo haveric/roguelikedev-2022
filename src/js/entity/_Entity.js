@@ -8,10 +8,7 @@ export default class _Entity {
         this.id = args.id;
         this.name = args.name || "";
         this.description = args.description || "";
-        this.sprite = args.sprite || "";
-        this.spriteBG = args.spriteBG || "";
-        this.spriteCorpse = args.spriteCorpse || "";
-        this.spriteCorpseBG = args.spriteCorpseBG || "";
+        this.sprites = args.sprites || [];
         this.letter = args.letter || "?";
         this.letterCorpse = args.letterCorpse || "?";
         this.color = args.color || "#fff";
@@ -23,53 +20,8 @@ export default class _Entity {
             this.callEvent("onComponentsLoaded");
         }
 
-        const hasSprite = this.sprite && this.sprite !== "";
-        const hasSpriteBG = this.spriteBG && this.spriteBG !== "";
-        const hasSpriteCorpse = this.spriteCorpse && this.spriteCorpse !== "";
-        const hasSpriteCorpseBG = this.spriteCorpseBG && this.spriteCorpseBG !== "";
-        this.numSprites = 0;
-        if (hasSprite) {
-            this.numSprites ++;
-        }
-        if (hasSpriteBG) {
-            this.numSprites ++;
-        }
-        if (hasSpriteCorpse) {
-            this.numSprites ++;
-        }
-        if (hasSpriteCorpseBG) {
-            this.numSprites ++;
-        }
-
-
         this.numSpritesLoaded = 0;
-        this.spriteImage = null;
-        if (hasSprite) {
-            this.spriteImage = new Image();
-            this.spriteImage.src = this.sprite;
-            this.spriteImage.onload = this.spriteImageLoaded.bind(this);
-        }
-
-        this.spriteBGImage = null;
-        if (hasSpriteBG) {
-            this.spriteBGImage = new Image();
-            this.spriteBGImage.src = this.spriteBG;
-            this.spriteBGImage.onload = this.spriteImageLoaded.bind(this);
-        }
-
-        this.spriteCorpseImage = null;
-        if (hasSpriteCorpse) {
-            this.spriteCorpseImage = new Image();
-            this.spriteCorpseImage.src = this.spriteCorpse;
-            this.spriteCorpseImage.onload = this.spriteImageLoaded.bind(this);
-        }
-
-        this.spriteCorpseBGImage = null;
-        if (hasSpriteCorpseBG) {
-            this.spriteCorpseBGImage = new Image();
-            this.spriteCorpseBGImage.src = this.spriteCorpseBG;
-            this.spriteCorpseBGImage.onload = this.spriteImageLoaded.bind(this);
-        }
+        this.numSprites = this.sprites.length;
 
         // Extra dynamic description (for Equippable items). Should not be saved.
         this.displayDescription = "";
@@ -157,15 +109,22 @@ export default class _Entity {
             return this.cachedSave;
         }
 
+        const spritesJson = [];
+        for (const sprite of this.sprites) {
+            const spriteJson = {};
+            spriteJson.path = sprite.path;
+            if (sprite.color) {
+                spriteJson.color = sprite.color;
+            }
+            spritesJson.push(spriteJson);
+        }
+
         const json = {
             id: this.id,
             type: this.type,
             name: this.name,
             description: this.description,
-            sprite: this.sprite,
-            spriteBG: this.spriteBG,
-            spriteCorpse: this.spriteCorpse,
-            spriteCorpseBG: this.spriteCorpseBG,
+            sprites: spritesJson,
             letter: this.letter,
             color: this.color
         };

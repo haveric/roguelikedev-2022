@@ -14,8 +14,10 @@
         "extends": "base_shield",
         "name": "Buckler",
         "color": "#4f361b",
-        "sprite": "assets/kenney/item/buckler_front.png",
-        "spriteBG": "assets/kenney/item/buckler_back.png",
+        "sprites": [
+            { "path": "assets/kenney/item/buckler_front.png", "color": "#aaa" },
+            { "path": "assets/kenney/item/buckler_back.png", "color": "#4f361b" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -28,8 +30,10 @@
         "extends": "base_shield",
         "name": "Large Shield",
         "color": "#dce5e7",
-        "sprite": "assets/kenney/item/shield_large_front.png",
-        "spriteBG": "assets/kenney/item/shield_large_back.png",
+        "sprites": [
+            { "path": "assets/kenney/item/shield_large_front.png", "color": "#aaa" },
+            { "path": "assets/kenney/item/shield_large_back.png", "color": "#4f361b" }
+        ],
         "description": "",
         "components": {
             "equippable": {

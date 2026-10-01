@@ -3,8 +3,10 @@
         "id": "base_amulet",
         "extends": "base_item",
         "letter": "ᴕ",
-        "sprite": "assets/kenney/item/amulet_front.png",
-        "spriteBG": "assets/kenney/item/amulet_back.png",
+        "sprites": [
+            { "path": "assets/kenney/item/amulet_front.png", "color": "default" },
+            { "path": "assets/kenney/item/amulet_back.png", "color": "#666"}
+        ],
         "components": {
             "equippable": {
                 "slot": "amulet"

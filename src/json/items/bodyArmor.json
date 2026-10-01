@@ -14,7 +14,9 @@
         "extends": "base_body_armor",
         "name": "Peasant Shirt",
         "color": "#4f361b",
-        "sprite": "assets/kenney/item/shirt_peasant.png",
+        "sprites": [
+            { "path": "assets/kenney/item/shirt_peasant.png", "color": "default" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -26,8 +28,10 @@
         "id": "leather_armor",
         "extends": "base_body_armor",
         "name": "Leather Armor",
-        "color": "#4f361b",
-        "sprite": "assets/kenney/item/leather_armor.png",
+        "color": "#8c5841",
+        "sprites": [
+            { "path": "assets/kenney/item/leather_armor.png", "color": "default" }
+        ],
         "description": "",
         "components": {
             "equippable": {
@@ -39,8 +43,10 @@
         "id": "plate_mail",
         "extends": "base_body_armor",
         "name": "Plate Mail",
-        "color": "#dce5e7",
-        "sprite": "assets/kenney/item/plate_mail.png",
+        "color": "#666",
+        "sprites": [
+            { "path": "assets/kenney/item/plate_mail.png", "color": "default" }
+        ],
         "description": "",
         "components": {
             "equippable": {

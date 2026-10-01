@@ -5,8 +5,10 @@
         "name": "Player",
         "color": "#CC9C80",
         "letter": "@",
-        "sprite": "assets/kenney/actor/player_front.png",
-        "spriteBG": "assets/kenney/actor/player_back.png",
+        "sprites": [
+            { "path": "assets/kenney/actor/player_front.png", "color": "#CC9C80" },
+            { "path": "assets/kenney/actor/player_back.png" }
+        ],
         "components": {
             "faction": {
                 "factions": "player",
@@ -23,6 +25,56 @@
                 "capacity": 40,
                 "items": [
                     {"load": "potion_health_minor"}
+                ],
+                "itemsTest1": [
+                    {"load": "amulet_of_minor_health"},
+                    {"load": "amulet_of_health"},
+                    {"load": "amulet_of_major_health"},
+                    {"load": "amulet_of_defense"},
+                    {"load": "amulet_of_power"},
+                    {"load": "amulet_of_light"},
+                    {"load": "leather_belt"},
+                    {"load": "shirt_peasant"},
+                    {"load": "leather_armor"},
+                    {"load": "plate_mail"},
+                    {"load": "work_boots"},
+                    {"load": "leather_boots"},
+                    {"load": "plate_greaves"},
+                    {"load": "work_gloves"},
+                    {"load": "leather_gloves"},
+                    {"load": "plate_gauntlets"},
+                    {"load": "leather_cap"},
+                    {"load": "leather_helmet"},
+                    {"load": "full_helm"},
+                    {"load": "crown"},
+                    {"load": "potion_health"},
+                    {"load": "potion_health_minor"},
+                    {"load": "potion_health_major"},
+                    {"load": "ring_of_minor_health"},
+                    {"load": "ring_of_health"},
+                    {"load": "ring_of_major_health"},
+                    {"load": "ring_of_defense"},
+                    {"load": "ring_of_power"},
+                    {"load": "ring_of_light"},
+                    {"load": "scroll_lightning"},
+                    {"load": "scroll_confusion"},
+                    {"load": "scroll_fireball"},
+                    {"load": "scroll_fireball_weak"},
+                    {"load": "scroll_fireball_strong"},
+                    {"load": "buckler"},
+                    {"load": "shield_large"},
+                    {"load": "torch"},
+                    {"load": "torch_burnt"},
+                    {"load": "torch_large"}
+                ],
+                "itemsTest2": [
+                    {"load": "dagger"},
+                    {"load": "club"},
+                    {"load": "hatchet"},
+                    {"load": "short_sword"},
+                    {"load": "long_sword"},
+                    {"load": "warhammer"},
+                    {"load": "greataxe"}
                 ]
             },
             "level": {

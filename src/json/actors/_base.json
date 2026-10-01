@@ -3,8 +3,10 @@
         "id": "base_actor",
         "type": "actor",
         "letterCorpse": "%",
-        "spriteCorpse": "assets/kenney/actor/corpse_front.png",
-        "spriteCorpseBG": "assets/kenney/actor/corpse_back.png",
+        "corpseSprites": [
+            { "path": "assets/kenney/actor/corpse_front.png", "color": "default" },
+            { "path": "assets/kenney/actor/corpse_back.png" }
+        ],
         "components": {
             "blocksMovement": true,
             "hex": {
