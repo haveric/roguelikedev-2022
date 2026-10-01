@@ -29,8 +29,7 @@
         "name": "Club",
         "color": "#4f361b",
         "letter": "|",
-        "sprite": "assets/kenney/item/club_front.png",
-        "spriteBG": "assets/kenney/item/club_back.png",
+        "sprite": "assets/kenney/item/club.png",
         "description": "",
         "components": {
             "equippable": {
