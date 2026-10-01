@@ -1,5 +1,28 @@
 [
     {
+        "id": "giant_rat",
+        "extends": "base_enemy",
+        "name": "Giant Rat",
+        "color": "#333",
+        "letter": "r",
+        "sprites": [
+            { "path": "assets/kenney/actor/giant_rat_front.png", "color": "default" },
+            { "path": "assets/kenney/actor/giant_rat_back.png" }
+        ],
+        "components": {
+            "fighter": {
+                "baseHp": 7,
+                "hp": 7,
+                "defense": 0,
+                "power": 2
+            },
+            "aiMeleeChase": {},
+            "level": {
+                "xp": 15
+            }
+        }
+    },
+    {
         "id": "goblin",
         "extends": "base_enemy",
         "name": "Goblin",
@@ -23,6 +46,28 @@
         }
     },
     {
+        "id": "skeleton",
+        "extends": "base_enemy",
+        "name": "Skeleton",
+        "color": "#666",
+        "letter": "s",
+        "sprites": [
+            { "path": "assets/kenney/actor/skeleton.png", "color": "default" }
+        ],
+        "components": {
+            "fighter": {
+                "baseHp": 15,
+                "hp": 15,
+                "defense": 1,
+                "power": 3
+            },
+            "aiMeleeChase": {},
+            "level": {
+                "xp": 50
+            }
+        }
+    },
+    {
         "id": "troll",
         "extends": "base_enemy",
         "name": "Troll",
@@ -34,8 +79,8 @@
         ],
         "components": {
             "fighter": {
-                "baseHp": 16,
-                "hp": 16,
+                "baseHp": 24,
+                "hp": 24,
                 "defense": 2,
                 "power": 4
             },
