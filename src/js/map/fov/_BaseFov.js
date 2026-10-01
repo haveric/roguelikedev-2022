@@ -116,6 +116,9 @@ export default class _BaseFov {
     }
 
     getPath(costGraph, startHex, endHex) {
+        if (!startHex || !endHex) {
+            return null;
+        }
         const start = costGraph.grid[startHex.row - this.left][startHex.col - this.top];
         const end = costGraph.grid[endHex.row - this.left][endHex.col - this.top];
 

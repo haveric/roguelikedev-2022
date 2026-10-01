@@ -6,6 +6,7 @@ import engine from "../Engine";
 import SpriteCache from "../SpriteCache";
 import ObjectUtil from "../util/ObjectUtil";
 import Extend from "../util/Extend";
+import AIConfused from "../components/ai/AIConfused";
 
 export default class Actor extends _Entity {
     constructor(args = {}) {
@@ -105,6 +106,11 @@ export default class Actor extends _Entity {
                 sceneState.ctx.drawImage(this.canvas, 0, 0, this.canvas.width, this.canvas.height, drawXY.x - (.5 * this.canvas.width * sceneState.scale), drawXY.y - (.5 * this.canvas.height * sceneState.scale), this.canvas.width * sceneState.scale, this.canvas.height * sceneState.scale);
             } else {
                 sceneState.drawTextAt(this.letter, drawXY.x, drawXY.y, 26, this.color);
+            }
+
+            const ai = this.getComponent("ai");
+            if (ai && ai instanceof AIConfused) {
+                sceneState.drawTextAt("?", drawXY.x + (.5 * HexUtil.HEX_RADIUS_H), drawXY.y - (.5 * HexUtil.HEX_RADIUS_V), 16, "magenta");
             }
         } else {
             if (this.canvasCorpse) {
