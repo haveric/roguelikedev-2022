@@ -47,9 +47,14 @@ class ChanceLoader {
     }
 
     getActorForLevel(name, level) {
-        const chances = this.getChancesForLevel(name, level);
-        const actors = chances.actors;
-
+        let chances;
+        let actors;
+        let levelToCheck = level;
+        while(levelToCheck > 0 && !actors) {
+            chances = this.getChancesForLevel(name, levelToCheck);
+            actors = chances.actors;
+            levelToCheck --;
+        }
         let actorOrGroup = this.getRandomFromGroup(actors);
         while (actorOrGroup.group !== undefined) {
             const actorGroup = this.entityGroups.get(actorOrGroup.group);
@@ -60,8 +65,14 @@ class ChanceLoader {
     }
 
     getItemForLevel(name, level) {
-        const chances = this.getChancesForLevel(name, level);
-        const items = chances.items;
+        let chances;
+        let items;
+        let levelToCheck = level;
+        while(levelToCheck > 0 && !items) {
+            chances = this.getChancesForLevel(name, levelToCheck);
+            items = chances.items;
+            levelToCheck --;
+        }
 
         let itemOrGroup = this.getRandomFromGroup(items);
         while (itemOrGroup.group !== undefined) {
