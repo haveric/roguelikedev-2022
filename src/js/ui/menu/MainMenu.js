@@ -183,7 +183,6 @@ class MainMenu {
         loadGame.show();
 
         engine.setEventHandler(new LoadGameEventHandler());
-        engine.needsRenderUpdate = true;
     }
 
     openSaveGame() {
@@ -191,7 +190,6 @@ class MainMenu {
         saveGame.show();
 
         engine.setEventHandler(new SaveGameEventHandler());
-        engine.needsRenderUpdate = true;
     }
 
     openControls() {
@@ -199,7 +197,6 @@ class MainMenu {
         controlsMenu.show();
 
         engine.setEventHandler(new ControlsMenuEventHandler());
-        engine.needsRenderUpdate = true;
     }
 
     openCredits() {
@@ -207,7 +204,6 @@ class MainMenu {
         creditsMenu.show();
 
         engine.setEventHandler(new CreditsMenuEventHandler());
-        engine.needsRenderUpdate = true;
     }
 }
 

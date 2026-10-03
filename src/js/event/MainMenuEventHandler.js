@@ -18,7 +18,6 @@ export default class MainMenuEventHandler extends _EventHandler {
             mainMenu.hide();
 
             engine.setEventHandler(new DefaultPlayerEventHandler());
-            engine.needsRenderUpdate = true;
         }
 
         return null;

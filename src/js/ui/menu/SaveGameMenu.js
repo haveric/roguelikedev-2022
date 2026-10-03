@@ -109,7 +109,6 @@ class SaveGameMenu {
         this.hide();
 
         engine.setEventHandler(new DefaultPlayerEventHandler());
-        engine.needsRenderUpdate = true;
     }
 
     createNewSave() {

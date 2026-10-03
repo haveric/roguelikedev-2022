@@ -200,7 +200,6 @@ export default class Fighter extends _Component {
             gameOver.setPosition(sceneState.center.x - 100, sceneState.center.y * .7);
             gameOver.show();
             engine.setEventHandler(new GameOverEventHandler());
-            engine.needsRenderUpdate = true;
         }
     }
 

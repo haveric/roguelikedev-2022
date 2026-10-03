@@ -117,7 +117,6 @@ class ControlsMenu {
     returnToMenu() {
         mainMenu.show();
         engine.setEventHandler(new MainMenuEventHandler());
-        engine.needsRenderUpdate = true;
     }
 }
 

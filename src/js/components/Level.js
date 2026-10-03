@@ -69,7 +69,6 @@ export default class Level extends _Component {
         levelUp.setPosition(sceneState.center.x - 150, sceneState.center.y * .7);
         levelUp.show();
         engine.setEventHandler(new LevelUpEventHandler());
-        engine.needsRenderUpdate = true;
     }
 
     increaseMaxHp(amount) {

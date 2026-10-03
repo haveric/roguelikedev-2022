@@ -59,6 +59,7 @@ class Engine {
             this.eventHandler.teardown();
         }
         this.eventHandler = eventHandler;
+        this.needsRenderUpdate = true;
     }
 
     save(name) {

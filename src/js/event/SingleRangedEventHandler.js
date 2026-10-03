@@ -91,6 +91,5 @@ export default class SingleRangedEventHandler extends _EventHandler {
         }
 
         engine.setEventHandler(new DefaultPlayerEventHandler());
-        engine.needsRenderUpdate = true;
     }
 }

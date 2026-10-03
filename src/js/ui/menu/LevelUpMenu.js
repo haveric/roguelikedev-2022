@@ -114,7 +114,6 @@ class LevelUpMenu {
     afterClick() {
         this.hide();
         engine.setEventHandler(new DefaultPlayerEventHandler());
-        engine.needsRenderUpdate = true;
     }
 }
 

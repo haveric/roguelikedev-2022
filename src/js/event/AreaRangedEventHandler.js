@@ -110,6 +110,5 @@ export default class AreaRangedEventHandler extends _EventHandler {
         this.highlightedTiles = [];
 
         engine.setEventHandler(new DefaultPlayerEventHandler());
-        engine.needsRenderUpdate = true;
     }
 }

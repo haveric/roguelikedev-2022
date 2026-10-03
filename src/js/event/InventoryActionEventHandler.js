@@ -53,16 +53,12 @@ export default class InventoryActionEventHandler extends _EventHandler {
                         engine.processAction(actionOrComponent);
 
                         engine.setEventHandler(new DefaultPlayerEventHandler());
-
-                        engine.needsRenderUpdate = true;
                     } else if (actionOrComponent instanceof _Component) {
                         const action = actionOrComponent.getAction();
                         if (action) {
                             engine.processAction(action);
 
                             engine.setEventHandler(new DefaultPlayerEventHandler());
-
-                            engine.needsRenderUpdate = true;
                         }
                     } else {
                         console.error("Unknown actionOrComponent type");

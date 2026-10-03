@@ -121,14 +121,12 @@ class LoadGameMenu {
         this.hide();
 
         engine.setEventHandler(new DefaultPlayerEventHandler());
-        engine.needsRenderUpdate = true;
     }
 
     returnToMenu() {
         engine.state = "start";
         mainMenu.show();
         engine.setEventHandler(new MainMenuEventHandler());
-        engine.needsRenderUpdate = true;
     }
 
     load(name) {

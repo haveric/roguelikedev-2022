@@ -65,7 +65,6 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
             mainMenu.show();
 
             engine.setEventHandler(new MainMenuEventHandler());
-            engine.needsRenderUpdate = true;
         }
 
         // DEBUG Actions
@@ -252,8 +251,6 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                 inventoryActionModal.show();
 
                 engine.setEventHandler(new InventoryActionEventHandler());
-
-                engine.needsRenderUpdate = true;
             }
         }
 
@@ -271,8 +268,6 @@ export default class DefaultPlayerEventHandler extends _EventHandler {
                 inventoryActionModal.show();
 
                 engine.setEventHandler(new InventoryActionEventHandler());
-
-                engine.needsRenderUpdate = true;
             }
         }
     }
