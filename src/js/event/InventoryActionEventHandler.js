@@ -2,7 +2,7 @@ import _EventHandler from "./_EventHandler";
 import controls from "../controls/Controls";
 import engine from "../Engine";
 import sceneState from "../SceneState";
-import inventoryActionModal from "../ui/InventoryActionModal";
+import inventoryActionModal from "../ui/menu/InventoryActionModal";
 import DefaultPlayerEventHandler from "./DefaultPlayerEventHandler";
 import _Action from "../actions/_Action";
 import _Component from "../components/_Component";
@@ -33,11 +33,7 @@ export default class InventoryActionEventHandler extends _EventHandler {
         this.mouse.y = e.clientY;
 
         for (const button of inventoryActionModal.buttons) {
-            if (this.mouse.x > button.position.x && this.mouse.x < button.position.x + button.position.width && this.mouse.y > button.position.y && this.mouse.y < button.position.y + button.position.height) {
-                button.hover = true;
-            } else {
-                button.hover = false;
-            }
+            button.hover = button.isInside(this.mouse.x, this.mouse.y);
 
             engine.needsRenderUpdate = true;
         }
@@ -48,7 +44,7 @@ export default class InventoryActionEventHandler extends _EventHandler {
         this.mouse.y = e.clientY;
 
         for (const button of inventoryActionModal.buttons) {
-            if (this.mouse.x > button.position.x && this.mouse.x < button.position.x + button.position.width && this.mouse.y > button.position.y && this.mouse.y < button.position.y + button.position.height) {
+            if (button.isInside(this.mouse.x, this.mouse.y)) {
                 const actionOrComponent = button.actionOrComponent;
                 if (actionOrComponent) {
                     e.preventDefault();

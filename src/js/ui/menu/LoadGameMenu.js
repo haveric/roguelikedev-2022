@@ -1,18 +1,19 @@
-import sceneState from "../SceneState";
-import Hex from "../components/Hex";
-import HexUtil from "../util/HexUtil";
-import engine from "../Engine";
-import DefaultPlayerEventHandler from "../event/DefaultPlayerEventHandler";
+import sceneState from "../../SceneState";
+import Hex from "../../components/Hex";
+import HexUtil from "../../util/HexUtil";
+import engine from "../../Engine";
+import DefaultPlayerEventHandler from "../../event/DefaultPlayerEventHandler";
 import mainMenu from "./MainMenu";
-import MainMenuEventHandler from "../event/MainMenuEventHandler";
-import saveManager from "../SaveManager";
-import DateUtil from "../util/DateUtil";
-import viewInfo from "./ViewInfo";
-import inventoryView from "./InventoryView";
-import messageManager from "../message/MessageManager";
-import equipmentView from "./EquipmentView";
+import MainMenuEventHandler from "../../event/MainMenuEventHandler";
+import saveManager from "../../SaveManager";
+import DateUtil from "../../util/DateUtil";
+import viewInfo from "../ViewInfo";
+import inventoryView from "../InventoryView";
+import messageManager from "../../message/MessageManager";
+import equipmentView from "../EquipmentView";
+import Button from "../controls/Button";
 
-class LoadGame {
+class LoadGameMenu {
     constructor() {
         this.visible = false;
         this.x = 0;
@@ -24,59 +25,35 @@ class LoadGame {
     setButtons() {
         this.height = 55;
         const self = this;
-        let y = this.y + (25 * sceneState.scale);
-        const lineHeight = 26 * sceneState.scale;
 
         if (engine.state === "game") {
             this.buttons = [
-                {
-                    text: "Return to Game",
-                    hover: false,
-                    position: {
-                        x: 0,
-                        y: 0,
-                        width: 0,
-                        height: 0
-                    },
-                    callback: this.returnToGame.bind(this)
-                }
+                new Button("Return to Game", this.returnToGame.bind(this)),
             ];
         } else {
             this.buttons = [
-                {
-                    text: "Return to Menu",
-                    hover: false,
-                    position: {
-                        x: 0,
-                        y: 0,
-                        width: 0,
-                        height: 0
-                    },
-                    callback: this.returnToMenu.bind(this)
-                }
+                new Button("Return to Menu", this.returnToMenu.bind(this)),
             ];
         }
 
-        y += lineHeight + (.7 * (26 * sceneState.scale));
-        y += lineHeight + (.7 * (26 * sceneState.scale));
-
         const saves = saveManager.getSavesAsList();
         for (const save of saves) {
-            this.buttons.push({
-                text: "Load: " + save.name + "-" + DateUtil.formatDate(save.date) + " " + DateUtil.formatTime(save.date),
-                hover: false,
-                position: {
-                    x: this.x + (15 * sceneState.scale),
-                    y: y - (.6 * lineHeight),
-                    width: this.width * sceneState.scale - (30 * sceneState.scale),
-                    height: 1.2 * lineHeight
-                },
-                callback: () => {
-                    self.load(save.name);
-                }
-            });
+            this.buttons.push(new Button("Load: " + save.name + "-" + DateUtil.formatDate(save.date) + " " + DateUtil.formatTime(save.date), () => {
+                self.load(save.name);
+            }));
 
             this.height += 45;
+        }
+
+        this.setButtonPositions();
+    }
+
+    setButtonPositions() {
+        this.padding = 15 * sceneState.scale;
+        const lineHeight = 26 * sceneState.scale;
+        let y = this.y + (25 * sceneState.scale);
+        for (const button of this.buttons) {
+            button.setPosition(this.x + this.padding, y - (.6 * lineHeight), this.width * sceneState.scale - (2 * this.padding), 1.2 * lineHeight);
             y += lineHeight + (.7 * (26 * sceneState.scale));
         }
     }
@@ -134,25 +111,8 @@ class LoadGame {
             sceneState.ctx.fillStyle = "rgba(150, 150, 150, 1)";
             sceneState.ctx.fillRect(this.x,this.y, this.width * sceneState.scale, this.height * sceneState.scale);
 
-            const lineHeight = 26 * sceneState.scale;
-            let y = this.y + (25 * sceneState.scale);
             for (const button of this.buttons) {
-                if (button.hover) {
-                    sceneState.ctx.fillStyle = "rgba(120, 120, 120, 1)";
-                } else {
-                    sceneState.ctx.fillStyle = "rgba(100, 100, 100, 1)";
-                }
-
-                button.position.x = this.x + (15 * sceneState.scale);
-                button.position.y = y - (.6 * lineHeight);
-                button.position.width = this.width * sceneState.scale - (30 * sceneState.scale);
-                button.position.height = 1.2 * lineHeight;
-
-                sceneState.ctx.fillRect(button.position.x,button.position.y, button.position.width, button.position.height);
-                sceneState.drawTextAt(button.text, this.x + (30 * sceneState.scale), y, 26, "black", "left");
-                y += lineHeight;
-
-                y += .7 * (26 * sceneState.scale);
+                button.draw();
             }
         }
     }
@@ -161,12 +121,14 @@ class LoadGame {
         this.hide();
 
         engine.setEventHandler(new DefaultPlayerEventHandler());
+        engine.needsRenderUpdate = true;
     }
 
     returnToMenu() {
         engine.state = "start";
         mainMenu.show();
         engine.setEventHandler(new MainMenuEventHandler());
+        engine.needsRenderUpdate = true;
     }
 
     load(name) {
@@ -196,5 +158,5 @@ class LoadGame {
 }
 
 
-const loadGame = new LoadGame();
+const loadGame = new LoadGameMenu();
 export default loadGame;

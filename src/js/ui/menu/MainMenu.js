@@ -1,23 +1,24 @@
-import sceneState from "../SceneState";
-import Hex from "../components/Hex";
-import HexUtil from "../util/HexUtil";
-import engine from "../Engine";
-import viewInfo from "./ViewInfo";
-import inventoryView from "./InventoryView";
-import entityLoader from "../entity/EntityLoader";
-import CellularAutomataMap from "../map/CellularAutomataMap";
-import DefaultPlayerEventHandler from "../event/DefaultPlayerEventHandler";
-import messageManager from "../message/MessageManager";
-import loadGame from "./LoadGame";
-import saveGame from "./SaveGame";
-import LoadGameEventHandler from "../event/LoadGameEventHandler";
-import SaveGameEventHandler from "../event/SaveGameEventHandler";
-import gameWorld from "../GameWorld";
-import equipmentView from "./EquipmentView";
+import sceneState from "../../SceneState";
+import Hex from "../../components/Hex";
+import HexUtil from "../../util/HexUtil";
+import engine from "../../Engine";
+import viewInfo from "../ViewInfo";
+import inventoryView from "../InventoryView";
+import entityLoader from "../../entity/EntityLoader";
+import CellularAutomataMap from "../../map/CellularAutomataMap";
+import DefaultPlayerEventHandler from "../../event/DefaultPlayerEventHandler";
+import messageManager from "../../message/MessageManager";
+import loadGame from "./LoadGameMenu";
+import saveGame from "./SaveGameMenu";
+import LoadGameEventHandler from "../../event/LoadGameEventHandler";
+import SaveGameEventHandler from "../../event/SaveGameEventHandler";
+import gameWorld from "../../GameWorld";
+import equipmentView from "../EquipmentView";
 import controlsMenu from "./ControlsMenu";
 import creditsMenu from "./CreditsMenu";
-import ControlsMenuEventHandler from "../event/ControlsMenuEventHandler";
-import CreditsMenuEventHandler from "../event/CreditsMenuEventHandler";
+import ControlsMenuEventHandler from "../../event/ControlsMenuEventHandler";
+import CreditsMenuEventHandler from "../../event/CreditsMenuEventHandler";
+import Button from "../controls/Button";
 
 class MainMenu {
     constructor() {
@@ -31,69 +32,38 @@ class MainMenu {
     setButtons() {
         this.height = 95;
         this.buttons = [
-            {
-                text: "New Game",
-                hover: false,
-                position: {
-                    x: 0,
-                    y: 0,
-                    width: 0,
-                    height: 0
-                },
-                callback: this.startNewGame.bind(this)
-            },{
-                text: "Load Game",
-                hover: false,
-                position: {
-                    x: 0,
-                    y: 0,
-                    width: 0,
-                    height: 0
-                },
-                callback: this.openLoadGame.bind(this)
-            }
+            new Button("New Game", this.startNewGame.bind(this)),
+            new Button("Load Game", this.openLoadGame.bind(this))
         ];
 
         if (engine.state === "game") {
+            this.buttons.push(
+                new Button("Save Game", this.openSaveGame.bind(this))
+            );
             this.height += 45;
-            this.buttons.push({
-                text: "Save Game",
-                hover: false,
-                position: {
-                    x: 0,
-                    y: 0,
-                    width: 0,
-                    height: 0
-                },
-                callback: this.openSaveGame.bind(this)
-            });
         }
 
+        this.buttons.push(
+            new Button("Controls", this.openControls.bind(this))
+        );
         this.height += 45;
-        this.buttons.push({
-            text: "Controls",
-            hover: false,
-            position: {
-                x: 0,
-                y: 0,
-                width: 0,
-                height: 0
-            },
-            callback: this.openControls.bind(this)
-        });
 
+        this.buttons.push(
+            new Button("Credits", this.openCredits.bind(this))
+        );
         this.height += 45;
-        this.buttons.push({
-            text: "Credits",
-            hover: false,
-            position: {
-                x: 0,
-                y: 0,
-                width: 0,
-                height: 0
-            },
-            callback: this.openCredits.bind(this)
-        });
+
+        this.setButtonPositions();
+    }
+
+    setButtonPositions() {
+        this.padding = 15 * sceneState.scale;
+        const lineHeight = 26 * sceneState.scale;
+        let y = this.y + (25 * sceneState.scale);
+        for (const button of this.buttons) {
+            button.setPosition(this.x + this.padding, y - (.6 * lineHeight), this.width * sceneState.scale - (2 * this.padding), 1.2 * lineHeight);
+            y += lineHeight + (.7 * (26 * sceneState.scale));
+        }
     }
 
     setPosition(x, y) {
@@ -152,25 +122,8 @@ class MainMenu {
             sceneState.ctx.fillStyle = "rgba(150, 150, 150, 1)";
             sceneState.ctx.fillRect(this.x,this.y, this.width * sceneState.scale, this.height * sceneState.scale);
 
-            const lineHeight = 26 * sceneState.scale;
-            let y = this.y + (25 * sceneState.scale);
             for (const button of this.buttons) {
-                if (button.hover) {
-                    sceneState.ctx.fillStyle = "rgba(120, 120, 120, 1)";
-                } else {
-                    sceneState.ctx.fillStyle = "rgba(100, 100, 100, 1)";
-                }
-
-                button.position.x = this.x + (15 * sceneState.scale);
-                button.position.y = y - (.6 * lineHeight);
-                button.position.width = this.width * sceneState.scale - (30 * sceneState.scale);
-                button.position.height = 1.2 * lineHeight;
-
-                sceneState.ctx.fillRect(button.position.x,button.position.y, button.position.width, button.position.height);
-                sceneState.drawTextAt(button.text, this.x + (30 * sceneState.scale), y, 26, "black", "left");
-                y += lineHeight;
-
-                y += .7 * (26 * sceneState.scale);
+                button.draw();
             }
         }
     }

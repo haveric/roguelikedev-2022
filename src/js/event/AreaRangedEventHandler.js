@@ -4,7 +4,7 @@ import engine from "../Engine";
 import HexUtil from "../util/HexUtil";
 import viewInfo from "../ui/ViewInfo";
 import sceneState from "../SceneState";
-import inventoryActionModal from "../ui/InventoryActionModal";
+import inventoryActionModal from "../ui/menu/InventoryActionModal";
 import DefaultPlayerEventHandler from "./DefaultPlayerEventHandler";
 
 export default class AreaRangedEventHandler extends _EventHandler {

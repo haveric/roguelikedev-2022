@@ -1,6 +1,6 @@
 import _EventHandler from "./_EventHandler";
 import engine from "../Engine";
-import controlsMenu from "../ui/ControlsMenu";
+import controlsMenu from "../ui/menu/ControlsMenu";
 
 export default class ControlsMenuEventHandler extends _EventHandler {
     constructor() {
@@ -20,11 +20,7 @@ export default class ControlsMenuEventHandler extends _EventHandler {
         this.mouse.y = e.clientY;
 
         for (const button of controlsMenu.buttons) {
-            if (this.mouse.x > button.position.x && this.mouse.x < button.position.x + button.position.width && this.mouse.y > button.position.y && this.mouse.y < button.position.y + button.position.height) {
-                button.hover = true;
-            } else {
-                button.hover = false;
-            }
+            button.hover = button.isInside(this.mouse.x, this.mouse.y);
 
             engine.needsRenderUpdate = true;
         }
@@ -35,7 +31,7 @@ export default class ControlsMenuEventHandler extends _EventHandler {
         this.mouse.y = e.clientY;
 
         for (const button of controlsMenu.buttons) {
-            if (this.mouse.x > button.position.x && this.mouse.x < button.position.x + button.position.width && this.mouse.y > button.position.y && this.mouse.y < button.position.y + button.position.height) {
+            if (button.isInside(this.mouse.x, this.mouse.y)) {
                 e.preventDefault();
                 button.callback();
 

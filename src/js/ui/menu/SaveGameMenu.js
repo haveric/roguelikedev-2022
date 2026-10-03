@@ -1,12 +1,13 @@
-import sceneState from "../SceneState";
-import Hex from "../components/Hex";
-import HexUtil from "../util/HexUtil";
-import engine from "../Engine";
-import DefaultPlayerEventHandler from "../event/DefaultPlayerEventHandler";
-import saveManager from "../SaveManager";
-import DateUtil from "../util/DateUtil";
+import sceneState from "../../SceneState";
+import Hex from "../../components/Hex";
+import HexUtil from "../../util/HexUtil";
+import engine from "../../Engine";
+import DefaultPlayerEventHandler from "../../event/DefaultPlayerEventHandler";
+import saveManager from "../../SaveManager";
+import DateUtil from "../../util/DateUtil";
+import Button from "../controls/Button";
 
-class SaveGame {
+class SaveGameMenu {
     constructor() {
         this.visible = false;
         this.x = 0;
@@ -18,53 +19,29 @@ class SaveGame {
     setButtons() {
         this.height = 100;
         const self = this;
-        let y = this.y + (25 * sceneState.scale);
-        const lineHeight = 26 * sceneState.scale;
         this.buttons = [
-            {
-                text: "Return to Game",
-                hover: false,
-                position: {
-                    x: this.x + (15 * sceneState.scale),
-                    y: y - (.6 * lineHeight),
-                    width: this.width * sceneState.scale - (30 * sceneState.scale),
-                    height: 1.2 * lineHeight
-                },
-                callback: this.returnToGame.bind(this)
-            },
-            {
-                text: "Create New Save",
-                hover: false,
-                position: {
-                    x: this.x + (15 * sceneState.scale),
-                    y: y - (.6 * lineHeight) + lineHeight + (.7 * (26 * sceneState.scale)),
-                    width: this.width * sceneState.scale - (30 * sceneState.scale),
-                    height: 1.2 * lineHeight
-                },
-                callback: this.createNewSave.bind(this)
-            }
+            new Button("Return to Game", this.returnToGame.bind(this)),
+            new Button("Create New Save", this.createNewSave.bind(this)),
         ];
-
-        y += lineHeight + (.7 * (26 * sceneState.scale));
-        y += lineHeight + (.7 * (26 * sceneState.scale));
 
         const saves = saveManager.getSavesAsList();
         for (const save of saves) {
-            this.buttons.push({
-                text: "Overwrite: " + save.name + "-" + DateUtil.formatDate(save.date) + " " + DateUtil.formatTime(save.date),
-                hover: false,
-                position: {
-                    x: this.x + (15 * sceneState.scale),
-                    y: y - (.6 * lineHeight),
-                    width: this.width * sceneState.scale - (30 * sceneState.scale),
-                    height: 1.2 * lineHeight
-                },
-                callback: () => {
-                    self.save(save.name);
-                }
-            });
+            this.buttons.push(new Button("Overwrite: " + save.name + "-" + DateUtil.formatDate(save.date) + " " + DateUtil.formatTime(save.date), () => {
+                self.save(save.name);
+            }));
 
             this.height += 45;
+        }
+
+        this.setButtonPositions();
+    }
+
+    setButtonPositions() {
+        this.padding = 15 * sceneState.scale;
+        const lineHeight = 26 * sceneState.scale;
+        let y = this.y + (25 * sceneState.scale);
+        for (const button of this.buttons) {
+            button.setPosition(this.x + this.padding, y - (.6 * lineHeight), this.width * sceneState.scale - (2 * this.padding), 1.2 * lineHeight);
             y += lineHeight + (.7 * (26 * sceneState.scale));
         }
     }
@@ -122,18 +99,8 @@ class SaveGame {
             sceneState.ctx.fillStyle = "rgba(150, 150, 150, 1)";
             sceneState.ctx.fillRect(this.x,this.y, this.width * sceneState.scale, this.height * sceneState.scale);
 
-            const lineHeight = 26 * sceneState.scale;
-            let y = this.y + (25 * sceneState.scale);
             for (const button of this.buttons) {
-                if (button.hover) {
-                    sceneState.ctx.fillStyle = "rgba(120, 120, 120, 1)";
-                } else {
-                    sceneState.ctx.fillStyle = "rgba(100, 100, 100, 1)";
-                }
-
-                sceneState.ctx.fillRect(button.position.x,button.position.y, button.position.width, button.position.height);
-                sceneState.drawTextAt(button.text, this.x + (30 * sceneState.scale), y, 26, "black", "left");
-                y += lineHeight + (.7 * (26 * sceneState.scale));
+                button.draw();
             }
         }
     }
@@ -174,5 +141,5 @@ class SaveGame {
 }
 
 
-const saveGame = new SaveGame();
+const saveGame = new SaveGameMenu();
 export default saveGame;

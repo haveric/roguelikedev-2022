@@ -7,17 +7,17 @@ import playerInfo from "./js/ui/PlayerInfo";
 import messageConsole from "./js/ui/MessageConsole";
 import inventoryView from "./js/ui/InventoryView";
 import inventoryHoverModal from "./js/ui/InventoryHoverModal";
-import inventoryActionModal from "./js/ui/InventoryActionModal";
+import inventoryActionModal from "./js/ui/menu/InventoryActionModal";
 import MainMenuEventHandler from "./js/event/MainMenuEventHandler";
-import mainMenu from "./js/ui/MainMenu";
-import gameOver from "./js/ui/GameOver";
+import mainMenu from "./js/ui/menu/MainMenu";
+import gameOver from "./js/ui/menu/GameOverMenu";
 import saveManager from "./js/SaveManager";
-import loadGame from "./js/ui/LoadGame";
-import saveGame from "./js/ui/SaveGame";
-import levelUp from "./js/ui/LevelUp";
+import loadGame from "./js/ui/menu/LoadGameMenu";
+import saveGame from "./js/ui/menu/SaveGameMenu";
+import levelUp from "./js/ui/menu/LevelUpMenu";
 import equipmentView from "./js/ui/EquipmentView";
-import controlsMenu from "./js/ui/ControlsMenu";
-import creditsMenu from "./js/ui/CreditsMenu";
+import controlsMenu from "./js/ui/menu/ControlsMenu";
+import creditsMenu from "./js/ui/menu/CreditsMenu";
 
 (function () {
     function init() {

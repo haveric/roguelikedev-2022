@@ -1,61 +1,43 @@
-import sceneState from "../SceneState";
-import Hex from "../components/Hex";
-import HexUtil from "../util/HexUtil";
-import engine from "../Engine";
-import DefaultPlayerEventHandler from "../event/DefaultPlayerEventHandler";
+import sceneState from "../../SceneState";
+import Hex from "../../components/Hex";
+import HexUtil from "../../util/HexUtil";
+import engine from "../../Engine";
+import DefaultPlayerEventHandler from "../../event/DefaultPlayerEventHandler";
+import Button from "../controls/Button";
 
-class LevelUp {
+class LevelUpMenu {
     constructor() {
         this.visible = false;
         this.x = 0;
         this.y = 0;
         this.width = 300;
         this.height = 140;
+
+        this.buttons = [
+            new Button("Constitution (+10 HP)", this.increaseMaxHp.bind(this)),
+            new Button("Strength (+1 Power)", this.increasePower.bind(this)),
+            new Button("Agility (+1 Defense)", this.increaseDefense.bind(this))
+        ];
     }
 
-    setButtons() {
-        this.buttons = [
-            {
-                text: "Constitution (+10 HP)",
-                hover: false,
-                position: {
-                    x: 0,
-                    y: 0,
-                    width: 0,
-                    height: 0
-                },
-                callback: this.increaseMaxHp.bind(this)
-            },{
-                text: "Strength (+1 Power)",
-                hover: false,
-                position: {
-                    x: 0,
-                    y: 0,
-                    width: 0,
-                    height: 0
-                },
-                callback: this.increasePower.bind(this)
-            },{
-                text: "Agility (+1 Defense)",
-                hover: false,
-                position: {
-                    x: 0,
-                    y: 0,
-                    width: 0,
-                    height: 0
-                },
-                callback: this.increaseDefense.bind(this)
-            }
-        ];
+    setButtonPositions() {
+        this.padding = 15 * sceneState.scale;
+        const lineHeight = 26 * sceneState.scale;
+        let y = this.y + (25 * sceneState.scale);
+        for (const button of this.buttons) {
+            button.setPosition(this.x + this.padding, y - (.6 * lineHeight), this.width * sceneState.scale - (2 * this.padding), 1.2 * lineHeight);
+            y += lineHeight + (.7 * (26 * sceneState.scale));
+        }
     }
 
     setPosition(x, y) {
         this.x = x;
         this.y = y;
+
+        this.setButtonPositions();
     }
 
     show() {
-        this.setButtons();
         this.visible = true;
     }
 
@@ -102,25 +84,8 @@ class LevelUp {
             sceneState.ctx.fillStyle = "rgba(150, 150, 150, 1)";
             sceneState.ctx.fillRect(this.x,this.y, this.width * sceneState.scale, this.height * sceneState.scale);
 
-            const lineHeight = 26 * sceneState.scale;
-            let y = this.y + (25 * sceneState.scale);
             for (const button of this.buttons) {
-                if (button.hover) {
-                    sceneState.ctx.fillStyle = "rgba(120, 120, 120, 1)";
-                } else {
-                    sceneState.ctx.fillStyle = "rgba(100, 100, 100, 1)";
-                }
-
-                button.position.x = this.x + (15 * sceneState.scale);
-                button.position.y = y - (.6 * lineHeight);
-                button.position.width = this.width * sceneState.scale - (30 * sceneState.scale);
-                button.position.height = 1.2 * lineHeight;
-
-                sceneState.ctx.fillRect(button.position.x,button.position.y, button.position.width, button.position.height);
-                sceneState.drawTextAt(button.text, this.x + (30 * sceneState.scale), y, 26, "black", "left");
-                y += lineHeight;
-
-                y += .7 * (26 * sceneState.scale);
+                button.draw();
             }
         }
     }
@@ -154,5 +119,5 @@ class LevelUp {
 }
 
 
-const levelUp = new LevelUp();
+const levelUp = new LevelUpMenu();
 export default levelUp;

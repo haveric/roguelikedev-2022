@@ -4,7 +4,7 @@ import messageManager from "../message/MessageManager";
 import playerInfo from "../ui/PlayerInfo";
 import engine from "../Engine";
 import GameOverEventHandler from "../event/GameOverEventHandler";
-import gameOver from "../ui/GameOver";
+import gameOver from "../ui/menu/GameOverMenu";
 import sceneState from "../SceneState";
 import MathUtil from "../util/MathUtil";
 

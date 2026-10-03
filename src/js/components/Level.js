@@ -1,7 +1,7 @@
 import _Component from "./_Component";
 import messageManager from "../message/MessageManager";
 import LevelUpEventHandler from "../event/LevelUpEventHandler";
-import levelUp from "../ui/LevelUp";
+import levelUp from "../ui/menu/LevelUpMenu";
 import engine from "../Engine";
 import sceneState from "../SceneState";
 

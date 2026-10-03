@@ -1,6 +1,6 @@
 import _EventHandler from "./_EventHandler";
 import engine from "../Engine";
-import levelUp from "../ui/LevelUp";
+import levelUp from "../ui/menu/LevelUpMenu";
 
 export default class LevelUpEventHandler extends _EventHandler {
     constructor() {
@@ -20,11 +20,7 @@ export default class LevelUpEventHandler extends _EventHandler {
         this.mouse.y = e.clientY;
 
         for (const button of levelUp.buttons) {
-            if (this.mouse.x > button.position.x && this.mouse.x < button.position.x + button.position.width && this.mouse.y > button.position.y && this.mouse.y < button.position.y + button.position.height) {
-                button.hover = true;
-            } else {
-                button.hover = false;
-            }
+            button.hover = button.isInside(this.mouse.x, this.mouse.y);
 
             engine.needsRenderUpdate = true;
         }
@@ -35,7 +31,7 @@ export default class LevelUpEventHandler extends _EventHandler {
         this.mouse.y = e.clientY;
 
         for (const button of levelUp.buttons) {
-            if (this.mouse.x > button.position.x && this.mouse.x < button.position.x + button.position.width && this.mouse.y > button.position.y && this.mouse.y < button.position.y + button.position.height) {
+            if (button.isInside(this.mouse.x, this.mouse.y)) {
                 e.preventDefault();
                 button.callback();
 
