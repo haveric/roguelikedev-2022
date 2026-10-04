@@ -65,6 +65,11 @@ export default class ConfusionConsumable extends _Consumable {
             return new UnableToPerformAction(consumer, "No target at that location");
         }
 
+        const targetActorAI = targetActor.getComponent("ai");
+        if (targetActorAI instanceof AIConfused) {
+            return new UnableToPerformAction(consumer, "The " + targetActor.name + " is already confused!");
+        }
+
         if (consumer === targetActor) {
             return new UnableToPerformAction(consumer, "You can't confuse yourself!");
         }
@@ -72,7 +77,7 @@ export default class ConfusionConsumable extends _Consumable {
         messageManager.text("The eyes of the " + targetActor.name + " look vacant, as it starts to stumble around!").build();
 
         const previousAI = targetActor.getComponent("ai");
-        targetActor.setComponent(new AIConfused({components: {aiConfused: {turnsRemaining: this.turns, previousAI: previousAI}}}));
+        targetActor.setComponent(new AIConfused({components: {aiConfused: {turnsRemaining: this.turns, previousAI: previousAI.type}}}));
 
         this.consume();
     }

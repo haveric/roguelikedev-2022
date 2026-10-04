@@ -12,21 +12,30 @@ export default class TextUtil {
         }
 
         for (let i = 1; i < words.length; i++) {
-            let word = words[i];
-            if (word.startsWith("\n")) {
+            const word = words[i];
+            const splitWords = word.split("\n");
+            if (splitWords.length > 1) {
+                currentLine = this.addWord(splitWords[0].trim(), lines, currentLine, maxWidth);
                 lines.push(currentLine);
-                word = word.substring("\n".length);
-                currentLine = word;
-            }
-            const width = sceneState.ctx.measureText(currentLine + " " + word).width;
-            if (width < maxWidth) {
-                currentLine += " " + word;
+                currentLine = splitWords[1];
             } else {
-                lines.push(currentLine);
-                currentLine = word;
+                currentLine = this.addWord(word, lines, currentLine, maxWidth);
             }
+
         }
         lines.push(currentLine);
         return lines;
+    }
+
+    static addWord(word, lines, currentLine, maxWidth) {
+        const width = sceneState.ctx.measureText(currentLine + " " + word).width;
+        if (width < maxWidth) {
+            currentLine += " " + word;
+        } else {
+            lines.push(currentLine);
+            currentLine = word;
+        }
+
+        return currentLine;
     }
 }

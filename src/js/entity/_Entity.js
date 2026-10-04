@@ -74,8 +74,14 @@ export default class _Entity {
     setComponent(component) {
         component.parentEntity = this;
         this.components[component.baseType] = component;
+        for (let i = 0; i < this.componentArray.length; i++) {
+            const oldComponent = this.componentArray[i];
+            if (oldComponent.baseType === component.baseType) {
+                this.componentArray.splice(i, 1);
+                break;
+            }
+        }
         this.componentArray.push(component);
-
         this.clearSaveCache();
     }
 

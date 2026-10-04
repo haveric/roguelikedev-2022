@@ -1,6 +1,7 @@
 import _AI from "./_AI";
 import messageManager from "../../message/MessageManager";
 import WanderAction from "../../actions/WanderAction";
+import componentLoader from "../ComponentLoader";
 
 export default class AIConfused extends _AI {
     constructor(entity) {
@@ -40,7 +41,9 @@ export default class AIConfused extends _AI {
     perform() {
         if (this.turnsRemaining <= 0) {
             messageManager.text("The " + this.parentEntity.name + " is no longer confused.").build();
-            this.parentEntity.setComponent(this.previousAI);
+
+            const newAIComponent = componentLoader.create(this.parentEntity, this.previousAI);
+            this.parentEntity.setComponent(newAIComponent);
         } else {
             this.setTurnsRemaining(this.turnsRemaining - 1);
 
